@@ -1,0 +1,60 @@
+<div id="register" class="row container">
+  <form class="col s8 offset-s2 card" action="/register" method="POST" enctype="multipart/form-data">
+    <div class="card-content">
+      <div class="row">
+        <div class="col s12">
+          <p class="center-align card-title">Create an Account</p>
+        </div>
+      </div>
+      {{> messages}} 
+      <div class="row">
+        <div class="col s12 input-field">
+          <label for="username">Username</label>
+          <input placeholder="Username" type="text" id="username" name="username">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12">
+          <label for="password">Password</label>
+          <input placeholder="Password" type="password" id="password" name="password">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12">
+          <label for="password">Re-enter password</label>
+          <input placeholder="Confirm Password" type="password" id="confirmPass" name="confirmPass">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12">
+          <label for="avatar">Avatar</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s12 input-field">
+          <input type="file" id="avatar" name="avatar">
+        </div>
+
+        <div class="col s12 input-field">
+          <input placeholder="About you..." type="text" id="description" name="description">
+        </div>
+      </div>
+
+      <div class="row center-align">
+        <div class="col s12">
+          <button class="waves-effect waves-light btn" type="submit" value="Sign up">Sign Up</button>
+        </div>
+      </div>
+
+      <div class="row center-align">
+        <div class="col s12">
+          <p>Already have an account? <a href="/login">Login</a>.</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
