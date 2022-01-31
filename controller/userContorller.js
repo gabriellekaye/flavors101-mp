@@ -29,7 +29,7 @@ exports.registerUser = async (req, res) => {
     const user = await userModel.findOne({ username }).exec()
     if (user) {
       console.log(user)
-      req.flash('error_msg', 'User already exists. Please login.');
+      req.flash('error_msg', 'Username exists. Please login.');
       return res.redirect('/login');
     }
 
@@ -52,7 +52,7 @@ exports.registerUser = async (req, res) => {
     try {
       const newUser = await userModel.create(data)
       console.log(newUser);
-      req.flash('success_msg', 'You are now registered! Login below.');
+      req.flash('success_msg', 'Registration successful! Login below.');
       res.redirect('/login');
     } catch (err) {
       req.flash('error_msg', 'Could not create user. Please try again.');
@@ -68,7 +68,6 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-// Login User
 exports.loginUser = (req, res) => {
   const errors = validationResult(req);
 
@@ -81,7 +80,7 @@ exports.loginUser = (req, res) => {
     userModel.findOne({ username }, (err, user) => {
       if (err) {
         // Database error
-        req.flash('error_msg', 'Something happened! Please try again.');
+        req.flash('error_msg', 'Server crashed! Please try again.');
         res.redirect('/login');
       } else {
         if (user) { // User found
@@ -94,12 +93,12 @@ exports.loginUser = (req, res) => {
               
               res.redirect('/');  //redirect to homepage
             } else { // Passwords don't match
-              req.flash('error_msg', 'Incorrect password.');
+              req.flash('error_msg', 'Incorrect password!');
               res.redirect('/login');
             }
           });
         } else { // User not found
-          req.flash('error_msg', 'Account does not exist! Please sign up.');
+          req.flash('error_msg', 'Account does not exist!');
           res.redirect('/register');
         }
       }
@@ -113,7 +112,6 @@ exports.loginUser = (req, res) => {
   }
 };
 
-// Logout User
 exports.logoutUser = (req, res) => {
   if (req.session) { //Destory session
     req.session.destroy(() => { 
@@ -122,3 +120,19 @@ exports.logoutUser = (req, res) => {
     });
   }
 };
+
+exports.getProfile = (req, res) => {
+  const user = { 
+    username, 
+    password,
+    avatar,
+    description 
+  }
+
+  res.render('profile', {
+      username: user.username,
+      password: user.password, 
+      description: user.description
+
+  });
+}

@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const userController = require('../../controller/userController');
-const { registerValidation, loginValidation } = require('../../validators.js');
-const { isPublic, isPrivate } = require('../../middlewares/authentication');
+const userController = require('../controller/userContorller');
+const { registerValidation, loginValidation } = require('../validators');
+const { isPublic, isPrivate } = require('../middlewares/authentication');
 
 // GET login to display login page
 router.get('/login', isPublic, (req, res) => {
@@ -23,5 +23,8 @@ router.post('/login', isPublic, loginValidation, userController.loginUser);
 
 // logout
 router.get('/logout', isPrivate, userController.logoutUser);
+
+// profile 
+router.get('/profile', isPrivate, userController.getProfile);
 
 module.exports = router;

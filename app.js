@@ -39,8 +39,8 @@ app.use(express.json())
 app.engine('hbs', exphbs.create({
   extname: 'hbs',
   defaultView: 'main',
-  layoutsDir: path.join(__dirname, '/views/layouts'),
-  partialsDir: path.join(__dirname, '/views/partials'),
+  //layoutsDir: path.join(__dirname, '/views/layouts'),
+  //partialsDir: path.join(__dirname, '/views/partials'),
 }).engine);
 
 app.use(session({

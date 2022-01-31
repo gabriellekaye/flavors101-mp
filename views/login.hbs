@@ -1,42 +1,35 @@
-<link rel="stylesheet" type="text/css" media="all" href="css/custom-style.css">
-<div id="custom">
-  <div id="login" class="row container">
-    <form class="col s8 offset-s2 card" action="/login" method="POST" enctype="multipart/form-data">
-      <div class="card-content">
-        <div class="row">
-          <div class="col s12 bg-light">
-            <p class="card-title center-align">Login</p>
-          </div>
-        </div>
-        {{> messages}}
-        <div class="row">
-          <div class="col s12 input-field">
-            <input placeholder="Username" type="text" id="username" name="username" />
-            <label for="username">Username</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col s12">
-            <label for="password">Password</label>
-            <input placeholder="password" type="password" id="password" name="password" />
-
-          </div>
-        </div>
-
-        <div class="row  center-align">
-          <div class="col s12">
-            <button class="waves-effect waves-light btn">Login</button>
-          </div>
-        </div>
-
-        <div class="row center-align">
-          <div class="col s12">
-            <p>Don't have an account? <a href="/register">Sign up now</a>!</p>
-          </div>
-        </div>
+<html> 
+  <head>
+    <title>Login</title>
+    <link rel="stylesheet" href="../public/css/reg.css">
+  </head>
+  
+  <body>
+    <div class="box">  
+      <div class = "image">
+          <img src = "../public/LOGO.PNG" width = "300" height = "200"/>
       </div>
-    </form>
-  </div>
-</div>
+    
+      <form  action="/login" method="POST" enctype="multipart/form-data">
+    
+        {{> messages}} <!-- Flash messages -->
 
+        <div class="inputs">
+          <input placeholder="Username" type="text" id="username" name="username" />
+        </div>
+
+        <div class="inputs">
+          <input placeholder="Password" type="password" id="password" name="password" />
+        </div>
+
+        <div class="inputs">
+          <button class="submit type=submit" value="Login">Login</button>
+        </div>
+
+        <div class="inputs">
+          <p id="small-p">Don't have an account? <a id="signup_link" href="/register">Sign up</a> here!</p>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
