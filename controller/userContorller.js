@@ -127,12 +127,11 @@ exports.getProfile = (req, res) => {
     password,
     avatar,
     description 
-  }
+  } = req.body;
 
   res.render('profile', {
       username: user.username,
-      password: user.password, 
+      password: user.password,
       description: user.description
-
   });
 }
