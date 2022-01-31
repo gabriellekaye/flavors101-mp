@@ -68,6 +68,7 @@ exports.registerUser = async (req, res) => {
   }
 };
 
+// Login User
 exports.loginUser = (req, res) => {
   const errors = validationResult(req);
 
@@ -112,6 +113,7 @@ exports.loginUser = (req, res) => {
   }
 };
 
+// Logout User
 exports.logoutUser = (req, res) => {
   if (req.session) { //Destory session
     req.session.destroy(() => { 
