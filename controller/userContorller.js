@@ -69,7 +69,7 @@ exports.registerUser = async (req, res) => {
 };
 
 // Log in
-exports.loginUser = (req, res) => {
+exports.loginUser = async (req, res) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
@@ -78,36 +78,37 @@ exports.loginUser = (req, res) => {
       password
     } = req.body;
 
-    userModel.findOne({ username }, (err, user) => {
-      if (err) {
-        // Database error
+    const user = await userModel.findOne({ username }).exec()
+    
+    try{
+      if (user) { // User found
+        bcrypt.compare(password, user.password, (err, result) => {
+          console.log(result, err)
+          if (result) { // Passwords match
+            req.session.user = user._id;
+            req.session.username = user.username;
+            console.log(req.session);
+            res.redirect('/');  //redirect to homepage
+          } 
+          else { // Passwords don't match
+            req.flash('error_msg', 'Incorrect password!');
+            res.redirect('/login');
+          }
+        });
+      } 
+      else { // User not found
+        req.flash('error_msg', 'Account does not exist!');
+        res.redirect('/register');
+      }
+    } 
+    catch(err) {
+        console.log(err);
         req.flash('error_msg', 'Server crashed! Please try again.');
         res.redirect('/login');
-      } else {
-        if (user) { // User found
-          bcrypt.compare(password, user.password, (err, result) => {
-            console.log(result, err)
-            if (result) { // Passwords match
-              req.session.user = user._id;
-              req.session.username = user.username;
-              console.log(req.session);
-              
-              res.redirect('/');  //redirect to homepage
-            } else { // Passwords don't match
-              req.flash('error_msg', 'Incorrect password!');
-              res.redirect('/login');
-            }
-          });
-        } else { // User not found
-          req.flash('error_msg', 'Account does not exist!');
-          res.redirect('/register');
-        }
-      }
-    });
-
-  } else {
+    }
+  } 
+  else {
     const messages = errors.array().map((item) => item.msg);
-
     req.flash('error_msg', messages.join(' '));
     res.redirect('/login');
   }

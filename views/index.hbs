@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Flavours 101 </title>
+        <link rel="stylesheet" href="./css/styles.css">
+        <script src="https://kit.fontawesome.com/38d688374b.js" crossorigin="anonymous"></script>
+
+    </head>
+
+    <body>
+        <div class="container">
+            <section class="start" id="home" >
+                <div class="recipe"><br>
+                    <h1> Flavours <span>101</span> </h1>
+                    <h2 style="margin: 1; color: darkgray; font-size: 18;"> Can't decide? Try "<a href = "/random-recipe">Surprise Me</a>" </h2>
+                </div>
+                <br><br><br>
+                
+                {{!-- Should be in main --}}
+                <p>TO DELETE</p>
+                <br>
+                <a href = "/submit-recipe">Submit Post</a>
+                <br><br>
+                <form action = "/search" method = "post">
+                    <input type ="search" name = "searchTerm" class = "form-control" placeholder ="Search..." aria-label = "Search">
+                </form>
+                <p>TO DELETE (END)</p>
+                {{!-- END --}}
+
+                <div class="posts">
+                    <div id="chicken">
+                        {{#each recipes}}
+                            <a href="/recipe/{{this._id}}"><img class="rec" src="../uploads/{{this.image}}"  /></a>
+                            <a href="/recipe/{{this._id}}"  class="cap"><p>{{this.title}}<br> by: kewpie_mayo</p></a>
+                        {{/each}}
+                    </div>
+                </div>
+            </section>
+        </div>    
+
+    </body>
+</html>

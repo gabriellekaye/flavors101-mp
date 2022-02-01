@@ -75,8 +75,8 @@ app.use((req, res, next) => {
 const homeRouter = require('./routes/home');
 const authRouter = require('./routes/auth');
 
-app.use('/', homeRouter); // Main index route
-app.use('/', authRouter); // Login/registration routes
+app.use('/', homeRouter); // Home/index route
+app.use('/', authRouter); // Login/registration & profile routes
 
 // Listen to port and log port number
 app.listen(port, function () {
