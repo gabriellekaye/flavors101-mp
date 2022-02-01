@@ -14,7 +14,7 @@ app.use(fileUpload())
 app.use(express.json())
 app.use(express.urlencoded( {extended: true}));
 
-// Register user
+// Register
 exports.registerUser = async (req, res) => {
   const errors = validationResult(req);
 
@@ -68,6 +68,7 @@ exports.registerUser = async (req, res) => {
   }
 };
 
+// Log in
 exports.loginUser = (req, res) => {
   const errors = validationResult(req);
 
@@ -112,6 +113,7 @@ exports.loginUser = (req, res) => {
   }
 };
 
+// Log out
 exports.logoutUser = (req, res) => {
   if (req.session) { //Destory session
     req.session.destroy(() => { 
@@ -121,6 +123,7 @@ exports.logoutUser = (req, res) => {
   }
 };
 
+//Show profile
 exports.getProfile = (req, res) => {
   const user = { 
     username, 

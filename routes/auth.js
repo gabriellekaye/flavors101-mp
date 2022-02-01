@@ -21,10 +21,10 @@ router.get('/register', isPublic, (req, res) => {
 router.post('/register', isPublic, registerValidation, userController.registerUser);
 router.post('/login', isPublic, loginValidation, userController.loginUser);
 
-// logout
+// get logout
 router.get('/logout', isPrivate, userController.logoutUser);
 
-// profile 
+// get profile 
 router.get('/profile', isPrivate, userController.getProfile);
 
 module.exports = router;
