@@ -1,14 +1,17 @@
 const {body} = require('express-validator');
 
 const registerValidation = [
-  // Username is required
-  body('username').not().isEmpty().withMessage("Username is required"),
+  // Username cant be empty
+  body('username').not().isEmpty().withMessage("Username is required."),
+
+  // Username should be at least 6 chars
+  body('username').isLength({ min: 6 }).withMessage("Username must be at least 6 characters."),
   
   // Password length must be at least 6 characters
-  body('password').isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
+  body('password').isLength({ min: 6 }).withMessage("Password must be at least 6 characters."),
 
-  // Confirm Password must match password
-  body('confirmPass').isLength({ min: 6 }).withMessage("Confirm password must be at least 6 characters")
+  // Confirm pass cant be empty and must match pass
+  body('confirmPass').not().isEmpty().withMessage("Please confirm password.")
     .custom((value, { req }) => {
       if (value !== req.body.password) {
         throw new Error("Passwords did not match");
@@ -17,9 +20,13 @@ const registerValidation = [
     }),
   
   // Avatar is required
-  //body('avatar')
-  //  .custom((value, {req}) => {
-  //})
+  body('avatar')
+    .custom((value, {req}) => {
+      if(value == null && req.files == null){
+        throw new Error("Avatar is required.");
+      }
+      return true;
+    })
   ];
 
 const loginValidation = [

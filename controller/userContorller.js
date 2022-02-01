@@ -16,6 +16,7 @@ app.use(express.urlencoded( {extended: true}));
 
 // Register
 exports.registerUser = async (req, res) => {
+
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
