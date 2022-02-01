@@ -55,12 +55,14 @@ exports.registerUser = async (req, res) => {
       console.log(newUser);
       req.flash('success_msg', 'Registration successful! Login below.');
       res.redirect('/login');
-    } catch (err) {
+    } 
+    catch (err) {
       req.flash('error_msg', 'Could not create user. Please try again.');
       res.redirect('/register');
       res.status(500).send({ message: "Could not create user"});
     }
-  } else {
+  } 
+  else {
     const messages = errors.array().map((item) => item.msg);
     console.log(errors)
 

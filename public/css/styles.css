@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Montserrat:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    outline: none;
+    border: none;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+
+}
+.recipe{
+    margin: 0;
+    height: 500;
+    background-color:#f9f3e3; 
+}
+.cap{
+    text-decoration: none;
+    color: gray;
+    background-color: transparent;
+}
+
+.cap:hover{
+    color: orangered;
+}
+img{
+    height: 100;
+}
+*::selection{
+    color: #fff;
+    background: orangered;
+}
+
+
+body{
+    background: #f7f7f7;
+}
+
+#bg{
+    height:700;
+    margin-right: -400;
+
+}
+
+section{
+    padding: 4;
+}
+
+h1{
+    font-size: 100;
+    margin-top: 200;
+    text-align: center;
+    text-shadow: #666;
+    font-family: 'Cedarville Cursive', cursive;
+    color: rgb(255, 100, 44);
+}
+
+span{
+    color: #666; 
+    font-family: 'Cedarville Cursive', cursive;
+}
+
+.chicken{
+    height: 300;
+    width: 250;
+    margin: 0 0 0 0;
+   text-align: center;
+   
+}
+.rec{
+    height: 300;
+    width: 250;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.posts {
+    padding: 100;
+    text-align: center;
+    display: grid;
+    margin-top: 100;
+    justify-content: center;
+}
+
+p {
+    margin: 0;
+    font-size: 16;
+   border: solid;
+   margin-top: 0;
+    margin-left: 20px;
+    margin-bottom: 100;
+}
+
+.dash{
+  margin-left: 15;
+    font-size: 30;
+    color: #666;
+    background-color: white;
+}
+
+
+.dash:hover{
+    color: orangered;
+}
+
+header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 20;
+    font-weight:bolder;
+}
+
+.whole{
+    display: flex;
+    background-color: white;
+}
+.search{
+    background: rgba(255, 68, 0, 0.865);
+    padding: 10;
+    display: flex;
+    text-align: center;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+}
+
+#input{
+    height: 10;
+    background: white;
+    color: gray;
+    padding: 10;
+    width: 150;
+}
+
+
+h2{
+    display: block;
+    margin-top: 100;
+    text-align: center;
+    align-items: center;
+}
+
+pre{
+    margin-top: 200;
+    text-align: center;
+    font-size: 25;
+    font-family: 'Fuzzy Bubbles', cursive;
+}
+
+#abt{
+    margin-top: 100;
+    display: block;
+    justify-content: center;
+    text-align: center;
+    width: 700px;
+    height: 600;
+}
+
+.add{
+    background: #fff;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #fb5109;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    margin-left: 850px;
+  }
+
+
+  

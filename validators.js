@@ -14,14 +14,13 @@ const registerValidation = [
   body('confirmPass').not().isEmpty().withMessage("Please confirm password.")
     .custom((value, { req }) => {
       if (value !== req.body.password) {
-        throw new Error("Passwords did not match");
+        throw new Error("Passwords did not match.");
       }
       return true;
     }),
   
   // Avatar is required
-  body('avatar')
-    .custom((value, {req}) => {
+  body('avatar').custom((value, {req}) => {
       if(value == null && req.files == null){
         throw new Error("Avatar is required.");
       }

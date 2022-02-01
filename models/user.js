@@ -5,7 +5,6 @@ const userSchema = new mongoose.Schema({
     password: { type: String, min: 6, required: true },
     avatar: {type: String, required: true}, 
     description: { type: String, required: false},
-    date: { type: Date, default: Date.now }
   }
 );
 
