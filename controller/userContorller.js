@@ -8,7 +8,8 @@ const express = require('express')
 const app = new express()
 
 // To upload avatar
-const fileUpload = require('express-fileupload')
+const fileUpload = require('express-fileupload');
+const user = require('../models/user');
 app.use(fileUpload())
 
 app.use(express.json())
@@ -127,18 +128,43 @@ exports.logoutUser = (req, res) => {
   }
 };
 
-//Show profile
-exports.getProfile = (req, res) => {
-  const user = { 
-    username, 
-    password,
-    avatar,
-    description 
+//Delete acct
+exports.deleteUser = (req, res) => {
+  // const {
+  //   username,
+  // } = req.body;
+
+  // const user = await userModel.findOne({ username }).exec()
+  // if(user){
+  //   console.log('deleting');
+  //   userModel.deleteOne({username:req.session.username});
+  //   console.log('deleted user');
+  //   res.redirect('/login');
+  // }
+
+  const {
+    username,
   } = req.body;
 
+  userModel.deleteOne({ username }), (err, user) => {
+    if (err) { //could not delete
+      console.log(err);
+      req.flash('error_msg', 'Could not delete account.');
+      res.redirect('/profile');
+    } else {  // Successful query
+      console.log('deleted');
+      req.flash('sucess_msg', 'Account deleted!');
+      res.redirect('/register');
+    }
+  }
+};
+
+//Show profile
+exports.getProfile = (req, res) => {
   res.render('profile', {
-      username: user.username,
-      password: user.password,
-      description: user.description
+      pageTitle: req.session.username+' | Profile',
+      username: req.session.username,
+      description: req.session.description,
+      avatar: req.session.avatar
   });
-}
+};

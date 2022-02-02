@@ -24,6 +24,9 @@ router.post('/login', isPublic, loginValidation, userController.loginUser);
 // get logout
 router.get('/logout', isPrivate, userController.logoutUser);
 
+// delete acct
+router.get('/deleteact', isPrivate, userController.deleteUser);
+
 // get profile 
 router.get('/profile', isPrivate, userController.getProfile);
 

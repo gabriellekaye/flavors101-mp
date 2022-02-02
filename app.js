@@ -27,7 +27,7 @@ mongoose.connect(dbUri, options, (err) => {
 const store = new mongoStore({
   uri: dbUri,
   databaseName: 'flavors101',
-  collection: 'sessions'
+  collection: 'sessions',
 })
 store.on('error', err => console.log(err.message))
 
@@ -79,7 +79,7 @@ const recipeRouter = require('./routes/post');
 
 app.use('/', homeRouter); // Home/index route
 app.use('/', authRouter); // Login/registration & profile routes
-app.use('/', recipeRouter);
+app.use('/', recipeRouter); 
 
 // Listen to port and log port number
 app.listen(port, function () {

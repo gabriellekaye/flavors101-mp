@@ -1,21 +1,19 @@
 <html>
     <head>
-        <title>Login</title>
         <link rel="icon" type="image/png" href="/images/favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="../public/css/profile_style.css">   
-        {{!-- <script type="text/javascript" src="/javascript/profile.js"></script>   --}}
     </head>
 
     <body>
         <div id="page">
             <br><br>
-            {{!-- <img id="profile_pic" src="images/kewpie.jpg" alt="Profile Photo" /> --}}
+            <img id="profile_pic" src="../public/avatars/{{avatar}}" alt="Avatar" /> 
             <div id="info">
                 <br><br>
                 <p id="small_p">Username</p>
-                <h1 id="username">{{user:username}}</h1>
+                <h1 id="username">{{ username }}</h1>
                 <p id="small_p">Short Description</p>
-                <p id="short_desc"> {{user:description}}</p>
+                <p id="description">{{ description }}</p>
                 <br><br><br>
             </div>
     
@@ -26,10 +24,13 @@
                         <a id = "small_link" href ="/edit_profile"> <i class="fa fa-edit"></i> Edit profile</a>
                     </li>
                     <li> 
-                        <a onclick="return deleteact();" id = "small_link" href ="index.html"></i>Delete Profile </a>
+                        <a id = "small_link" href="/deleteact">Delete Account</a>
                     </li>
                     <li> 
                         <a id = "small_link" href="/logout">Log Out</a>
+                    </li>
+                    <li> 
+                        <a id = "small_link" href="/index">Home</a>
                     </li>
                 </ul>
             </div>

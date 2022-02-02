@@ -55,7 +55,7 @@
     line-height: 10mm;
 }
 
-#short_desc {
+#description {
     color: darkorange;
     font-family: 'Garamond', serif;
     font-weight: bold;
@@ -161,7 +161,6 @@ header{
     align-items: center;
     color: white;
     border: none;
-
 }
 
 #input{

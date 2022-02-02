@@ -9,7 +9,9 @@ exports.home = async (req, res) =>
     //Only 5 posts will be posted
     const max = 5;
     const recipes = await Recipe.find({}).limit(max);
-    res.render('index', {recipes});
+    res.render('index', {
+        pageTitle: 'Flavors101',
+        recipes});
 }
 
 //Loading the Form
