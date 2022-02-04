@@ -125,6 +125,7 @@ exports.logoutUser = (req, res) => {
       res.clearCookie('connect.sid'); //clear cookies
       res.redirect('/login'); //redirect to log in page
     });
+    console.log('logged out');
   }
 };
 
@@ -142,24 +143,11 @@ exports.deleteUser = (req, res) => {
   //   res.redirect('/login');
   // }
 
-  const {
-    username,
-  } = req.body;
+  userModel.deleteOne({username:req.session.username}); 
+  console.log('delete acct');
+}
 
-  userModel.deleteOne({ username }), (err, user) => {
-    if (err) { //could not delete
-      console.log(err);
-      req.flash('error_msg', 'Could not delete account.');
-      res.redirect('/profile');
-    } else {  // Successful query
-      console.log('deleted');
-      req.flash('sucess_msg', 'Account deleted!');
-      res.redirect('/register');
-    }
-  }
-};
-
-//Show profile
+//Show my profile 
 exports.getProfile = (req, res) => {
   res.render('profile', {
       pageTitle: req.session.username+' | Profile',
@@ -168,3 +156,5 @@ exports.getProfile = (req, res) => {
       avatar: req.session.avatar
   });
 };
+
+// Show someone elses profile

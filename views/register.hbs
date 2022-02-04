@@ -5,6 +5,7 @@
     
   <body>
     <div id="register" class="container">
+      <br><br>
       <div class="box">
           
         <div class = "image">
@@ -15,23 +16,23 @@
           {{> messages}} 
 
           <div class="inputs">
-            <input placeholder="Username" type="text" id="username" name="username">
+            <input placeholder="Username*" type="text" id="username" name="username">
           </div>
 
           <div class="inputs">
-            <input placeholder="Password" type="password" id="password" name="password">
+            <input placeholder="Password*" type="password" id="password" name="password">
           </div>
 
           <div class="inputs">
-            <input placeholder="Confirm Password" type="password" id="confirmPass" name="confirmPass">
+            <input placeholder="Confirm Password*" type="password" id="confirmPass" name="confirmPass">
           </div>
 
-          <div class="inputs">
-            <input type="file" id="avatar" name="avatar" />
-          </div>
+          <label id="lbl" for="avatar">Avatar*</label>
+          <input type="file" id="avatar" name="avatar" />
 
           <div class="inputs">
-            <input placeholder="Optional short description..." type="text" id="description" name="description">
+            <input placeholder="Short description..." type="text" id="description" name="description">
+            <p id="fineprint">* Required</p>
           </div>
 
           <div class="inputs">
@@ -39,7 +40,7 @@
           </div>
 
           <div class="inputs">
-            <p id="small-p">Already have an account? <a id="signup_link" href="/login">Login</a>.</p>
+            <p id="small-p">Already have an account?<a id="signup_link" href="/login">Login</a>.</p>
           </div>  
         </form>
       </div>

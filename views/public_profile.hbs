@@ -5,10 +5,9 @@
     </head>
 
     <body>
-        {{> nav }}
         <div id="page">
             <br><br>
-            <img id="profile_pic" src="{{avatar}}" alt="Avatar" /> 
+            <img id="profile_pic" src="../public/avatars/{{avatar}}" alt="Avatar" /> 
             <div id="info">
                 <br><br>
                 <p id="small_p">Username</p>
@@ -16,24 +15,6 @@
                 <p id="small_p">Short Description</p>
                 <p id="description">{{ description }}</p>
                 <br><br><br>
-            </div>
-    
-            <div id="side_menu">
-                <br><br><br>
-                <ul style="list-style-type:none;">
-                    <li>
-                        <a id = "small_link" href ="/edit_profile"> <i class="fa fa-edit"></i> Edit profile</a>
-                    </li>
-                    <li> 
-                        <a id = "small_link" href="/deleteact">Delete Account</a>
-                    </li>
-                    <li> 
-                        <a id = "small_link" href="/logout">Log Out</a>
-                    </li>
-                    <li> 
-                        <a id = "small_link" href="/index">Home</a>
-                    </li>
-                </ul>
             </div>
             <br><br>
             <hr>

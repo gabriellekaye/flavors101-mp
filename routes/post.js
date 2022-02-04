@@ -7,7 +7,7 @@ const { isPrivate } = require('../middlewares/authentication');
 const recipeController = require('../controller/recipeController');
 
 //Route to homepage
-router.get('/index', isPrivate, recipeController.home);
+router.get('/', isPrivate, recipeController.home);
 
 //Submit forms
 router.get('/submit-recipe', isPrivate, recipeController.submitRecipe);
