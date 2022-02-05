@@ -1,0 +1,70 @@
+<html>
+    <head><title>Random Post</title></head>
+
+    <body>
+        {{> nav }}
+        {{#with recipe}}
+            <div class = "post" style="background-color: white;">
+                <hr>
+                <br>
+                <h1 class = "name">{{title}}</h1>
+                <br>
+                
+                <h3 class = "author">
+                    By: 
+                    <a href = "profile.html">kewpie_mayo</a><br><br>
+                </h3>
+                
+                <div class = "button_cont">
+                    <button class = "like_b" onclick = "increment()">
+                        👍 Like 
+                    </button>
+                    <h2>Liked by: <span id = "count">0</span></h2>
+                </div>
+        
+                <br>
+                <br>
+                
+                <div class = "c_i">
+                    <img class = "image" src = "/uploads/{{image}}" width = "530" height = "350"/>
+                    <br>
+                </div>
+                
+                
+                <p class = "desc">{{description}}</p>
+
+                <hr>
+                <br>
+                
+                <h1 class = "h_ingredients">Ingredients</h1>
+                <ul class = "ingredients">
+                    {{#each ingredients}}
+                        <li class = "list-group-item">
+                            {{this}}
+                        </li>
+                    {{/each}}
+                </ul>
+
+                <hr>
+                <br>
+
+                <h1 class = "h_prep">Preparation</h1>
+                
+                <ol class = "prep">
+                    {{#each preparation}}
+                        <li class = "list-group-item">
+                            {{this}}
+                        </li>
+                    {{/each}}
+                </ol>
+                <hr>
+            </div>
+            <br><br>
+        {{/with}}
+
+        {{!-- Delete LATER --}}
+        <p>DELETE LATER</p>
+        <a href = '/'>Home</a>
+        
+    </body>
+</html>
