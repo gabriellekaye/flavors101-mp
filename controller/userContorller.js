@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt'); //For has password
-const userModel = require('../models/user'); //Database 
+const User = require('../models/user'); //Database 
 const { validationResult } = require('express-validator'); //for validation
 const path = require('path')
 
@@ -9,7 +9,6 @@ const app = new express()
 
 // To upload avatar
 const fileUpload = require('express-fileupload');
-const user = require('../models/user');
 app.use(fileUpload())
 
 app.use(express.json())
@@ -28,7 +27,7 @@ exports.registerUser = async (req, res) => {
       description 
     } = req.body;
 
-    const user = await userModel.findOne({ username }).exec()
+    const user = await User.findOne({ username }).exec()
     if (user) {
       console.log(user)
       req.flash('error_msg', 'Username exists. Please login.');
@@ -40,19 +39,22 @@ exports.registerUser = async (req, res) => {
     const hashed = await bcrypt.hash(password, saltRounds)
     const { avatar: image } = req.files
     // Change file name to username-avatar.jpg
-    const uploadPath = path.resolve('./public/avatars', username + '-avatar.jpg')
+    //const uploadPath = path.resolve('./public/avatars', username + '-avatar.jpg')
+    const fileName = username + '-avatar.jpg';
+    const uploadPath = path.resolve('./public/avatars', fileName);
+    console.log(fileName);
 
     await image.mv(uploadPath)
     
     const data = {
       username,
       password: hashed,
-      avatar: uploadPath,
+      avatar: fileName,
       description
     };
 
     try {
-      const newUser = await userModel.create(data)
+      const newUser = await User.create(data)
       console.log(newUser);
       req.flash('success_msg', 'Registration successful! Login below.');
       res.redirect('/login');
@@ -60,7 +62,6 @@ exports.registerUser = async (req, res) => {
     catch (err) {
       req.flash('error_msg', 'Could not create user. Please try again.');
       res.redirect('/register');
-      res.status(500).send({ message: "Could not create user"});
     }
   } 
   else {
@@ -82,16 +83,18 @@ exports.loginUser = async (req, res) => {
       password
     } = req.body;
 
-    const user = await userModel.findOne({ username }).exec()
     
-    try{
+    try {
+      const user = await User.findOne({ username }).exec()
       if (user) { // User found
         bcrypt.compare(password, user.password, (err, result) => {
           console.log(result, err)
           if (result) { // Passwords match
-            req.session.user = user._id;
-            req.session.username = user.username;
-            console.log(req.session);
+            // What is stored in sessions
+            req.session._id = user._id;
+            req.session.username = user.username,
+            req.session.avatar = user.avatar,
+            req.session.description = user.description,
             res.redirect('/');  //redirect to homepage
           } 
           else { // Passwords don't match
@@ -130,25 +133,67 @@ exports.logoutUser = (req, res) => {
 };
 
 //Delete acct
-exports.deleteUser = (req, res) => {
-  // const {
-  //   username,
-  // } = req.body;
+exports.getDeleteProfile = async (req, res) => {
 
-  // const user = await userModel.findOne({ username }).exec()
-  // if(user){
-  //   console.log('deleting');
-  //   userModel.deleteOne({username:req.session.username});
-  //   console.log('deleted user');
-  //   res.redirect('/login');
-  // }
-
-  userModel.deleteOne({username:req.session.username}); 
-  console.log('delete acct');
+  await User.deleteOne({_id: req.session._id})
+  console.log('deleted');
+  req.session.destroy(() => { 
+    res.clearCookie('connect.sid'); //clear cookies
+    res.redirect('/login'); //redirect to log in page
+  });
+  console.log('end session');
 }
+
+//Edit profile
+exports.getEditProfile = (req, res) => {
+  res.render('edit-profile', {
+      username: req.session.username,
+      description: req.session.description,
+      avatar: req.session.avatar
+  });
+};
+
+// Update profile
+exports.getUpdateProfile = async (req,res) => {
+  let sess = req.session;
+  const { username, description } = req.body
+  const user = {}
+
+  if (username) {
+    sess.username = username;
+    user.username = username;
+  }
+ 
+  if (description) {
+    sess.description = description;
+    user.description = description;
+  }
+  
+  if (req.files) {
+    //upload avatar
+    const { avatar: image } = req.files;
+    // Change file name to username-avatar.jpg
+    const fileName = sess.username + '-avatar.' + image.name.split('.')[1]
+    const uploadPath = path.resolve('./public/avatars', fileName);
+    console.log(fileName)
+    await image.mv(uploadPath);
+
+    sess.avatar = fileName;
+    user.avatar = fileName;
+  }
+
+  try {
+      await User.updateOne({_id: sess._id}, user);
+      console.log('PROFILE EDITED');
+      res.redirect ('/profile'); 
+  } catch (err) {
+      console.log(err)
+  }
+};
 
 //Show my profile 
 exports.getProfile = (req, res) => {
+  
   res.render('profile', {
       pageTitle: req.session.username+' | Profile',
       username: req.session.username,

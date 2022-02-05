@@ -7,6 +7,7 @@ const session = require('express-session');
 const mongoStore = require('connect-mongodb-session')(session);
 const flash = require('connect-flash');
 const fileUpload = require('express-fileupload')
+const db = require('./models/db')
 
 // get environment variables
 require('dotenv').config()
@@ -15,6 +16,8 @@ const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 }
+
+db.connect();
 
 const secret = process.env.SECRET
 const port = 3000;
@@ -73,11 +76,9 @@ app.use((req, res, next) => {
 });
 
 // Routes imports
-const homeRouter = require('./routes/home');
 const authRouter = require('./routes/auth');
 const recipeRouter = require('./routes/post');
 
-app.use('/', homeRouter); // Home/index route
 app.use('/', authRouter); // Login/registration & profile routes
 app.use('/', recipeRouter); 
 

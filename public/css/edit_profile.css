@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
+#page {
+    margin-top: 125;
+    margin-left: 100px;
+    margin-right: 100px;
+    background: #f7f7f7;
+    background-repeat: no-repeat; 
+    background-position: 1500 400;
+    height: 900;
+}
+
+#Link {
+    color: #666;
+    background-color: white;
+    margin-left: 50px;
+
+    text-decoration: none;
+    text-align: center;
+    font-size: 30px;
+    overflow-x: hidden;
+}
+
+#Link:hover{
+    color: orangered;
+}
+
+#small_link {
+    color:rgb(88, 49, 23);
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Garamond', serif;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#small_link:hover {
+    color: orangered;
+}
+
+#profile_pic {
+    height: 303px;
+    width: 293px;
+    float: left;
+    border: 5px solid orangered;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+#username { 
+    color: sienna;
+    font-size: 40px;
+    font-family: 'Garamond', serif;
+    font-weight: bold;
+    text-decoration: wavy;
+}
+
+#short_desc {
+    color: darkorange;
+    font-family: 'Garamond', serif;
+    font-weight: bold;
+    text-decoration: dotted;
+    font-size: 30px;
+}
+
+#change_password {
+    color:rgb(99, 96, 96);
+    font-family: 'Garamond', serif;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#change_header {
+    color:#666;
+    font-family: 'Garamond', serif;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#info {
+    margin-left: 450px;
+    margin-right: 100px;
+    margin-top: 50px;
+}
+
+body {
+    background: linear-gradient(120deg,#ffbc65, #fd9956);
+}
+
+#side_menu {
+    margin-top: 0px;
+    margin-left: 150px;
+}
+
+#center_button, #changepic_btn, #submit-edit {
+    display:block;
+    background-color:#fd9956;
+    font-family: 'Garamond', serif;
+    font-weight: bold;
+    font-size: 15;
+    font-weight: 500;
+    border-radius: 4px;
+    border: 1px solid orange;
+    color:rgb(71, 70, 70);
+}
+
+#center_button:hover, #submit-edit:hover {
+    background-color: seashell;
+    cursor: pointer;
+}
+
+
+img
+{
+    height: 100;
+}
+
+*::selection
+{
+    background:orangered;
+    color: #fff;
+}
+
+
+hr
+{
+  border: 10px solid orangered;
+  border-radius: 5px;
+}
+
+section
+{
+    padding: 2rem 9%;
+}
+
+header, .logo
+{
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color: #666;
+}
+
+
+header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 20;
+    font-weight:bolder;
+}
+
+.logo{
+    height: 100;
+}
+
+.whole{
+    display: flex;
+    background-color: white;
+}
+.search{
+    background: rgba(255, 68, 0, 0.865);
+    padding: 10;
+    display: flex;
+    text-align: center;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: none;
+    font-family: 'Montserrat';
+}
+
+#input{
+    height: 10;
+    background: white;
+    color: gray;
+    padding: 10;
+    width: 150;
+    border: none;
+    text-decoration: none;
+    outline: none;
+    font-family: 'Montserrat';
+}
+
+.dash{
+    margin-left: 15;
+      font-size: 30;
+      color: #666;
+      background-color: white;
+      text-decoration: none;
+      font-family: 'Montserrat';
+  }
+  
+  
+  .dash:hover{
+      color: orangered;
+  }
+
+#changepic_btn {
+    margin-left: 50px;
+}
+
+#changepic_btn:hover {
+    background-color: seashell;
+}

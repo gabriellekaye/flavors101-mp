@@ -4,18 +4,18 @@ const { registerValidation, loginValidation } = require('../validators');
 const { isPublic, isPrivate } = require('../middlewares/authentication');
 
 // GET login to display login page
-router.get('/login', isPublic, (req, res) => {
-  res.render('login', {
-    pageTitle: 'Login',
-  });
-});
+ router.get('/login', isPublic, (req, res) => {
+   res.render('login', {
+     pageTitle: 'Login',
+   });
+ });
 
-// GET register to display registration page
-router.get('/register', isPublic, (req, res) => {
-  res.render('register', {
-    pageTitle: 'Registration',
-  });
-});
+// // GET register to display registration page
+ router.get('/register', isPublic, (req, res) => {
+   res.render('register', {
+     pageTitle: 'Registration',
+   });
+ });
 
 // POST methods for form submissions
 router.post('/register', isPublic, registerValidation, userController.registerUser);
@@ -25,9 +25,22 @@ router.post('/login', isPublic, loginValidation, userController.loginUser);
 router.get('/logout', isPrivate, userController.logoutUser);
 
 // delete acct
-router.get('/deleteact', isPrivate, userController.deleteUser);
+router.post('/delete', isPrivate, userController.getDeleteProfile);
 
 // get profile 
 router.get('/profile', isPrivate, userController.getProfile);
+
+// edit profile
+router.get('/edit-profile', isPrivate, userController.getEditProfile);
+
+// updated profile
+router.post('/update-profile', isPrivate, userController.getUpdateProfile);
+
+// get abt page
+router.get('/about', (req, res) => {
+  res.render('about', {
+    pageTitle: 'About Us',
+  });
+});
 
 module.exports = router;

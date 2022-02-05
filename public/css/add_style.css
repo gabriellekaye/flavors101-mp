@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&display=swap');
+
+*{
+  margin: 0;
+  margin-left: 0;
+  margin-top: 10;
+  margin-right: 0;
+}
+.center, h4{
+    text-align: center;
+    padding: 20px 0;
+
+}
+h5{
+    font-size: 20;
+    margin: 0;
+    font-family: 'Montserrat';
+    font-weight: bolder;
+}
+
+h4{
+    font-size: 30;
+    font-family: 'Cedarville Cursive', cursive;
+    color: white;
+    border: solid;
+    background-color: orangered;
+}
+
+form .txt, textarea
+{
+  position: relative;
+  margin: 30px 0;
+  font-family: 'Montserrat','sans-serrif';
+}
+
+.txt, textarea
+{
+  width: 500;
+  padding: 0 5px;
+  height: 100px;
+  font-size: 16px;
+  background: none;
+  outline: none;
+}
+
+#close{
+  margin-left: 1800;
+  color: white;
+  background-color: gray;
+  width:50;
+  height: 50;
+  cursor: pointer;
+}
+
+#post
+{
+    width: 200;
+    height: 50;
+    background-color: orangered;
+    font-family: 'Montserrat';
+    border: none;
+    color: white;
+    font-size: 30;
+    cursor: pointer;
+}
+
+.btn 
+{
+  width: 120;
+  height: 50;
+  background-color: orangered;
+  font-family: 'Montserrat';
+  border: none;
+  color: white;
+  font-size: 15;
+  cursor: pointer;
+}

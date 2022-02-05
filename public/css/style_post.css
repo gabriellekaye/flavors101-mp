@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    outline: none;
+    border: none;
+    text-decoration: none;
+    transition: all .2s linear;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.dash{
+    font-size: 30px;
+    margin-left: 15px;
+    color: #666;
+    background-color: white;
+}
+
+.dash:hover{
+    color: orangered;
+}
+
+.c_i
+{
+    text-align: center;
+}
+
+.image
+{
+    align-content: center;
+}
+
+.name, .h_ingredients, .h_prep
+{
+    font-weight: 1000px;
+    font-size: 40px;
+}
+
+.ingredients, .prep
+{
+    list-style-position: inside;
+    margin : 50px;
+}
+
+li
+{
+    font-size : 20px;
+}
+
+.author, .author a
+{
+    text-align: center;
+    font-size: 20px;
+}
+
+.desc
+{
+    font-size : 20px;
+    margin : 50px;
+    margin-left : 200px;
+    margin-right : 200px;
+    text-align: center;
+}
+
+
+
+*::selection
+{
+    background:red;
+    color: #fff;
+}
+
+
+hr
+{
+  border: 10px solid orangered;
+  border-radius: 5px;
+}
+
+body{
+    background: #f7f7f7;
+    background: url(burger1.png);
+    background-repeat: no-repeat; 
+    background-position: 1500 400;
+    height: 10000;
+}
+
+h1
+{
+    font-size: 100;
+    margin-top: 200;
+    text-align: center;
+    text-shadow: #666;
+}
+
+
+a
+{
+    font-size: 4rem;
+    margin-left: 2rem;
+    color: #666;
+    background-color: white;
+}
+
+.author a
+{   
+    text-align: center;
+    font-size: 20px;
+    background-color : #f7f7f7;
+    margin-left : 0rem;
+}
+
+a:hover
+{
+    color: orangered;
+}
+
+header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 20;
+    font-weight:bolder;
+}
+
+.whole{
+    display: flex;
+    background-color: white;
+}
+.search{
+    background: rgba(255, 68, 0, 0.865);
+    padding: 10;
+    display: flex;
+    text-align: center;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+#input{
+    height: 10;
+    background: white;
+    color: gray;
+    padding: 10;
+    width: 150;
+}
+
+.button_cont
+{
+    text-align: center;
+}
+
+
+/* CSS */
+.like_b 
+{
+  appearance: button;
+  background-color: #1899D6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 5%;
+}
+
+.like_b:after {
+  background-clip: padding-box;
+  background-color: #1CB0F6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.like_b:main, .like_b:focus 
+{
+  user-select: auto;
+}
+
+.like_b:hover:not(:disabled) 
+{
+  filter: brightness(1.1);
+}
+
+.like_b:disabled 
+{
+  cursor: auto;
+}

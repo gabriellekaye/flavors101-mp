@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" media="all" href="/public/css/edit_profile.css">
+        <script src="https://kit.fontawesome.com/38d688374b.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="/public/javascript/editprofile.js"></script> 
+        <title>Edit Profile</title>
+    </head>
+    
+    <body>
+        {{> nav }}
+        <div id="page">
+            <img id="profile_pic" src="public/avatars/{{avatar}}" alt="Profile Photo" />
+            <div id="info">
+            <form method="POST" action="./update-profile" enctype="multipart/form-data">    
+                    <br><br><br>
+                    <h1 id="username">Username: <input type="text" id="username-input" value="{{username}}" name="username"> </h1>
+                    <p id="short_desc">Description: <input type="text" id="description-input" value="{{description}}" name="description"> </p>
+                    <p id="short_desc">Avatar: <input type="file" id="avatar-input" name="avatar"> </p>
+                    <button type="submit" id="submit-edit">Edit</button>
+            </form> 
+            <form method="POST" action="./update-password">
+                    <h1 id="change_header"> Change Password </h2>
+                    <h1 id="change_password"> Enter old password: <input type="password" id="old_pass" name="oldPass"></h2>
+                    <h1 id="change_password"> Enter new password: <input type="password" id="new_pass1" name="newPass"> </h2>
+                    <h1 id="change_password"> Retype new password: <input type="password" id="new_pass2" name="confirmPass"></h2>
+                    <button id="center_button" onclick="changePassword(this);">Change Password</button>
+            </form>                      
+                </div>
+                <div id="side_menu">
+                    {{!-- <button id="changepic_btn" onclick="changePhoto(this);">Change Photo</button> --}}
+                    <ul id="list">
+                        <li>
+                            <a id = "small_link" href ="/profile"> Back to Profile</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+            
+        </div>
+    </body>
+</html>
