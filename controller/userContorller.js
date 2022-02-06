@@ -232,6 +232,8 @@ exports.myRecipes = async (req, res) => {
   const curAuthor = req.session.username
   const max = 5;
 
-  const recipes = await Recipe.find({author : curAuthor }).lean().limit(max);
-  res.render('my-recipes', {recipes});
+  const recipe = await Recipe.find({author : curAuthor }).lean().limit(max);
+  res.render('my-recipes', {
+    pageTitle: curAuthor + ' Recipes', 
+    recipes: recipe});
 };
