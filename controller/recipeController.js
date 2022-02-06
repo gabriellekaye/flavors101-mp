@@ -224,7 +224,7 @@ const RecipeController = {
             else{
                 console.log("Commented");
             }
-        }).lean().exec();
+        });
 
         res.redirect('/recipe/' + curid);
     },
