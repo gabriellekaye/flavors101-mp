@@ -32,7 +32,7 @@
                 <div id="chicken">
                     {{#each recipes}}
                         <a href="/recipe/{{this._id}}"><img class="rec" src="../public/uploads/{{this.image}}"  /></a>
-                        <a href="/recipe/{{this._id}}"  class="cap"><p>{{this.title}}<br> by: kewpie_mayo</p></a>
+                        <a href="/recipe/{{this._id}}"  class="cap"><p>{{this.title}}<br> by: {{this.author}}</p></a>
                     {{ else }}
                     <h1>No Posts Yet</h1>
                     {{/each}}
