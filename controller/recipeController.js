@@ -244,7 +244,6 @@ const RecipeController = {
 
     likeRecipe : async (req, res) =>
     {
-        const curUser = await User.findById(req.session._id);
         const curid = req.params.id;
         const curRecipe = await Recipe.findById(curid);
         const likes = curRecipe.likes + 1;
@@ -258,16 +257,9 @@ const RecipeController = {
                 console.log("Liked");
             }
         });
-
-        User.findByIdAndUpdate({_id : curUser}, { $push: { likes : curRecipe._id } }, function (err, docs) 
-        {
-            if (err){
-                console.log(err);
-            }
-            else{
-                console.log("Liked recipe added to user");
-            }
-        });
+        
+        // Add id of liked recipe to users "likes"
+        await User.updateOne({ _id: req.session._id }, { $push: { likes : curid } });
         res.redirect('/recipe/' + curid);
     }
 }   
