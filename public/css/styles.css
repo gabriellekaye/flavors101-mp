@@ -26,9 +26,9 @@
 .cap:hover{
     color: orangered;
 }
-img{
+/* img{
     height: 100;
-}
+} */
 *::selection{
     color: #fff;
     background: orangered;
