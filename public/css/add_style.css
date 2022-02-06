@@ -61,13 +61,13 @@ form .txt, textarea
     font-family: 'Montserrat';
     border: none;
     color: white;
-    font-size: 30;
+    font-size: 24;
     cursor: pointer;
 }
 
 .btn 
 {
-  width: 120;
+  width: 170;
   height: 50;
   background-color: orangered;
   font-family: 'Montserrat';
@@ -76,3 +76,4 @@ form .txt, textarea
   font-size: 15;
   cursor: pointer;
 }
+
