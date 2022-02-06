@@ -1,22 +1,23 @@
-$(document).ready(function () {
+window.onload = function () {
+    const form = document.getElementById('password-form')
+    const oldPassHelp = document.getElementById('old-pass-error')
+    const newPassHelp = document.getElementById('new-pass-error')
+    const confirmPassHelp = document.getElementById('confirm-pass-error')
+    const passfeedback = document.getElementById('password-feedback')
 
-    //Edit Profile
-    $('#submit-edit').click(function () {
-        let username = $('#username-input');
-        let description = $('#description-input');
-        let avatar = $('#avatar-input');
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const values = Object.fromEntries(new FormData(e.target))
+        const { data } = await axios.post('/update-password', values)
 
-        $.get('/update-profile', {username: username.val(), description = description.val(), avatar: avatar.val()}, function(data, status){});
-        window.location= '/profile';
-    });
-
-    $('#small_link').click(function () {
-        window.location = '/edit-profile';
-    });
-
-    $('#delete-acct').click(function (){
-        window.location = '/';
+        if (data.oldPassErr) {
+            oldPassHelp.innerText = data.oldPassErr
+        } else if (data.newPassErr) {
+            newPassHelp.innerText = data.newPassErr
+        } else if (data.confirmPassErr) {
+            confirmPassHelp.innerText = data.confirmPassErr
+        } else {
+            passfeedback.innerText = "Password changed!"
+        }
     })
-
-    
-})
+}

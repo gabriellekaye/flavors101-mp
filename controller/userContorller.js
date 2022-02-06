@@ -34,9 +34,8 @@ exports.registerUser = async (req, res) => {
       return res.redirect('/login');
     }
 
-    const saltRounds = 10;
     // Hash password
-    const hashed = await bcrypt.hash(password, saltRounds)
+    const hashed = await bcrypt.hash(password, process.env.SALT_ROUNDS)
     const { avatar: image } = req.files
     // Change file name to username-avatar.jpg
     //const uploadPath = path.resolve('./public/avatars', username + '-avatar.jpg')
@@ -190,6 +189,30 @@ exports.getUpdateProfile = async (req,res) => {
       console.log(err)
   }
 };
+
+exports.changePassword = async (req, res) => {
+  // check old password matches in db
+  const { oldPass, newPass, confirmPass } = req.body
+  const { password } = await User.findById(req.session._id, '-_id password').exec()
+  
+  const result = await bcrypt.compare(oldPass, password)
+
+  if (!result) {
+    return res.json({ oldPassErr: 'Old password is incorrect' })
+  }
+
+  if (newPass?.length < 6) {
+    return res.json({ newPassErr: 'New password invalid' })
+  }
+
+  if (newPass !== confirmPass) {
+    return res.json({ confirmPassErr: 'New password and confirmation do not match' })
+  }
+
+  const hash =  await bcrypt.hash(newPass, parseInt(process.env.SALT_ROUNDS))
+  await User.updateOne({ _id: req.session._id }, { password: hash })
+  res.json({ success: true })
+}
 
 //Show my profile 
 exports.getProfile = (req, res) => {

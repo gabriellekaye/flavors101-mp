@@ -36,6 +36,9 @@ router.get('/edit-profile', isPrivate, userController.getEditProfile);
 // updated profile
 router.post('/update-profile', isPrivate, userController.getUpdateProfile);
 
+// change password
+router.post('/update-password', isPrivate, userController.changePassword);
+
 // get abt page
 router.get('/about', (req, res) => {
   res.render('about', {
