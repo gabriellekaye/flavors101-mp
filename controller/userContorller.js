@@ -36,7 +36,7 @@ exports.registerUser = async (req, res) => {
     }
 
     // Hash password
-    const hashed = await bcrypt.hash(password, process.env.SALT_ROUNDS)
+    const hashed = await bcrypt.hash(password, 10)
     const { avatar: image } = req.files
     // Change file name to username-avatar.jpg
     const fileName = username + '-avatar.jpg';
@@ -226,7 +226,6 @@ exports.getProfile = (req, res) => {
 };
 
 // Show my recipes page
-// my-recipes page
 exports.myRecipes = async (req, res) => {
   const curAuthor = req.session.username
   const max = 10;
@@ -236,3 +235,20 @@ exports.myRecipes = async (req, res) => {
     pageTitle: curAuthor + ' | Recipes', 
     recipes: recipe});
 };
+
+// Save liked recipes to user 
+exports.likeRecipe = (req, res) => {
+  const liked = req.params.id;
+  const curUserId = req.session.id;
+
+  User.findByIdAndUpdate({_id : curUserId}, { $push: { likes : liked } }, function (err, docs) 
+  {
+      if (err){
+          console.log(err)
+      }
+      else{
+          console.log("Liked recipe");
+      }
+  });
+
+}
