@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt'); //For has password
 const User = require('../models/user'); //Database 
+const Recipe = require('../models/recipe');
 const { validationResult } = require('express-validator'); //for validation
 const path = require('path')
 
@@ -212,7 +213,7 @@ exports.changePassword = async (req, res) => {
   const hash =  await bcrypt.hash(newPass, parseInt(process.env.SALT_ROUNDS))
   await User.updateOne({ _id: req.session._id }, { password: hash })
   res.json({ success: true })
-}
+};
 
 //Show my profile 
 exports.getProfile = (req, res) => {
@@ -225,4 +226,12 @@ exports.getProfile = (req, res) => {
   });
 };
 
-// Show someone elses profile
+// Show my recipes page
+// my-recipes page
+exports.myRecipes = async (req, res) => {
+  const curAuthor = req.session.username
+  const max = 5;
+
+  const recipes = await Recipe.find({author : curAuthor }).limit(max);
+  res.render('my-recipes', {recipes});
+};

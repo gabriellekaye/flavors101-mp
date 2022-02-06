@@ -46,4 +46,7 @@ router.get('/about', (req, res) => {
   });
 });
 
+// get my recipes page
+router.get('/myRecipes', isPrivate, userController.myRecipes);
+
 module.exports = router;

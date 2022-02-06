@@ -23,10 +23,18 @@ router.get('/random-recipe', isPrivate, recipeController.showRandom);
 router.post('/search', isPrivate, recipeController.searchRecipe);
 
 // //To delete a recipe/post
-router.delete('/recipe/:id', isPrivate, recipeController.deleteRecipe)
+router.delete('/delete/:id', isPrivate, recipeController.deleteRecipe);
 
-// //To update a recipe/post
-// router.post('/recipe/:id', recipeController.updateRecipe)
-router.get('/update', recipeController.updateRecipe)
+//To update a recipe/post
+router.get('/update/:id', isPrivate, recipeController.updateRecipe);
+
+// to show updated recipe
+router.post('/update/:id', isPrivate, recipeController.updateRecipeDone);
+
+//To comment on a recipe
+router.post('/comment/:id', isPrivate, recipeController.commentRecipe);
+
+//To like a recipe
+router.post('/like/:id', isPrivate, recipeController.likeRecipe);
 
 module.exports = router;
