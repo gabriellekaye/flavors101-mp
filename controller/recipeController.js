@@ -7,7 +7,9 @@ const RecipeController = {
     //Homepage
     home: async (req, res) => {
         const max = 5;
-        const recipes = await Recipe.find({}).limit(max);
+
+        const recipes = await Recipe.find({}).limit(max).lean().exec();
+
         res.render('index', {recipes});
     },
 
@@ -81,7 +83,7 @@ const RecipeController = {
 
             curId = recipeId;
 
-            const recipe = await Recipe.findById(recipeId);
+            const recipe = await Recipe.findById(recipeId).lean().exec();
 
             res.render('recipe', {recipe});
         } catch (error) {
@@ -97,7 +99,7 @@ const RecipeController = {
             //To find a random post
             var count = await Recipe.find().countDocuments();
             var random = Math.floor(Math.random() * count);
-            var recipe = await Recipe.findOne().skip(random).exec();
+            var recipe = await Recipe.findOne().skip(random).lean().exec();
 
             res.render ('recipe', {recipe});
         } catch (error) {
@@ -112,7 +114,8 @@ const RecipeController = {
             let searchTerm = req.body.searchTerm;
             
             // let recipes = await Recipe.find({ $text : { $search : searchTerm, $diacriticSensitive : true}});
-            let recipes = await Recipe.find({ title: new RegExp(searchTerm, "i")})
+
+            let recipes = await Recipe.find({ title: new RegExp(searchTerm, "i")}).lean().exec();
             
             //to show recipes on console
             // console.log(recipes)
@@ -130,7 +133,7 @@ const RecipeController = {
         try {
             //To extract the id from the request
             var recipeId = req.params.id;
-            const recipe = await Recipe.findById(recipeId);
+            const recipe = await Recipe.findById(recipeId).lean().exec();
 
             res.render('edit', {recipe});
         } catch (error) {
@@ -146,7 +149,7 @@ const RecipeController = {
 
         const { title, description, image, ingredients, preparation } = req.body
 
-        const curRecipe = await Recipe.findById(curid);
+        const curRecipe = await Recipe.findById(curid).lean().exec();
 
         // console.log('Title ' + curRecipe.title);
 
@@ -183,13 +186,13 @@ const RecipeController = {
             author : curRecipe.author
         }
 
-        Recipe.findOneAndUpdate({_id: curid}, updatedRecipe, function(err, succ) 
+        Recipe.findOneAndUpdate({_id: curid}, updatedRecipe, function(err, succ)
         {
             if(err)
                 console.log(err);
             else
                 console.log('Recipe Updated');
-        })
+        }).lean().exec();
 
         //to return to home after updating
         res.redirect('/recipe/' + curid);
@@ -204,7 +207,7 @@ const RecipeController = {
             //to return to home after deleting
             res.redirect('/');
             console.log('Recipe Deleted');
-        })
+        }).lean().exec();
     },
 
     //To comment on a recipe
@@ -221,7 +224,7 @@ const RecipeController = {
             else{
                 console.log("Commented");
             }
-        });
+        }).lean().exec();
 
         res.redirect('/recipe/' + curid);
     },
@@ -240,7 +243,7 @@ const RecipeController = {
             else{
                 console.log("Liked");
             }
-        });
+        }).lean().exec();
 
         res.redirect('/recipe/' + curid);
     }
