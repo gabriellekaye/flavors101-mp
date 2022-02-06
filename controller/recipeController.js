@@ -98,7 +98,7 @@ const RecipeController = {
             var random = Math.floor(Math.random() * count);
             var recipe = await Recipe.findOne().skip(random).exec();
 
-            res.render ('random', {recipe});
+            res.render ('recipe', {recipe});
         } catch (error) {
             
         }
