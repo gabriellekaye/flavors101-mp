@@ -105,7 +105,9 @@ const RecipeController = {
             var random = Math.floor(Math.random() * count);
             var recipe = await Recipe.findOne().skip(random).lean().exec();
 
-            res.render ('recipe', {recipe});
+            res.render ('recipe', {
+                pageTitle: recipe.title,
+                recipe});
         } catch (error) {
             
         }
@@ -120,11 +122,10 @@ const RecipeController = {
             // let recipes = await Recipe.find({ $text : { $search : searchTerm, $diacriticSensitive : true}});
 
             let recipes = await Recipe.find({ title: new RegExp(searchTerm, "i")}).lean().exec();
-            
-            //to show recipes on console
-            // console.log(recipes)
 
-            res.render('search', {recipes});
+            res.render('search', {
+                pageTitle: "Search",
+                recipes});
 
         } catch (error) {
             res.status(500).send({message: error.message || "Error Occured"});  
@@ -139,7 +140,9 @@ const RecipeController = {
             var recipeId = req.params.id;
             const recipe = await Recipe.findById(recipeId).lean().exec();
 
-            res.render('edit', {recipe});
+            res.render('edit', {
+                pageTitle: recipe.title + " | Edit",
+                recipe});
         } catch (error) {
 
         }

@@ -5,6 +5,7 @@
     </head>
 
     <body>
+        {{> nav }}
         <div class = 'center'>
             <h4>Edit Recipe</h4><br>
             {{#with recipe}}
@@ -51,10 +52,6 @@
                     <input type = "submit" id = "post" value = "Submit Post">
                 </form>
             {{/with}}
-            
-            {{!-- REMOVE --}}
-            <p>To remove later :</p>
-            <a href = "/">Home</a>
 
             <script>
                 let addIngredientsBtn = document.getElementById('addIngredientsBtn');

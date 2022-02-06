@@ -39,7 +39,6 @@ exports.registerUser = async (req, res) => {
     const hashed = await bcrypt.hash(password, process.env.SALT_ROUNDS)
     const { avatar: image } = req.files
     // Change file name to username-avatar.jpg
-
     const fileName = username + '-avatar.jpg';
     const uploadPath = path.resolve('./public/avatars', fileName);
     console.log(fileName);
@@ -128,7 +127,7 @@ exports.logoutUser = (req, res) => {
       res.clearCookie('connect.sid'); //clear cookies
       res.redirect('/login'); //redirect to log in page
     });
-    console.log('logged out');
+    console.log('logged out and session ended');
   }
 };
 
@@ -136,17 +135,17 @@ exports.logoutUser = (req, res) => {
 exports.getDeleteProfile = async (req, res) => {
 
   await User.deleteOne({_id: req.session._id})
-  console.log('deleted');
+  console.log('deleted user');
   req.session.destroy(() => { 
     res.clearCookie('connect.sid'); //clear cookies
     res.redirect('/login'); //redirect to log in page
   });
-  console.log('end session');
 }
 
 //Edit profile
 exports.getEditProfile = (req, res) => {
   res.render('edit-profile', {
+      pageTitle: req.session.username+" | Edit Profile",
       username: req.session.username,
       description: req.session.description,
       avatar: req.session.avatar
@@ -230,7 +229,7 @@ exports.getProfile = (req, res) => {
 // my-recipes page
 exports.myRecipes = async (req, res) => {
   const curAuthor = req.session.username
-  const max = 5;
+  const max = 10;
 
   const recipe = await Recipe.find({author : curAuthor }).lean().limit(max);
   res.render('my-recipes', {
