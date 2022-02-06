@@ -3,21 +3,21 @@ const userController = require('../controller/userContorller');
 const { registerValidation, loginValidation } = require('../validators');
 const { isPublic, isPrivate } = require('../middlewares/authentication');
 
-// GET login to display login page
+// get sign-in
  router.get('/login', isPublic, (req, res) => {
    res.render('login', {
      pageTitle: 'Login',
    });
  });
 
-// // GET register to display registration page
+// // get sign up
  router.get('/register', isPublic, (req, res) => {
    res.render('register', {
-     pageTitle: 'Registration',
+     pageTitle: 'Sign Up',
    });
  });
 
-// POST methods for form submissions
+// POST methods for form submissions in reg and login
 router.post('/register', isPublic, registerValidation, userController.registerUser);
 router.post('/login', isPublic, loginValidation, userController.loginUser);
 

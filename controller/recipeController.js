@@ -12,7 +12,7 @@ const RecipeController = {
         const recipe = await Recipe.find({}).limit(max).lean().exec();
 
         res.render('index', {
-            pageTitle: "Home",
+            pageTitle: "Flavors 101",
             recipes: recipe});
     },
 
@@ -130,7 +130,7 @@ const RecipeController = {
             let recipes = await Recipe.find({ title: new RegExp(searchTerm, "i")}).lean().exec();
 
             res.render('search', {
-                pageTitle: "Search",
+                pageTitle: "Search " + searchTerm,
                 recipes});
 
         } catch (error) {
@@ -147,7 +147,7 @@ const RecipeController = {
             const recipe = await Recipe.findById(recipeId).lean().exec();
 
             res.render('edit', {
-                pageTitle: recipe.title + " | Edit",
+                pageTitle: recipe.title + " | Edit Recipe",
                 recipe});
         } catch (error) {
 
@@ -260,8 +260,9 @@ const RecipeController = {
         
         // Add id of liked recipe to users "likes"
         await User.updateOne({ _id: req.session._id }, { $push: { likes : curid } });
+        
         res.redirect('/recipe/' + curid);
     }
-}   
+};
 
 module.exports = RecipeController;

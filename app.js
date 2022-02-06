@@ -76,7 +76,7 @@ app.use((req, res, next) => {
 });
 
 // Routes imports
-const authRouter = require('./routes/auth');
+const authRouter = require('./routes/user');
 const recipeRouter = require('./routes/post');
 
 app.use('/', authRouter); // Login/registration & profile routes
