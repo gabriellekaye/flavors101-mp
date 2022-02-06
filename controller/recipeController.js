@@ -68,7 +68,12 @@ const RecipeController = {
             await newRecipe.save()
 
             console.log('Submitted');
-            res.redirect('/');
+
+            //Redirect to home
+            // res.redirect('/');
+
+            //Redirect to post
+            res.redirect('/recipe/' + newRecipe._id);
         } 
         catch (error) {
             console.log('Fail');
