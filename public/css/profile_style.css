@@ -184,3 +184,20 @@ header{
 .dash:hover{
   color: orangered;
 }
+
+#delete-acct {
+    display:block;
+    background-color:#fd9956;
+    font-family: 'Garamond', serif;
+    font-weight: bold;
+    font-size: 15;
+    font-weight: 500;
+    border-radius: 4px;
+    border: 1px solid orange;
+    color:rgb(71, 70, 70);
+}
+
+#delete-acct:hover {
+    background-color: seashell;
+    cursor: pointer;
+}
