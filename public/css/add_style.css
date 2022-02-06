@@ -77,3 +77,35 @@ form .txt, textarea
   cursor: pointer;
 }
 
+.dash{
+  margin-left: 15;
+    font-size: 30;
+    color: #666;
+    background-color: white;
+    margin: 0;
+    box-sizing: border-box; 
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.dash:hover{
+    color: orangered;
+}
+
+header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 20;
+    font-weight:bolder;
+}
+
+.whole{
+    display: flex;
+    background-color: white;
+}
