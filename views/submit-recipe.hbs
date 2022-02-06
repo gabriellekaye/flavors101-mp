@@ -7,34 +7,30 @@
     </head>
 
     <body>
-        {{> nav }}
+        
         <div class = 'center'>
             <h4> Create a Recipe</h4><br>
             <form action = "/submit-recipe" encType="multipart/form-data" method = "POST">
-                {{!-- TITLE --}}
-                {{!-- <label for ="title" class = "form-label">Title:</label> --}}
+                
                 <h5>Title:</h5>
-                <input type = "text" name="title" id = "title" class ="txt" placeholder = "Add a Title here" required/>
+                <input type="text" name="title" id="title" class="txt" placeholder="Add a Title here" required/>
                 <br>
 
-                {{!-- DESCRIPTION --}}
                 <h5>Description:</h5>
-                <textarea name = "description" id = "description" class = "txt" placeholder = "Add a Description here" required></textarea>
+                <textarea name="description" id="description" class="txt" placeholder="Add a Description here" required></textarea>
                 <br>
 
-                {{!-- IMAGE --}}
                 <h5>Select an image: </h5>
-                <input type = "file" name = "image" id = "image" class = "txt" placeholder = "Add an Image here" required/>
+                <input type="file" name="image" id="image" class="txt" placeholder="Add an Image here" required/>
 
-                {{!-- INGREDIENTS --}}
                 <h5>Ingredients: </h5>
-                <div class = "ingredientList">
-                    <div class = "ingredientDiv">
-                        <input type = "text" name = "ingredients" class ="txt" placeholder = "Add an Ingredient here" required/>
+                <div class="ingredientList">
+                    <div class="ingredientDiv">
+                        <input type="text" name="ingredients" class="txt" placeholder="Add an Ingredient here" required/>
                     </div>
                 </div>
 
-                <button type = "button" class = "btn" id = "addIngredientsBtn" >+ Ingredient</button>
+                <button type="button" class="btn" id="addIngredientsBtn">+ Ingredient</button>
                 <br><br><br>
 
 

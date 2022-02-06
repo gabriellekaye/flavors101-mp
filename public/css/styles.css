@@ -131,7 +131,7 @@ header{
     justify-content: center;
     align-items: center;
     color: white;
-
+    width: 50;
 }
 
 #input{
@@ -139,7 +139,7 @@ header{
     background: white;
     color: gray;
     padding: 10;
-    width: 150;
+    width: 50;
 }
 
 
