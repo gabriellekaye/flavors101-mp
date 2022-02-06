@@ -209,10 +209,6 @@ const RecipeController = {
         const curid = req.params.id;
         const comment = req.body.comment;
 
-        
-        // console.log(comment);
-        // console.log(curid);
-
         Recipe.findByIdAndUpdate({_id : curid}, { $push: { comments : comment } }, function (err, docs) 
         {
             if (err){
