@@ -133,19 +133,3 @@ form .inputs
     height: 500;
     background-color:#f9f3e3; 
 }
-
-#pre{
-  text-align: center;
-}
-
-h1{
-  font-size: 100;
-  text-align: center;
-  text-shadow: #666;
-  font-family: 'Cedarville Cursive', cursive;
-  color: rgb(255, 100, 44);
-}
-span{
-  color: #666; 
-  font-family: 'Cedarville Cursive', cursive;
-}
