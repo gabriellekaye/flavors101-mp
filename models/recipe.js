@@ -7,7 +7,8 @@ const recipeSchema = new mongoose.Schema({
     ingredients : {type : Array, required : 'This field is required'},
     preparation : {type : Array, required : 'This field is required'},
     comments : {type : Array},
-    likes : {type : Number}
+    likes : {type : Number},
+    author : {type : String}
 })
 
 recipeSchema.index({ name : 'text', description : 'text'});
