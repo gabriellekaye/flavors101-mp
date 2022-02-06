@@ -11,8 +11,11 @@
         <section class="start" id="home" >
             <div class="recipe"><br>
                 <h1> Flavours <span>101</span> </h1>
-                <h2 style="margin: 1; color: darkgray; font-size: 18;"> Can't decide? Try "Surprise Me!" </h2>
+                <h2 style="margin: 1; color: darkgray; font-size: 18;"> Can't decide? Try "<a href = "/random-recipe">Surprise Me</a>"" </h2>
             </div>
+            <form action = "/search" method = "post">
+                <input type ="search" name = "searchTerm" class = "form-control" placeholder ="Search..." aria-label = "Search">
+            </form>
             <br><br><br>
             
             {{!-- Should be in main --}}
@@ -21,9 +24,6 @@
             <br>
             <a href = "/submit-recipe">Submit Post</a>
             <br><br>
-            <form action = "/search" method = "post">
-                <input type ="search" name = "searchTerm" class = "form-control" placeholder ="Search..." aria-label = "Search">
-            </form>
             <p>TO DELETE (END)</p>
             {{!-- END --}}
 
