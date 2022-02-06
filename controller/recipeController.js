@@ -8,9 +8,11 @@ const RecipeController = {
     home: async (req, res) => {
         const max = 10;
 
-        const recipes = await Recipe.find({}).limit(max).lean().exec();
+        const recipe = await Recipe.find({}).limit(max).lean().exec();
 
-        res.render('index', {recipes});
+        res.render('index', {
+            pageTitle: "Home",
+            recipes: recipe});
     },
 
     //Loading the Form
@@ -85,7 +87,9 @@ const RecipeController = {
 
             const recipe = await Recipe.findById(recipeId).lean().exec();
 
-            res.render('recipe', {recipe});
+            res.render('recipe', {
+                pageTitle: recipe.title,
+                recipe: recipe});
         } catch (error) {
 
         }
