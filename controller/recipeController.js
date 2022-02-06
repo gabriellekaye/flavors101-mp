@@ -6,7 +6,7 @@ const RecipeController = {
 
     //Homepage
     home: async (req, res) => {
-        const max = 5;
+        const max = 10;
 
         const recipes = await Recipe.find({}).limit(max).lean().exec();
 
