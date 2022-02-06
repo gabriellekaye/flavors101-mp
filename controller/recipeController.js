@@ -1,6 +1,7 @@
 //Require the schemas
 require('../models/db');
 const Recipe = require ('../models/recipe');
+const User = require ('../models/user');
 
 const RecipeController = {
 
@@ -243,6 +244,7 @@ const RecipeController = {
 
     likeRecipe : async (req, res) =>
     {
+        const curUser = await User.findById(req.session._id);
         const curid = req.params.id;
         const curRecipe = await Recipe.findById(curid);
         const likes = curRecipe.likes + 1;
@@ -257,6 +259,15 @@ const RecipeController = {
             }
         });
 
+        User.findByIdAndUpdate({_id : curUser}, { $push: { likes : curRecipe._id } }, function (err, docs) 
+        {
+            if (err){
+                console.log(err);
+            }
+            else{
+                console.log("Liked recipe added to user");
+            }
+        });
         res.redirect('/recipe/' + curid);
     }
 }   

@@ -235,20 +235,3 @@ exports.myRecipes = async (req, res) => {
     pageTitle: curAuthor + ' | Recipes', 
     recipes: recipe});
 };
-
-// Save liked recipes to user 
-exports.likeRecipe = (req, res) => {
-  const liked = req.params.id;
-  const curUserId = req.session.id;
-
-  User.findByIdAndUpdate({_id : curUserId}, { $push: { likes : liked } }, function (err, docs) 
-  {
-      if (err){
-          console.log(err)
-      }
-      else{
-          console.log("Liked recipe");
-      }
-  });
-
-}
