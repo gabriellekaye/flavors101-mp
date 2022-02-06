@@ -18,21 +18,21 @@
             </form>
             <br><br><br>
             
-            {{!-- Should be in main --}}
-            <p>TO DELETE</p>
-            <a href = "/random-recipe">Surprise Me</a>
-            <br>
-            <a href = "/submit-recipe">Submit Post</a>
-            <br><br>
-            <p>TO DELETE (END)</p>
-            {{!-- END --}}
+                {{!-- Should be in main --}}
+                <p>TO DELETE</p>
+                <a href = "/random-recipe">Surprise Me</a><br>
+                <a href = "/submit-recipe">Submit Post</a><br><br>
+                <form action = "/search" method = "post">
+                    <input type ="search" name = "searchTerm" class = "form-control" placeholder ="Search..." aria-label = "Search">
+                </form>
+                <p>TO DELETE (END)</p>
+                {{!-- END --}}
 
             <div class="posts">
                 <div id="chicken">
                     {{#each recipes}}
                         <a href="/recipe/{{this._id}}"><img class="rec" src="../public/uploads/{{this.image}}"  /></a>
                         <a href="/recipe/{{this._id}}"  class="cap"><p>{{this.title}}<br> by: kewpie_mayo</p></a>
-
                     {{ else }}
                     <h1>No Posts Yet</h1>
                     {{/each}}

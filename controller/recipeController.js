@@ -50,7 +50,7 @@ const RecipeController = {
                 image : imageName,
                 ingredients : req.body.ingredients, 
                 preparation : req.body.preparation,
-                likes : 0
+                likes : 0,
             })
 
             //Test
