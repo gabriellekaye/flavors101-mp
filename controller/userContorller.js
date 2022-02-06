@@ -39,7 +39,7 @@ exports.registerUser = async (req, res) => {
     const hashed = await bcrypt.hash(password, process.env.SALT_ROUNDS)
     const { avatar: image } = req.files
     // Change file name to username-avatar.jpg
-    //const uploadPath = path.resolve('./public/avatars', username + '-avatar.jpg')
+
     const fileName = username + '-avatar.jpg';
     const uploadPath = path.resolve('./public/avatars', fileName);
     console.log(fileName);
@@ -232,6 +232,6 @@ exports.myRecipes = async (req, res) => {
   const curAuthor = req.session.username
   const max = 5;
 
-  const recipes = await Recipe.find({author : curAuthor }).limit(max);
+  const recipes = await Recipe.find({author : curAuthor }).lean().limit(max);
   res.render('my-recipes', {recipes});
 };
