@@ -6,7 +6,7 @@ const RecipeController = {
 
     //Homepage
     home: async (req, res) => {
-        const max = 5;
+        const max = 10;
 
         const recipes = await Recipe.find({}).limit(max).lean().exec();
 
@@ -192,7 +192,7 @@ const RecipeController = {
                 console.log(err);
             else
                 console.log('Recipe Updated');
-        }).lean().exec();
+        });
 
         //to return to home after updating
         res.redirect('/recipe/' + curid);
@@ -207,7 +207,7 @@ const RecipeController = {
             //to return to home after deleting
             res.redirect('/');
             console.log('Recipe Deleted');
-        }).lean().exec();
+        });
     },
 
     //To comment on a recipe
@@ -224,7 +224,7 @@ const RecipeController = {
             else{
                 console.log("Commented");
             }
-        }).lean().exec();
+        });
 
         res.redirect('/recipe/' + curid);
     },
@@ -243,7 +243,7 @@ const RecipeController = {
             else{
                 console.log("Liked");
             }
-        }).lean().exec();
+        });
 
         res.redirect('/recipe/' + curid);
     }
