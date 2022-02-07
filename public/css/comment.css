@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
 #page {
     margin-top: 125;
-    margin-left: 100px;
-    margin-right: 100px;
+    /* margin-left: 100px;
+    margin-right: 100px; */
     background: #f7f7f7;
     background-repeat: no-repeat; 
     background-position: 1500 400;
@@ -32,12 +32,13 @@ body {
 }
 
 #comments {
-  margin-left: 500px;
+  margin-left: 100px; 
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
   outline: none !important;
   border: 5px solid orange;
   border-radius: 4px;
+  width:700;
 }
 
 #btn {
@@ -50,7 +51,7 @@ body {
 }
 
 #btn_cmt {
-  margin-left: 500px;
+  /* margin-left: 500px; */
   background-color:#fd9956;
   font-family: 'Montserrat', sans-serif;
   font-size: 15;
@@ -62,16 +63,19 @@ body {
 #btn:hover, #btn_cmt:hover {
   background-color: seashell;
 }
-
+#comment{
+  text-align: center;
+}
 #rate {
   font-size: 25px;
-  margin-left: 500px;
+  /* margin-left: 500px; */
   margin-top: 10px;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
 #other_comments, #new {
-  margin-left: 500px;
+  /* margin-left: 500px; */
   margin-bottom: 20px;
 }
 
@@ -89,6 +93,7 @@ body {
 #com_user, #my_com, #my_new_cmt, #cmt_user,new{
   font-size: 25px;
   color: #666;
+  margin-left: 100;
 }
 
 #stars {

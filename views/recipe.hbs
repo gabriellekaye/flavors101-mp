@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Recipe</title>
-        <link rel = "stylesheet" type = "text/css" media="all" href = "../public/css/style_p.css"/>
+        <link rel = "stylesheet" type = "text/css" media="all" href = "../public/css/style_post.css"/>
         <script src="https://kit.fontawesome.com/38d688374b.js" crossorigin="anonymous"></script>
         <link rel = "stylesheet" type = "text/css" media="all" href = "../public/css/comment.css"/>
 
@@ -83,12 +83,11 @@
                 <input type = "submit" value = "DELETE"/>
             </form>
 
-            <br><br><br>
+            <br>
 
             {{!-- COMMENTS --}}
-            <br><br>
             <div id="page">
-                <h2 id="rate">Comments:</h2>
+                <h2 id="rate">Comments:</h2><br><br>
                 {{#each comments}}
                     <div id="new">
                         <p id="cmt_user_new"><a id="com_new_link" href ="profile.html"></a></p>
@@ -96,18 +95,19 @@
                     </div>
                 
                 {{else}}
-                    <p>No Comments</p>
+                    <p id="comment">No Comments</p>
                 {{/each}}
             
                 <div>
                     <form action = "/comment/{{_id}}" method = "POST">
+                        <br><br>
                         <textarea id="comments" name = "comment" placeholder="Comment about this recipe..." rows="5" cols="80" name="comment" maxlength="500"></textarea>
                         <br>
                         {{!-- <button id="btn_cmt" onclick="post_cmt(this);">Post Comment</button> --}}
                         <input type = "submit" value = "Post Comment"/>
                     </form>
 
-
+                    <br><br><br>
                     {{!-- RATE --}}
                     <h2 id="rate">Rate this recipe by taste and difficulty:</h2>
                     <br>
