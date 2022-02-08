@@ -50,6 +50,6 @@ router.get('/about', (req, res) => {
 router.get('/myRecipes', isPrivate, userController.myRecipes);
 
 // get someone elses profile
-router.get('/profile/:username', isPrivate, userController.getPublicProfile);
+router.get('/profile/:id', isPrivate, userController.getPublicProfile);
 
 module.exports = router;

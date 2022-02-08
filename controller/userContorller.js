@@ -241,18 +241,16 @@ exports.myRecipes = async (req, res) => {
 exports.getPublicProfile = async (req,res) => {
   try {
     const otherUser = req.params.id;
-    console.log(otherUser);
-    const user = await User.findOne({username : otherUser}).exec()
-    console.log(user)
+    const user = await User.findById(otherUser).exec()
 
     res.render('public-profile', {
       pageTitle: user.username+' | Profile',
       username: user.username,
       description: user.description,
       avatar: user.avatar
-  });
+    });
   }
   catch (err){
     console.log(err);
-  }
-}
+  };
+};

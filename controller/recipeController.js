@@ -207,7 +207,7 @@ const RecipeController = {
                 console.log('Recipe Updated');
         });
 
-        //to return to home after updating
+        //refresh to edited recipe
         res.redirect('/recipe/' + curid);
     }, 
 
@@ -217,7 +217,7 @@ const RecipeController = {
         const curid = req.params.id;
 
         Recipe.deleteOne({_id: curid}, function(){
-            //to return to home after deleting
+            // return to home after deleting
             res.redirect('/');
             console.log('Recipe Deleted');
         });
