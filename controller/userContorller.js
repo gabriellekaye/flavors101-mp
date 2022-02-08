@@ -129,6 +129,7 @@ exports.logoutUser = (req, res) => {
       res.redirect('/login'); //redirect to log in page
     });
     console.log('logged out and session ended');
+    res.status(200);
   }
 };
 
@@ -140,10 +141,11 @@ exports.getDeleteProfile = async (req, res) => {
   req.session.destroy(() => { 
     res.clearCookie('connect.sid'); //clear cookies
     res.redirect('/login'); //redirect to log in page
+    res.status(200);
   });
 }
 
-//Edit profile
+// get edit profile page
 exports.getEditProfile = (req, res) => {
   res.render('edit-profile', {
       pageTitle: req.session.username+" | Edit Profile",
@@ -184,10 +186,10 @@ exports.getUpdateProfile = async (req,res) => {
 
   try {
       await User.updateOne({_id: sess._id}, user);
-      console.log('PROFILE EDITED');
+      console.log('Profile edited');
       res.redirect ('/profile'); 
   } catch (err) {
-      console.log(err)
+      console.log(err);
   }
 };
 
@@ -216,13 +218,17 @@ exports.changePassword = async (req, res) => {
 };
 
 //Show my profile 
-exports.getProfile = (req, res) => {
-  
+exports.getProfile = async (req, res) => {
+  //const max = 5
+
+  //const recipes = await Recipe.findById(req.session.likes)
+
   res.render('profile', {
       pageTitle: req.session.username+' | Profile',
       username: req.session.username,
       description: req.session.description,
-      avatar: req.session.avatar
+      avatar: req.session.avatar,
+      //likes: recipes
   });
 };
 
@@ -240,11 +246,11 @@ exports.myRecipes = async (req, res) => {
 // Show someone elses profile 
 exports.getPublicProfile = async (req,res) => {
   try {
-    const otherUser = req.params.id;
-    const user = await User.findById(otherUser).exec()
+    var otherUser = req.params.id;
+    const user = await User.findOne({username : otherUser}).exec();
 
     res.render('public-profile', {
-      pageTitle: user.username+' | Profile',
+      pageTitle: user.username + '`s Profile',
       username: user.username,
       description: user.description,
       avatar: user.avatar

@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="icon" type="image/png" href="/images/favicon.ico"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="../public/css/profile_style.css">   
         <script type="text/javascript" src="/public/javascript/editprofile.js"></script>  
     </head>
@@ -44,10 +45,14 @@
             <br>
             <div class="like_div">
                 <h3 id= "likes"><i id="heart" class="fa fa-heart"></i> Liked Recipes </h3>
-                {{!-- <div id="chicken">
-                    <a href="carbonara.html"><img id="liked_img" src="images/carbonara.jpg" /></a>
-                    <a id="small_link" href="carbonara.html"><p>Carbonara <br> by: mark_axie</p></a>
-                </div> --}}
+                <div id="chicken">
+                    {{#each likes}}
+                        <a href="/recipe/{{this._id}}"><img class="rec" src="../public/uploads/{{this.image}}"  /></a>
+                        <a href="/recipe/{{this._id}}"  class="cap"><p>{{this.title}}<br> by: {{this.author}}</p></a>
+                    {{ else }}
+                    <h3 id= "likes">No likes yet <i id="heart" class="fa fa-frown-o" aria-hidden="true"></i></h3>
+                    {{/each}}
+                </div>
             </div>
         </div>
 
