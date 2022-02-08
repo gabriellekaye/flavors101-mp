@@ -93,7 +93,7 @@ const RecipeController = {
 
             const recipe = await Recipe.findById(recipeId).lean().exec();
 
-            //Editable
+            //Recipes can only be edited by author
             if(recipe.author === req.session.username)
             {
                 res.render('recipe', {
@@ -126,6 +126,7 @@ const RecipeController = {
             var random = Math.floor(Math.random() * count);
             var recipe = await Recipe.findOne().skip(random).lean().exec();
 
+            //Recipes can only be edited by author
             if(recipe.author === req.session.username)
             {
                 res.render('recipe', {
@@ -139,7 +140,7 @@ const RecipeController = {
                 pageTitle: recipe.title,
                 recipe: recipe});
             }
-            
+
             // res.render ('recipe', {
             //     pageTitle: recipe.title,
             //     recipe});
