@@ -88,8 +88,10 @@ body {
 
 #activity {
     color: rgb(88, 49, 23);
-    margin-left: 600px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
     font-size: 20px;
+    font-weight: bolder;
 }
 
 hr
@@ -115,19 +117,15 @@ hr
     position: relative;
 }
 
+#frown {
+    font-size: 30px;
+    color: rgb(88, 49, 23);
+    position: relative;
+}
+
 #chicken{
     text-align: center;
     font-family:'Montserrat', sans-serif;
-}
-
-#liked_img {
-    height: 300px;
-    width: 200px;
-}
-
-#liked_img_wide {
-    height: 300px;
-    width: 300px;
 }
 
 header{

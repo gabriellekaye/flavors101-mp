@@ -2,6 +2,7 @@
     <head>
         <link rel="icon" type="image/png" href="/images/favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="../public/css/profile_style.css">   
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script type="text/javascript" src="/javascript/editprofile.js"></script>  
     </head>
 
@@ -22,11 +23,16 @@
             <hr>
             <br>
             <div class="like_div">
-                <h3 id= "likes"><i id="heart" class="fa fa-heart"></i> Liked Recipes </h3>
-                {{!-- <div id="chicken">
-                    <a href="carbonara.html"><img id="liked_img" src="images/carbonara.jpg" /></a>
-                    <a id="small_link" href="carbonara.html"><p>Carbonara <br> by: mark_axie</p></a>
-                </div> --}}
+                <h3 id= "likes">Recent Activity</h3>
+                <ul style="list-style-type:none;">
+                    {{#each likes}}
+                    <li> 
+                        <p id="activity">Posted <a id = "small_link" href ="tonkatsu.html">Pork Tonkatsu</a> recipe.</p>
+                    </li>
+                    {{ else }}
+                    <h3 id= "activity">No recent activity <i id="frown" class="fa fa-frown-o" aria-hidden="true"></i></h3>
+                    {{/each}}
+                </ul>
             </div>
         </div>
 
