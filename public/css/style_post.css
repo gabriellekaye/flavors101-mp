@@ -222,3 +222,17 @@ header{
 {
   cursor: auto;
 }
+
+.updateBtn, .deleteBtn 
+{
+    width: 200;
+    height: 50;
+    background-color: orangered;
+    font-family: 'Montserrat';
+    border: none;
+    color: white;
+    font-size: 24;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 16px;
+}
