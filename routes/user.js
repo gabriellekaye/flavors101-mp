@@ -49,4 +49,7 @@ router.get('/about', (req, res) => {
 // get my recipes page
 router.get('/myRecipes', isPrivate, userController.myRecipes);
 
+// get someone elses profile
+router.get('/profile/:username', isPrivate, userController.getPublicProfile);
+
 module.exports = router;

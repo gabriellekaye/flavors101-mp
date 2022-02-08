@@ -10,6 +10,7 @@ const app = new express()
 
 // To upload avatar
 const fileUpload = require('express-fileupload');
+const { constants } = require('crypto');
 app.use(fileUpload())
 
 app.use(express.json())
@@ -235,3 +236,23 @@ exports.myRecipes = async (req, res) => {
     pageTitle: curAuthor + ' | Recipes', 
     recipes: recipe});
 };
+
+// Show someone elses profile 
+exports.getPublicProfile = async (req,res) => {
+  try {
+    const otherUser = req.params.id;
+    console.log(otherUser);
+    const user = await User.findOne({username : otherUser}).exec()
+    console.log(user)
+
+    res.render('public-profile', {
+      pageTitle: user.username+' | Profile',
+      username: user.username,
+      description: user.description,
+      avatar: user.avatar
+  });
+  }
+  catch (err){
+    console.log(err);
+  }
+}
