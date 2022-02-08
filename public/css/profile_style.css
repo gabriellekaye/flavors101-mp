@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
 #page {
-    margin-top: 125;
     margin-left: 100px;
     margin-right: 100px;
     background: #f7f7f7;
@@ -13,7 +12,6 @@
     color: #666;
     background-color: white;
     margin-left: 50px;
-
     text-decoration: none;
     text-align: center;
     font-size: 30px;
