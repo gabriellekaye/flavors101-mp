@@ -15,18 +15,6 @@
             <form action = "/search" method = "post">
                 <input type ="search" name = "searchTerm" class = "form-control" placeholder ="Search..." aria-label = "Search">
             </form>
-            <br><br><br>
-            
-                {{!-- Should be in main --}}
-                <p>TO DELETE</p>
-                <a href = "/random-recipe">Surprise Me</a><br>
-                <a href = "/submit-recipe">Submit Post</a><br><br>
-                <form action = "/search" method = "post">
-                    <input type ="search" name = "searchTerm" class = "form-control" placeholder ="Search..." aria-label = "Search">
-                </form>
-                <p>TO DELETE (END)</p>
-                {{!-- END --}}
-
             <div class="posts">
                 <div id="chicken">
                     {{#each recipes}}
