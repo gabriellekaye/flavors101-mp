@@ -93,9 +93,24 @@ const RecipeController = {
 
             const recipe = await Recipe.findById(recipeId).lean().exec();
 
-            res.render('recipe', {
+            //Recipes can only be edited by author
+            if(recipe.author === req.session.username)
+            {
+                res.render('recipe', {
                 pageTitle: recipe.title,
                 recipe: recipe});
+            }
+
+            else
+            {
+                res.render('uneditableRecipe', {
+                pageTitle: recipe.title,
+                recipe: recipe});
+            }
+
+            // res.render('recipe', {
+            //     pageTitle: recipe.title,
+            //     recipe: recipe});
         } catch (error) {
 
         }
@@ -111,9 +126,24 @@ const RecipeController = {
             var random = Math.floor(Math.random() * count);
             var recipe = await Recipe.findOne().skip(random).lean().exec();
 
-            res.render ('recipe', {
+            //Recipes can only be edited by author
+            if(recipe.author === req.session.username)
+            {
+                res.render('recipe', {
                 pageTitle: recipe.title,
-                recipe});
+                recipe: recipe});
+            }
+
+            else
+            {
+                res.render('uneditableRecipe', {
+                pageTitle: recipe.title,
+                recipe: recipe});
+            }
+
+            // res.render ('recipe', {
+            //     pageTitle: recipe.title,
+            //     recipe});
         } catch (error) {
             
         }

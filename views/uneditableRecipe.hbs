@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <title>Recipe</title>
+        <link rel = "stylesheet" type = "text/css" media="all" href = "../public/css/style_post.css"/>
+        <script src="https://kit.fontawesome.com/38d688374b.js" crossorigin="anonymous"></script>
+        <link rel = "stylesheet" type = "text/css" media="all" href = "../public/css/comment.css"/>
+
+    </head>
+    
+    <body>
+        {{> nav }}
+        {{#with recipe}}
+            <div class = "post" style="background-color: white;">
+                <hr>
+                <br>
+                <h1 class = "name">{{title}}</h1>
+                <br>
+                
+                <h3 class = "author">By: <a href = "/profile/{{author}}">{{author}}</a><br><br></h3>
+                
+                <div class = "button_cont">
+
+                    <form action = "/like/{{_id}}" method = "POST">
+                        <input type = "submit" class = "like_b" value = "👍 Like"/>   
+                    </form>
+
+                    {{!-- <button class = "like_b" onclick = "increment()">
+                        👍 Like 
+                    </button> --}}
+
+                    <h2>Liked by: <span id = "count">{{likes}}</span></h2>
+                </div>
+        
+                <br>
+                <br>
+                
+                <div class = "c_i">
+                    <img class = "image" src = "../public/uploads/{{image}}" width = "530" height = "350"/>
+                    <br>
+                </div>
+                
+                
+                <p class = "desc">{{description}}</p>
+
+                <hr>
+                <br>
+                
+                <h1 class = "h_ingredients">Ingredients</h1>
+                <ul class = "ingredients">
+                    {{#each ingredients}}
+                        <li>
+                            {{this}}
+                        </li>
+                    {{/each}}
+                </ul>
+
+                <hr>
+                <br>
+
+                <h1 class = "h_prep">Preparation</h1>
+                
+                <ol class = "prep">
+                    {{#each preparation}}
+                        <li>
+                            {{this}}
+                        </li>
+                    {{/each}}
+                </ol>
+                <hr>
+            </div>
+            <br>
+            <br>
+
+            {{!-- COMMENTS --}}
+            <div id="page">
+                <h2 id="rate">Comments:</h2><br><br>
+                {{#each comments}}
+                    <div id="new">
+                        <p id="cmt_user_new"><a id="com_new_link" href ="profile.html"></a></p>
+                        <p id="my_new_cmt">{{this}}</p>
+                    </div>
+                
+                {{else}}
+                    <p id="comment">No Comments</p>
+                {{/each}}
+            
+                <div>
+                    <form action = "/comment/{{_id}}" method = "POST">
+                        <br><br>
+                        <textarea id="comments" name = "comment" placeholder="Comment about this recipe..." rows="5" cols="80" name="comment" maxlength="500"></textarea>
+                        <br>
+                        {{!-- <button id="btn_cmt" onclick="post_cmt(this);">Post Comment</button> --}}
+                        <input type = "submit" value = "Post Comment"/>
+                    </form>
+
+                    <br><br><br>
+                    {{!-- RATE --}}
+                    <h2 id="rate">Rate this recipe by taste and difficulty:</h2>
+                    <br>
+                    <div id="stars">
+                        <i id="str1" class="fa fa-star"></i>
+                        <i id="str2" class="fa fa-star"></i>
+                        <i id="str3" class="fa fa-star"></i>
+                        <i id="str4" class="fa fa-star"></i>
+                        <i id="str5" class="fa fa-star"></i>
+                        <br>
+                        <button id="btn" onclick="rate(this);">Rate</button>
+                    </div>
+                </div>
+            <br><br><br>
+            </div>
+            <br>
+        {{/with}}
+
+        {{!-- Delete LATER --}}
+        <p>DELETE LATER</p>
+        <a href = '/'>Home</a>
+
+    </body>
+</html>
