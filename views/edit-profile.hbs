@@ -11,34 +11,27 @@
         <div id="page">
             <img id="profile_pic" src="public/avatars/{{avatar}}" alt="Profile Photo" />
             <div id="info">
-            <form method="POST" action="./update-profile" enctype="multipart/form-data">    
-                    <br><br><br>
-                    <h1 id="username">Username: <input type="text" id="username-input" value="{{username}}" name="username"> </h1>
-                    <p id="short_desc">Description: <input type="text" id="description-input" value="{{description}}" name="description"> </p>
-                    <p id="short_desc">Avatar: <input type="file" id="avatar-input" name="avatar"> </p>
-                    <button type="submit" id="submit-edit">Save Changes</button>
-            </form> 
-            <form id="password-form">
-                    <h1 id="username"> Change Password </h2>
-                    <h1 id="change_password"> Enter old password: <input type="password" id="old_pass" name="oldPass"></h2>
-                    <p id="old-pass-error"></p>
-                    <h1 id="change_password"> Enter new password: <input type="password" id="new_pass1" name="newPass"> </h2>
-                    <p id="new-pass-error"></p>
-                    <h1 id="change_password"> Retype new password: <input type="password" id="new_pass2" name="confirmPass"></h2>
-                    <p id="confirm-pass-error"></p>
-                    <input type="submit" id="center_button">Change Password</button>
-            </form>
-            <p id="password-feedback"></p>                
-                </div>
-                <div id="side_menu">
-                    <ul id="list">
-                        <li>
-                            <a id = "small_link" href ="/profile"> Back to Profile</a>
-                        </li>
-                    </ul>
-                </div>
-            </form>
-            
+                <br>
+                <form method="POST" action="./update-profile" enctype="multipart/form-data">    
+                        <h1 id="short_desc">Username: <input type="text" id="username-input" value="{{username}}" name="username"> </h1>
+                        <p id="short_desc">Description: <input type="text" id="description-input" value="{{description}}" name="description"> </p>
+                        <p id="short_desc">Avatar: <input type="file" id="avatar-input" name="avatar"> </p> <br>
+                        <button type="submit" id="submit-edit">Save Changes</button>
+                </form> 
+                <form id="password-form">
+                        <h1 id="short_desc"> Change Password </h2>
+                        <h1 id="change_password"> Enter old password: <input type="password" id="old_pass" name="oldPass"></h2>
+                        <p id="old-pass-error"></p>
+                        <h1 id="change_password"> Enter new password: <input type="password" id="new_pass1" name="newPass"> </h2>
+                        <p id="new-pass-error"></p>
+                        <h1 id="change_password"> Retype new password: <input type="password" id="new_pass2" name="confirmPass"></h2>
+                        <p id="confirm-pass-error"></p>
+                        <input type="submit" id="center_button"></button>
+                </form>
+                    <p id="password-feedback"></p>                
+                </form>
+                <br><br><br>
+            </div>
         </div>
     </body>
 </html>

@@ -12,12 +12,11 @@
             <br><br>
             <img id="profile_pic" src="/public/avatars/{{avatar}}" alt="Profile Photo" />
             <div id="info">
-                <br><br>
                 <p id="small_p">Username</p>
-                <h1 id="username">{{username}}</h1><br>
-                <p id="small_p">Short Description</p> <br>
+                <h1 id="username">{{username}}</h1>
+                <p id="small_p">Short Description</p><br>
                 <p id="short_desc"> {{description}}</p>
-                <br><br><br>
+                <br><br>
             </div>
             <br>
             <div id="side_menu">
@@ -27,16 +26,13 @@
                         <a id = "small_link" href ="/edit-profile"> <i class="fa fa-edit"></i> Edit Profile</a>
                     </li>
                     <li> 
+                        <a id = "small_link" href="/logout">Log Out</a>
+                    </li>
+                    <li> 
                         <form method="POST" action="/delete">
                             <button id="delete-acct" type="submit" >Delete Profile</button>
                         </form>
                         
-                    </li>
-                    <li> 
-                        <a id = "small_link" href="/logout">Log Out</a>
-                    </li>
-                    <li> 
-                        <a id = "small_link" href="/">Home</a>
                     </li>
                 </ul>
             </div>
@@ -52,6 +48,7 @@
                     {{ else }}
                     <h3 id= "activity">No likes yet</h3>
                     {{/each}}
+                    <br><br><br>
                 </div>
             </div>
         </div>

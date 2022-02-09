@@ -1,16 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
-*::selection
-{
+*::selection {
     background: coral;
 }
 
 #page {
-    margin-left: 100px;
-    margin-right: 100px;
-    background: #f7f7f7;
+    background: #f9f3e3;
     background-repeat: no-repeat; 
     background-position: 1500 400;
-    height: 1200;
+    height:auto;
 }
 
 #Link {
@@ -48,7 +45,6 @@
     float: left;
     border: 5px double orangered;
     margin-left: 100px;
-    margin-top: 50px;
 }
 
 #username { 
@@ -57,7 +53,6 @@
     font-family: 'Garamond', serif;
     font-weight: bold;
     text-decoration: wavy;
-    line-height: 10mm;
 }
 
 #short_desc {
@@ -65,8 +60,8 @@
     font-family: 'Garamond', serif;
     font-weight: bold;
     text-decoration: dotted;
-    font-size: 30px;
-    line-height: 10mm;
+    font-size: 35px;
+    line-height: normal;
 }
 
 #small_p {
@@ -99,13 +94,13 @@ body {
     font-weight: bolder;
 }
 
-hr
-{
+hr {
     border:none;
     border-top:5px dashed orangered;
     color:#fff;
     height:5px;
-    width:100%;
+    width:80%;
+    margin: auto;
 }
 
 #likes {
@@ -150,23 +145,6 @@ header{
     height: 100;
 }
 
-.whole{
-    display: flex;
-    background-color: white;
-}
-
-.search{
-    background: rgba(255, 68, 0, 0.865);
-    padding: 10;
-    display: flex;
-    text-align: center;
-    cursor: pointer;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    border: none;
-}
-
 #input{
     height: 10;
     background: white;
@@ -191,18 +169,16 @@ header{
 
 #delete-acct {
     display:block;
-    background-color:#fd9956;
+    background-color: #f9f3e3;
     font-family: 'Garamond', serif;
     font-weight: bold;
-    font-size: 15;
-    font-weight: 500;
-    border-radius: 4px;
-    border: 1px solid orange;
-    color:rgb(71, 70, 70);
+    font-size: 20px;
+    color:rgb(88, 49, 23);
+    border: none;
 }
 
 #delete-acct:hover {
-    background-color: seashell;
+    color: orangered;
     cursor: pointer;
 }
 
@@ -211,7 +187,7 @@ header{
     max-width: 250;
     height: auto;
     width: auto;
-    margin: 0 0 0 0;
+    margin: 0%;
     text-align: center;
 }
 
@@ -231,4 +207,16 @@ header{
 
 .cap:hover{
     color: orangered;
+}
+
+.search{
+    background: rgba(255, 68, 0, 0.865);
+    padding: 10;
+    display: flex;
+    text-align: center;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: none;
 }
