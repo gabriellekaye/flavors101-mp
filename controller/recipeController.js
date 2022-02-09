@@ -1,5 +1,6 @@
 //Require the schemas
 require('../models/db');
+const  mongoose = require('mongoose');
 const Recipe = require ('../models/recipe');
 const User = require ('../models/user');
 
@@ -257,8 +258,14 @@ const RecipeController = {
     commentRecipe : async (req, res) =>
     {
         const curid = req.params.id;
-        const comment = req.body.comment;
-
+        //const comment = req.body.comment;
+        //console.log(c_id);
+        console.log(req.body)
+        const comment = {text: req.body.comment,
+                        c_id: new mongoose.Types.ObjectId(),
+                        user_id: req.session._id
+        }
+        
         Recipe.findByIdAndUpdate({_id : curid}, { $push: { comments : comment } }, function (err, docs) 
         {
             if (err){

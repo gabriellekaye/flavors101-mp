@@ -6,7 +6,10 @@ const recipeSchema = new mongoose.Schema({
     image : {type : String, required : 'This field is required'},
     ingredients : {type : Array, required : 'This field is required'},
     preparation : {type : Array, required : 'This field is required'},
-    comments : {type : Array},
+    comments : [{text: {type : String},
+                c_id: {type: mongoose.SchemaTypes.ObjectId},
+                user_id: {type: String}
+    }],
     likes : {type : Number},
     author : {type : String}
 })
