@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
+*::selection
+{
+    background: coral;
+}
+
 #page {
     margin-left: 100px;
     margin-right: 100px;
@@ -36,8 +41,10 @@
 }
 
 #profile_pic {
-    height: 303px;
-    width: 293px;
+    max-height: 300px;
+    max-width: 300px;
+    height: auto;
+    width: auto;
     float: left;
     border: 5px double orangered;
     margin-left: 100px;
@@ -147,6 +154,7 @@ header{
     display: flex;
     background-color: white;
 }
+
 .search{
     background: rgba(255, 68, 0, 0.865);
     padding: 10;
@@ -169,11 +177,11 @@ header{
 
 .dash{
     margin-left: 15;
-      font-size: 30;
-      color: #666;
-      background-color: white;
-      font-family: 'Montserrat';
-      text-decoration: none;
+    font-size: 30;
+    color: #666;
+    background-color: white;
+    font-family: 'Montserrat';
+    text-decoration: none;
   }
   
   
@@ -199,10 +207,12 @@ header{
 }
 
 .chicken{
-    height: 300;
-    width: 250;
+    max-height: 300;
+    max-width: 250;
+    height: auto;
+    width: auto;
     margin: 0 0 0 0;
-   text-align: center;
+    text-align: center;
 }
 
 .rec{
@@ -216,6 +226,7 @@ header{
     text-decoration: none;
     color: gray;
     background-color: transparent;
+    font-weight: bold;
 }
 
 .cap:hover{
