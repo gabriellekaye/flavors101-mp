@@ -197,3 +197,27 @@ header{
     background-color: seashell;
     cursor: pointer;
 }
+
+.chicken{
+    height: 300;
+    width: 250;
+    margin: 0 0 0 0;
+   text-align: center;
+}
+
+.rec{
+    height: 300;
+    width: 250;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.cap{
+    text-decoration: none;
+    color: gray;
+    background-color: transparent;
+}
+
+.cap:hover{
+    color: orangered;
+}

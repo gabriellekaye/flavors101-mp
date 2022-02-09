@@ -219,16 +219,17 @@ exports.changePassword = async (req, res) => {
 
 //Show my profile 
 exports.getProfile = async (req, res) => {
-  //const max = 5
+  const max = 5
+  const user = await User.findById({_id : req.session._id})
 
-  //const recipes = await Recipe.findById(req.session.likes)
+  const recipes = await Recipe.find({_id : user.likes}).limit(max).lean().exec();
 
   res.render('profile', {
       pageTitle: req.session.username+' | Profile',
       username: req.session.username,
       description: req.session.description,
       avatar: req.session.avatar,
-      //likes: recipes
+      likes: recipes
   });
 };
 
