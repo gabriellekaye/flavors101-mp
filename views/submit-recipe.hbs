@@ -1,14 +1,10 @@
 <html>
     <head>
-        
-        <title>Create a Recipe</title>
         <link rel="stylesheet" href="../public/css/add_style.css">
-        
-        
     </head>
 
     <body>
-        
+        {{> nav }}
         <div class = 'center'>
             <h4> Create a Recipe</h4><br>
             <form action = "/submit-recipe" encType="multipart/form-data" method = "POST">
@@ -34,7 +30,6 @@
                 <button type="button" class="btn" id="addIngredientsBtn">+ Ingredient</button>
                 <br><br><br>
 
-
                 {{!-- PREPARATION --}}
                 <h5>Preparation:</h5>
                 <div class = "preparationList">
@@ -50,10 +45,6 @@
                 <input type = "submit" id = "post" value = "Submit Post">
             </form>
             
-            {{!-- REMOVE --}}
-            <p>To remove later :</p>
-            <a href = "/">Home</a>
-
             <script>
                 let addIngredientsBtn = document.getElementById('addIngredientsBtn');
                 let ingredientList = document.querySelector('.ingredientList');
@@ -76,9 +67,6 @@
                     preparationList.appendChild(newPreparation);
                 })
         </script>
-
         </div>
     </body>
-
-    
 </html>
