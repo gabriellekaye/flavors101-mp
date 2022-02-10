@@ -10,8 +10,8 @@
     border: none;
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
-
 }
+
 .recipe{
     margin: 0;
     height: 500;
@@ -26,9 +26,7 @@
 .cap:hover{
     color: orangered;
 }
-/* img{
-    height: 100;
-} */
+
 *::selection{
     color: #fff;
     background: orangered;
@@ -47,7 +45,16 @@ body{
 
 h1{
     font-size: 100;
-    margin-top: 200;
+    /* margin-top: 200; */
+    text-align: center;
+    text-shadow: #666;
+    font-family: 'Cedarville Cursive', cursive;
+    color: rgb(255, 100, 44);
+}
+
+#bar{
+    font-size: 100;
+    margin-top: 150;
     text-align: center;
     text-shadow: #666;
     font-family: 'Cedarville Cursive', cursive;
@@ -90,7 +97,7 @@ p {
 }
 
 .dash{
-  margin-left: 15;
+    margin-left: 15;
     font-size: 30;
     color: #666;
     background-color: white;
@@ -118,6 +125,7 @@ header{
     display: flex;
     background-color: white;
 }
+
 .search{
     background: rgba(255, 68, 0, 0.865);
     padding: 10;
@@ -131,11 +139,18 @@ header{
 }
 
 #input{
-    height: 10;
-    background: white;
-    color: gray;
-    padding: 10;
-    width: 50;
+    border: 1px solid orangered;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	outline:0;
+	height:25px;
+	width: 275px;
+	padding-left:10px;
+	padding-right:10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    margin-left: 400;
 }
 
 

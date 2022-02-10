@@ -8,8 +8,14 @@
         {{> nav }}
         <section class="start" id="home">
             <div class="recipe"><br>
-                <h1> Flavours <span>101</span> </h1>
-                <pre> 
+                <h1 id="bar"> Flavours <span>101</span> </h1>
+                <h2 style="margin: 1; color: darkgray; font-size: 18;"> Can't decide? Try "<a href = "/random-recipe">Surprise Me</a>"" </h2>
+                <br>
+                <form action = "/search" method = "post">
+                    <input id="input" type ="search" name = "searchTerm" class = "form-control" placeholder ="Search..." aria-label = "Search">
+                </form>
+            </div>
+            <pre> 
     Flavours 101 started with recipes passed down from our grandparents, 
     it was founded in 2020.They passed on the recipes from one generation 
     to another until one day, they realized that the recipes were building 
@@ -29,9 +35,8 @@
     own recipes at home!
 
     Enjoy using our website! <i class="fas fa-heart" style="color: red;"></i>
-                </pre>
-                {{!-- <center><img id="abt" src="../public/abt.jpg" height="20" width="30"/></center> --}}
-            </div>  
+            </pre>
+                {{!-- <center><img id="abt" src="../public/abt.jpg" height="20" width="30"/></center> --}}  
         </section>
     </body>
 </html>
