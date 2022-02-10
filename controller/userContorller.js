@@ -136,9 +136,17 @@ exports.logoutUser = (req, res) => {
 //Delete acct
 exports.getDeleteProfile = async (req, res) => {
 
-  await User.deleteOne({_id: req.session._id})
+  // TO ADD: 
+  //        - delete likes on other recipes (do -1 for all liked recipes)
+  //        - delete comments on other recipes
+
+  await Recipe.deleteMany({author: req.session.username}); // delete recipes
+  console.log('deleted user recipes');
+  
+  await User.deleteOne({_id: req.session._id}); // delete user
   console.log('deleted user');
-  req.session.destroy(() => { 
+  
+  req.session.destroy(() => { //end session
     res.clearCookie('connect.sid'); //clear cookies
     res.redirect('/login'); //redirect to log in page
     res.status(200);
