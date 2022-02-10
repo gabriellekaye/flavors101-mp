@@ -137,16 +137,21 @@ exports.logoutUser = (req, res) => {
 exports.getDeleteProfile = async (req, res) => {
 
   // TO ADD: 
-  //        - delete likes on other recipes (do -1 for all liked recipes)
   //        - delete comments on other recipes
 
   await Recipe.deleteMany({author: req.session.username}); // delete recipes
-  console.log('deleted user recipes');
 
-  await 
+  const user = await User.findById({_id : req.session._id});
+  const likeCount = user.likes.length;
+
+  // Delete users likes
+  for(let i = 0; i < likeCount; i++) {
+    const recipe = await Recipe.findByIdAndUpdate(user.likes[i]);
+    const removed = recipe.likes - 1;
+    await Recipe.findByIdAndUpdate(user.likes[i], {likes: removed});
+  }
   
   await User.deleteOne({_id: req.session._id}); // delete user
-  console.log('deleted user');
   
   req.session.destroy(() => { //end session
     res.clearCookie('connect.sid'); //clear cookies
