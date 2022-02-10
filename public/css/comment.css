@@ -90,6 +90,14 @@ body {
   margin-left: 100;
 }
 
+#my_new_reply
+{
+  font-size: 25px;
+  color: #666;
+  margin-left: 100;
+  text-indent: 50px;
+}
+
 #stars {
   margin-left: 500px;
 }
