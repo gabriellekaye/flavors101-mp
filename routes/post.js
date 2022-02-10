@@ -38,4 +38,7 @@ router.post('/comment/:id', isPrivate, recipeController.commentRecipe);
 //To like a recipe
 router.post('/like/:id', isPrivate, recipeController.likeRecipe);
 
+//To unlike a recipe
+router.post('/unlike/:id', isPrivate, recipeController.unlikeRecipe);
+
 module.exports = router;

@@ -165,7 +165,7 @@ header{
 
 
 /* CSS */
-.like_b 
+.like_b, .unlike_b
 {
   appearance: button;
   background-color: #1899D6;
@@ -197,7 +197,7 @@ header{
   width: 10%;
 }
 
-.like_b:after {
+.like_b:after, .unlike_b:after {
   background-clip: padding-box;
   background-color: #1CB0F6;
   border: solid transparent;
@@ -217,12 +217,12 @@ header{
   user-select: auto;
 }
 
-.like_b:hover:not(:disabled) 
+.like_b:hover:not(:disabled), .unlike_b:hover:not(:disabled)
 {
   filter: brightness(1.1);
 }
 
-.like_b:disabled 
+.like_b:disabled, .unlike_b:disabled 
 {
   cursor: auto;
 }

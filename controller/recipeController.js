@@ -299,6 +299,29 @@ const RecipeController = {
         await User.updateOne({ _id: req.session._id }, { $push: { likes : curid } });
         
         res.redirect('/recipe/' + curid);
+    },
+
+    // Unlike a recipe
+    unlikeRecipe : async (req, res) =>
+    {
+        const curid = req.params.id;
+        const curRecipe = await Recipe.findById(curid);
+        const likes = curRecipe.likes - 1;
+
+        Recipe.findByIdAndUpdate({_id : curid}, {likes : likes}, function (err, docs) 
+        {
+            if (err){
+                console.log(err)
+            }
+            else{
+                console.log("Unliked");
+            }
+        });
+        
+        // Add id of liked recipe to users "likes"
+        await User.updateOne({ _id: req.session._id }, { $pull: { likes : curid } });
+        console.log("unlike from userdb")
+        res.redirect('/recipe/' + curid);
     }
 };
 
