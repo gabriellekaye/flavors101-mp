@@ -142,6 +142,8 @@ exports.getDeleteProfile = async (req, res) => {
 
   await Recipe.deleteMany({author: req.session.username}); // delete recipes
   console.log('deleted user recipes');
+
+  await 
   
   await User.deleteOne({_id: req.session._id}); // delete user
   console.log('deleted user');
