@@ -3,6 +3,7 @@ require('../models/db');
 const  mongoose = require('mongoose');
 const Recipe = require ('../models/recipe');
 const User = require ('../models/user');
+const Comment = require('../models/comment')
 
 const RecipeController = {
 
@@ -90,10 +91,17 @@ const RecipeController = {
             //To extract the id from the request
             var recipeId = req.params.id;
 
-            curId = recipeId;
-
             const recipe = await Recipe.findById(recipeId).lean().exec();
 
+            const comments = await Comment.find({ recipe: recipeId , reply_to: null}, '-recipe -__v').lean().exec()
+            
+            for (let i = 0; i < comments.length; i++) {
+                const replies = await Comment.find({ reply_to: comments[i]._id }, '-_id').lean().exec()
+                comments[i].replies = replies
+            }
+
+            console.log(comments)
+            recipe.comments = comments
             //Recipes can only be edited by author
             if(recipe.author === req.session.username)
             {
@@ -258,23 +266,29 @@ const RecipeController = {
     commentRecipe : async (req, res) =>
     {
         const curid = req.params.id;
-        //const comment = req.body.comment;
-        //console.log(c_id);
-        console.log(req.body)
-        const comment = {text: req.body.comment,
-                        c_id: new mongoose.Types.ObjectId(),
-                        user_id: req.session._id
-        }
+        const comment = req.body.comment;
+
+        await Comment.create({
+            text: comment,
+            user_id: req.session._id,
+            reply_to: null,
+            recipe: curid,
+        })
+
+        // const comment = {text: req.body.comment,
+        //                 c_id: new mongoose.Types.ObjectId(),
+        //                 user_id: req.session._id
+        // }
         
-        Recipe.findByIdAndUpdate({_id : curid}, { $push: { comments : comment } }, function (err, docs) 
-        {
-            if (err){
-                console.log(err)
-            }
-            else{
-                console.log("Commented");
-            }
-        });
+        // Recipe.findByIdAndUpdate({_id : curid}, { $push: { comments : comment } }, function (err, docs) 
+        // {
+        //     if (err){
+        //         console.log(err)
+        //     }
+        //     else{
+        //         console.log("Commented");
+        //     }
+        // });
 
         res.redirect('/recipe/' + curid);
     },
