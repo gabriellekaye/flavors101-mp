@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
 *::selection {
     background: coral;
+    color: #f9f3e3;
 }
 
 #page {
@@ -160,7 +161,7 @@ header{
     background-color: white;
     font-family: 'Montserrat';
     text-decoration: none;
-  }
+}
   
   
 .dash:hover{
