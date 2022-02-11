@@ -349,6 +349,33 @@ const RecipeController = {
         await User.updateOne({ _id: req.session._id }, { $pull: { likes : curid } });
         console.log("unlike from userdb")
         res.redirect('/recipe/' + curid);
+    },
+
+    //To rate a recipe
+    rateRecipe : async (req, res) =>
+    {
+        const curid = req.params.id;
+        const recipe = await Recipe.findById(curid);
+
+        //Chosen rate based on form
+        const chosenRate = req.body.rate;
+
+        //Sum of all existing rates
+        const rateSum = 0;
+        
+        //Add chosen rate in the array
+        Recipe.findByIdAndUpdate({_id : curid}, { $push: { rate : chosenRate } });
+
+        for (let i = 0 ; i < recipe.rate.length ; i++)
+        {
+            rateSum += recipe.rate[i];
+        }
+
+        const average = rateSum / recipe.rate.length;
+
+        await Recipe.findByIdAndUpdate(curid, {average : average});
+
+        res.redirect('/recipe/' + curid);
     }
 };
 

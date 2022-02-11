@@ -11,7 +11,10 @@ const recipeSchema = new mongoose.Schema({
     //             user_id: {type: String}
     // }],
     likes : {type : Number},
-    author : {type : String}
+    author : {type : String},
+    rate : {type : Array},
+    //Average rate
+    average : {type : Number}
 })
 
 recipeSchema.index({ name : 'text', description : 'text'});
