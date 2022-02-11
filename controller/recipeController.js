@@ -58,7 +58,8 @@ const RecipeController = {
                 ingredients : req.body.ingredients, 
                 preparation : req.body.preparation,
                 likes : 0,
-                author : req.session.username
+                author : req.session.username,
+                average : 0
             })
 
             //Test
@@ -235,7 +236,9 @@ const RecipeController = {
             preparation : preparation || curRecipe.preparation,
             likes : curRecipe.likes,
             comments : curRecipe.comment,
-            author : curRecipe.author
+            author : curRecipe.author,
+            rate : curRecipe.rate, 
+            average : curRecipe.average
         }
 
         Recipe.findOneAndUpdate({_id: curid}, updatedRecipe, function(err, succ)
