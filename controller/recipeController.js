@@ -58,7 +58,8 @@ const RecipeController = {
                 ingredients : req.body.ingredients, 
                 preparation : req.body.preparation,
                 likes : 0,
-                author : req.session.username
+                author : req.session.username,
+                average : 0
             })
 
             //Test
