@@ -27,6 +27,7 @@
                     </form>
 
                     <h2>Liked by: <span id = "count">{{likes}}</span></h2>
+                    <h2>Average Rating: <span id = "count">{{rate}}</span></h2>
                 </div>
         
                 <br>
@@ -117,7 +118,7 @@
                     {{!-- RATE --}}
                     <h2 id="rate">Rate this recipe by taste and difficulty:</h2>
                     <br>
-                    <div id="stars">
+                    {{!-- <div id="stars">
                         {{!-- <i id="str1" class="fa fa-star"></i>
                         <i id="str2" class="fa fa-star"></i>
                         <i id="str3" class="fa fa-star"></i>
@@ -131,6 +132,23 @@
                         <a type="button" title="Rate 3 stars" onclick="addRate(3)">★</a>
                         <a type="button" title="Rate 2 stars" onclick="addRate(2)">★</a>
                         <a type="button" title="Rate 1 stars" onclick="addRate(1)">★</a>
+                    </div> --}}
+                    <div class="rate">
+                        <form action = "/rate/{{_id}}" method="POST" class = rate>
+                            <input type="radio" id="star5" name="rate" value="5" />
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rate" value="2" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value="1" />
+                            <label for="star1" title="text">1 star</label>
+                            
+                            <button type = "submit" value = "Rate">Rate</button>
+                        </form>
+                        <br><br><br>
                     </div>
                 </div>
             </div>
