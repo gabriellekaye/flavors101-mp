@@ -14,7 +14,7 @@ const recipeSchema = new mongoose.Schema({
     author : {type : String},
     rate : {type : [Number]},
     //Average rate
-    average : {type : Number}
+    average : {type : mongoose.Types.Decimal128}
 })
 
 recipeSchema.index({ name : 'text', description : 'text'});
