@@ -2,7 +2,7 @@ const {body} = require('express-validator');
 
 const registerValidation = [
   // Username cant be empty
-  body('username').not().isEmpty().withMessage("Username is required."),
+  body('username').not().isEmpty().withMessage("Please enter a username."),
 
   // Username should be at least 6 chars
   body('username').isLength({ min: 6 }).withMessage("Username must be at least 6 characters."),
@@ -22,7 +22,7 @@ const registerValidation = [
   // Avatar is required
   body('avatar').custom((value, {req}) => {
       if(value == null && req.files == null){
-        throw new Error("Avatar is required.");
+        throw new Error("Please upload an avatar.");
       }
       return true;
     })

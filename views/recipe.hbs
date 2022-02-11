@@ -112,13 +112,19 @@
                     <h2 id="rate">Rate this recipe by taste and difficulty:</h2>
                     <br>
                     <div id="stars">
-                        <i id="str1" class="fa fa-star"></i>
+                        {{!-- <i id="str1" class="fa fa-star"></i>
                         <i id="str2" class="fa fa-star"></i>
                         <i id="str3" class="fa fa-star"></i>
                         <i id="str4" class="fa fa-star"></i>
                         <i id="str5" class="fa fa-star"></i>
                         <br>
-                        <button id="btn" onclick="rate(this);">Rate</button>
+                        <button id="btn" onclick="rate(this);">Rate</button> --}}
+
+                        <a type="button" title="Rate 5 stars" onclick="setActive(5)">★</a>
+                        <a type="button" title="Rate 4 stars" onclick="setActive(4)">★</a>
+                        <a type="button" title="Rate 3 stars" onclick="setActive(3)">★</a>
+                        <a type="button" title="Rate 2 stars" onclick="setActive(2)">★</a>
+                        <a type="button" title="Rate 1 stars" onclick="setActive(1)">★</a>
                     </div>
                 </div>
             </div>
