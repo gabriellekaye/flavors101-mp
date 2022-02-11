@@ -35,6 +35,9 @@ router.post('/update/:id', isPrivate, recipeController.updateRecipeDone);
 //To comment on a recipe
 router.post('/comment/:id', isPrivate, recipeController.commentRecipe);
 
+//To delete a comment
+router.post('/:id/delete-comment', isPrivate, recipeController.deleteComment);
+
 //To like a recipe
 router.post('/like/:id', isPrivate, recipeController.likeRecipe);
 
