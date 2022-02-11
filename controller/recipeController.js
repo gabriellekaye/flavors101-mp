@@ -93,7 +93,7 @@ const RecipeController = {
 
             const recipe = await Recipe.findById(recipeId).lean().exec();
 
-            const comments = await Comment.find({ recipe: recipeId , reply_to: null}, '-recipe -__v').lean().exec()
+            const comments = await Comment.find({ recipe: recipeId , reply_to: null}, '-__v').lean().exec()
             
             for (let i = 0; i < comments.length; i++) {
                 const replies = await Comment.find({ reply_to: comments[i]._id }, '-_id').lean().exec()
@@ -267,7 +267,7 @@ const RecipeController = {
     {
         const curid = req.params.id;
         const comment = req.body.comment;
-
+        console.log(curid);
         await Comment.create({
             text: comment,
             user_id: req.session._id,
@@ -292,6 +292,19 @@ const RecipeController = {
 
         res.redirect('/recipe/' + curid);
     },
+
+    //To delete comment
+    deleteComment : async (req, res) => 
+    {
+        const {comment} = req.body;
+        const curid = req.params.id;
+    
+        Comment.deleteOne({_id: comment}, function(){
+            res.redirect('/recipe/' + curid);
+            console.log('Comment Deleted');
+        });
+    },
+
 
     likeRecipe : async (req, res) =>
     {
