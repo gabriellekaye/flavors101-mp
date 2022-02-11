@@ -362,19 +362,24 @@ const RecipeController = {
 
         //Chosen rate based on form
         const chosenRate = req.body.rate;
+        console.log(chosenRate)
 
         //Sum of all existing rates
-        const rateSum = 0;
+        var rateSum = 0;
         
         //Add chosen rate in the array
-        Recipe.findByIdAndUpdate({_id : curid}, { $push: { rate : chosenRate } });
+        await Recipe.findByIdAndUpdate({_id : curid}, { $push: { rate : chosenRate } });
+        console.log('rated in db')
 
         for (let i = 0 ; i < recipe.rate.length ; i++)
         {
-            rateSum += recipe.rate[i];
+            rateSum = rateSum + recipe.rate[i];
+            console.log("sum:")
+            console.log("rate " + i + " is " + recipe.rate[i] + "sum is " + rateSum);
         }
 
         const average = rateSum / recipe.rate.length;
+        console.log("avg = " + average)
 
         await Recipe.findByIdAndUpdate(curid, {average : average});
 

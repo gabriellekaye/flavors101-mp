@@ -12,7 +12,7 @@ const recipeSchema = new mongoose.Schema({
     // }],
     likes : {type : Number},
     author : {type : String},
-    rate : {type : Array},
+    rate : {type : [Number]},
     //Average rate
     average : {type : Number}
 })
