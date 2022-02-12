@@ -430,6 +430,8 @@ const RecipeController = {
             await Recipe.findByIdAndUpdate({_id:curid, average:avg});
         }
 
+        res.redirect('/recipe/' + curid);
+
         // var no_rates = recipe.rate.length;
 
 
