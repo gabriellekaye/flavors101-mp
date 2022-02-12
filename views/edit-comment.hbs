@@ -9,7 +9,7 @@
             <h4>Edit Comment</h4><br>
             {{#with comment}}
                 <form action = "/{{_id}}/update-comment"  method = "POST">
-                    
+                    <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
                     <h5>Comment: </h5>
                     <textarea name = "text" id = "description" class = "txt" >{{text}}</textarea>
                     <br>

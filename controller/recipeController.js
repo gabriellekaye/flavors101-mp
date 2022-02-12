@@ -332,7 +332,7 @@ const RecipeController = {
 
         const { id, text } = req.body
 
-        const curComment = await Comment.findById(id).exec();
+        const curComment = await Comment.findById(id).lean().exec();
         console.log(id);
         // console.log('Title ' + curRecipe.title);
         
@@ -350,7 +350,7 @@ const RecipeController = {
             else
                 console.log('Comment Updated');
         });
-        res.redirect('/recipe/' + curID);
+        res.redirect('/recipe/' + curComment.recipe);
     },
 
 
