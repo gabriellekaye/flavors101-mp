@@ -96,18 +96,10 @@ body {
   text-indent: 50px;
 }
 
-/* #stars {
-  margin-left: 500px;
+.rate {
+  margin-right: auto;
+  text-align: center;
 }
-
-#str1, #str2, #str3, #str4, #str5 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-#str1:hover, #str2:hover, #str3:hover, #str4:hover, #str5:hover {
-  color: gold;
-} */
 
 .rate:not(:checked) > input {
   position:absolute;

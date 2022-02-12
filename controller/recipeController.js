@@ -407,56 +407,39 @@ const RecipeController = {
 
         //Chosen rate based on form
         const chosenRate = req.body.rate;
-        console.log(chosenRate)
+        //console.log(chosenRate)
 
         //Add chosen rate in the array
         await Recipe.findByIdAndUpdate({_id : curid}, { $push: { rate : chosenRate } });
-        console.log('pushed rate to db')
+        //console.log('pushed rate to db')
 
         const added = req.body.rate
         var len = recipe.rate.length;
-        var sum
+        //console.log('length after pushing into db ' + len)
+        var sum =0 
         var avg
 
-        if (len == 1)
-            await Recipe.findByIdAndUpdate({_id:curid, average:added});
+        // First rate is automatically the new avg
+        if (len == 0){
+            //console.log('new avg is ' + added)
+            await Recipe.findByIdAndUpdate(curid, {average:added});
+            //console.log('first rate added, ' + added)
+        }
 
+        // to find average if there is more than 1 length
         else {
             sum = added
             for(let i = 0; i < len; i++){
-                sum = recipe.rate[i] + sum;
+                //console.log('sum before add is ' + sum);
+                sum = +recipe.rate[i] + +sum;
+                //console.log('index i is ' + i + ' value is ' + recipe.rate[i] + ' new sum ' + sum);
             }
             avg = sum/(len+1);
-            await Recipe.findByIdAndUpdate({_id:curid, average:avg});
+            //console.log('avg is ' + sum + '/' + len+1 + ' = ' + avg);
+            await Recipe.findByIdAndUpdate(curid, {average:avg});
         }
 
         res.redirect('/recipe/' + curid);
-
-        // var no_rates = recipe.rate.length;
-
-
-        // //if first rate, that is automatically the avg
-        // if(no_rates == 1){
-        //     await Recipe.findByIdAndUpdate(curid, {average : chosenRate});
-        // }
-
-        // else{
-            
-        //     for (let i = 0 ; i < no_rates; i++)
-        //     {
-        //         chosenRate = chosen + recipe.rate[i];
-        //         console.log("sum:")
-        //         console.log("rate " + i + " is " + recipe.rate[i] + " sum is " + chosenRate);
-        //     }
-        //     console.log("after loop " + chosenRate)
-
-        //     const average = chosenRate / added;
-        //     console.log("avg = " + average);
-
-        //     await Recipe.findByIdAndUpdate(curid, {average : average});
-        // }
-
-        // res.redirect('/recipe/' + curid);
     }
 };
 
