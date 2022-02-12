@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../public/css/add_style.css">
+    </head>
+
+    <body>
+        {{> nav }}
+        <div class = 'center'>
+            <h4>Edit Comment</h4><br>
+            {{#with comment}}
+                <form action = "/{{_id}}/update-comment"  method = "POST">
+                    
+                    <h5>Comment: </h5>
+                    <textarea name = "text" id = "description" class = "txt" >{{text}}</textarea>
+                    <br>
+
+                    {{!-- SUBMIT BUTTON --}}
+                    <input type = "submit" id = "post" value = "Submit Edited Comment">
+                </form>
+            {{/with}}
+
+        </div>
+    </body>
+</html>
