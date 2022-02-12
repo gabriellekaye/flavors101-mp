@@ -11,6 +11,8 @@ const app = new express()
 // To upload avatar
 const fileUpload = require('express-fileupload');
 const { constants } = require('crypto');
+const recipe = require('../models/recipe');
+const { findByIdAndUpdate } = require('../models/user');
 app.use(fileUpload())
 
 app.use(express.json())
@@ -177,6 +179,9 @@ exports.getUpdateProfile = async (req,res) => {
   const user = {}
 
   if (username) {
+    //change author name for users recipes
+    await Recipe.updateMany({author: sess.username}, {author: username});
+
     sess.username = username;
     user.username = username;
   }
