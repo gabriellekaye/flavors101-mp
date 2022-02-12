@@ -308,6 +308,51 @@ const RecipeController = {
         });
     },
 
+    //To render update comment
+    editComment : async  (req, res) => 
+    {
+        try {
+            const {id} = req.body;
+            var recipeId = req.params.id;
+            const recipe = await Recipe.findById(recipeId).lean().exec();
+            const comment = await Comment.findById(id).lean().exec();
+             console.log(comment);
+            res.render('edit-comment', {
+                _id: id,
+                 comment})
+            }catch (error) {
+
+        }
+    },
+    //To udpate recipe and render it afterwards
+    updateComment : async (req, res) =>
+    {
+        //To get the ID
+        const curID = req.params.id;
+
+        const { id, text } = req.body
+
+        const curComment = await Comment.findById(id).exec();
+        console.log(id);
+        // console.log('Title ' + curRecipe.title);
+        
+        const updatedComment = {
+            text: text || curComment.text,
+            user_id: curComment.user_id,
+            recipe: curComment.recipe,
+            reply_to : curComment.reply_to,
+        }
+
+        Comment.findOneAndUpdate({_id: id}, updatedComment, function(err, succ)
+        {
+            if(err)
+                console.log(err);
+            else
+                console.log('Comment Updated');
+        });
+        res.redirect('/recipe/' + curID);
+    },
+
 
     likeRecipe : async (req, res) =>
     {
