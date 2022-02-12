@@ -338,7 +338,7 @@ const RecipeController = {
         
         const updatedComment = {
             text: text || curComment.text,
-            user_id: req.session._id,
+            user_id: curComment.user_id,
             recipe: curComment.recipe,
             reply_to : curComment.reply_to,
         }
