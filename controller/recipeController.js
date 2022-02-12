@@ -101,8 +101,8 @@ const RecipeController = {
                 comments[i].replies = replies
             }
 
-            console.log(comments)
             recipe.comments = comments
+            console.log(recipe)
             //Recipes can only be edited by author
             if(recipe.author === req.session.username)
             {
