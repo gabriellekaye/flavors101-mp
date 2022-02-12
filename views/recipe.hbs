@@ -88,18 +88,20 @@
             <div id="page">
                 <h2 id="rate">Comments:</h2><br><br>
                 {{#each comments}}
-                    <div id="new">
-                        <form action = "/{{this.recipe}}/delete-comment" method = "POST">
-                            <p id="cmt_user_new"><a id="com_new_link" href ="profile.html"></a></p>
-                            <input type='hidden' name= "comment" id="cmt-id" value='{{this._id}}'>
-                            <p id="my_new_cmt">{{this.text}}</p> 
-                            <input type = "submit" id="delete" class = 'deleteBtn' value = "DELETE"/>
-                        </form> 
+                   <div id="new">
+                        <p id="my_new_cmt">{{this.text}}</p>
+                        {{#if (isEqual ../../session._id this.user_id)}} 
+                            <form action = "/{{this.recipe}}/delete-comment" method = "POST">
+                                <p id="cmt_user_new"><a id="com_new_link" href ="profile.html"></a></p>
+                                <input type='hidden' name= "comment" id="cmt-id" value='{{this._id}}'>
+                                <input type = "submit" id="delete" class = 'deleteBtn' value = "DELETE"/>
+                            </form> 
 
-                        <form action = "/{{this.recipe}}/edit" method = "POST">
+                            <form action = "/{{this.recipe}}/edit" method = "POST">
                                 <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
                                 <input type = "submit" id="edit" class = 'updateBtn' value = "UPDATE"/>
-                        </form>
+                            </form>
+                        {{/if}}
                         <p id = "my_new_cmt">Replies: </p>
                         {{!-- REPLIES --}}
                         <p id = "my_new_reply">"INSERT REPLIES</p>
