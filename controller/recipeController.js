@@ -108,14 +108,16 @@ const RecipeController = {
             {
                 res.render('recipe', {
                 pageTitle: recipe.title,
-                recipe: recipe});
+                recipe: recipe,
+                loggedin: req.session._id});
             }
 
             else
             {
                 res.render('uneditableRecipe', {
                 pageTitle: recipe.title,
-                recipe: recipe});
+                recipe: recipe,
+                });
             }
 
             // res.render('recipe', {

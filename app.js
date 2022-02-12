@@ -43,8 +43,9 @@ app.use(express.json())
 app.engine('hbs', exphbs.create({
   extname: 'hbs',
   defaultView: 'main',
-  //layoutsDir: path.join(__dirname, '/views/layouts'),
-  //partialsDir: path.join(__dirname, '/views/partials'),
+  helpers: {
+    isEqual: (arg1, arg2) => arg1 == arg2,
+  }
 }).engine);
 
 app.use(session({
@@ -72,6 +73,7 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
+  res.locals.session = req.session
   next();
 });
 
