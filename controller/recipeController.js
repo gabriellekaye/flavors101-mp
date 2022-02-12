@@ -364,27 +364,52 @@ const RecipeController = {
         const chosenRate = req.body.rate;
         console.log(chosenRate)
 
-        //Sum of all existing rates
-        var rateSum = 0;
-
         //Add chosen rate in the array
         await Recipe.findByIdAndUpdate({_id : curid}, { $push: { rate : chosenRate } });
-        console.log('rated in db')
+        console.log('pushed rate to db')
 
-        for (let i = 0 ; i < recipe.rate.length ; i++)
-        {
-            rateSum = rateSum + recipe.rate[i];
-            console.log("sum:")
-            console.log("rate " + i + " is " + recipe.rate[i] + "sum is " + rateSum);
+        const added = req.body.rate
+        var len = recipe.rate.length;
+        var sum
+        var avg
+
+        if (len == 1)
+            await Recipe.findByIdAndUpdate({_id:curid, average:added});
+
+        else {
+            sum = added
+            for(let i = 0; i < len; i++){
+                sum = recipe.rate[i] + sum;
+            }
+            avg = sum/(len+1);
+            await Recipe.findByIdAndUpdate({_id:curid, average:avg});
         }
-        console.log("sum after loop: " + rateSum)
 
-        const average = rateSum / recipe.rate.length;
-        console.log("avg = " + average)
+        // var no_rates = recipe.rate.length;
 
-        await Recipe.findByIdAndUpdate(curid, {average : average});
 
-        res.redirect('/recipe/' + curid);
+        // //if first rate, that is automatically the avg
+        // if(no_rates == 1){
+        //     await Recipe.findByIdAndUpdate(curid, {average : chosenRate});
+        // }
+
+        // else{
+            
+        //     for (let i = 0 ; i < no_rates; i++)
+        //     {
+        //         chosenRate = chosen + recipe.rate[i];
+        //         console.log("sum:")
+        //         console.log("rate " + i + " is " + recipe.rate[i] + " sum is " + chosenRate);
+        //     }
+        //     console.log("after loop " + chosenRate)
+
+        //     const average = chosenRate / added;
+        //     console.log("avg = " + average);
+
+        //     await Recipe.findByIdAndUpdate(curid, {average : average});
+        // }
+
+        // res.redirect('/recipe/' + curid);
     }
 };
 
