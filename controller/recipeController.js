@@ -308,8 +308,11 @@ const RecipeController = {
         const curid = req.params.id;
     
         Comment.deleteOne({_id: comment}, function(){
-            res.redirect('/recipe/' + curid);
-            console.log('Comment Deleted');
+            Comment.deleteMany({reply_to: comment}, function(){
+                res.redirect('/recipe/' + curid);
+                console.log('Comment Deleted');
+            })
+            
         });
     },
 
