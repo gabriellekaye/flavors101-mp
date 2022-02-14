@@ -89,12 +89,11 @@
                 <h2 id="rate">Comments:</h2><br><br>
                 {{#each comments}}
                    <div id="new">
-                        <p id="my_new_cmt">{{this.text}}  (by: {{../../session.username}}) </p>
+                        <p id="my_new_cmt">{{this.text}}  (by: {{ this.user_id.username }}) </p>
 
                         
-                        {{#if (isEqual ../../session._id this.user_id)}} 
+                        {{#if (isEqual ../../session._id this.user_id._id)}} 
                             <form action = "/{{this.recipe}}/delete-comment" method = "POST">
-                                <p id="cmt_user_new"><a id="com_new_link" href ="profile.html"></a></p>
                                 <input type='hidden' name= "comment" id="cmt-id" value='{{this._id}}'>
                                 <input type = "submit" id="delete" class = 'deleteBtn' value = "DELETE"/>
                             </form> 
@@ -107,21 +106,20 @@
 
                         <p id = "my_new_cmt">Replies: </p>
                         {{#each replies}}
-                            <p id="my_new_cmt">{{this.text}} </p>
+                            <p id="my_new_cmt">{{this.text}} (by: {{ this.user_id.username }})</p>
+                            {{#if (isEqual ../../../session._id this.user_id._id)}} 
+                                <form action = "/{{this.recipe}}/delete-comment" method = "POST">
+                                    <input type='hidden' name= "comment" id="cmt-id" value='{{this._id}}'>
+                                    <input type = "submit" id="delete" class = 'deleteBtn' value = "DELETE"/>
+                                </form> 
+                                <form action = "/{{this.recipe}}/edit" method = "POST">
+                                    <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
+                                    <input type = "submit" id="edit" class = 'updateBtn' value = "UPDATE"/>
+                                </form>
+                            {{/if}}
                         {{/each}}
 
-                        {{#if (isEqual ../../session._id this.user_id)}} 
-                            <form action = "/{{this.recipe}}/delete-comment" method = "POST">
-                                <p id="cmt_user_new"><a id="com_new_link" href ="profile.html"></a></p>
-                                <input type='hidden' name= "comment" id="cmt-id" value='{{this._id}}'>
-                                <input type = "submit" id="delete" class = 'deleteBtn' value = "DELETE"/>
-                            </form> 
-
-                            <form action = "/{{this.recipe}}/edit" method = "POST">
-                                <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
-                                <input type = "submit" id="edit" class = 'updateBtn' value = "UPDATE"/>
-                            </form>
-                        {{/if}}
+                        
                         <p id = "my_new_reply">"INSERT REPLIES</p>
 
                         

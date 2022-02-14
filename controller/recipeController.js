@@ -94,15 +94,16 @@ const RecipeController = {
 
             const recipe = await Recipe.findById(recipeId).lean().exec();
 
-            const comments = await Comment.find({ recipe: recipeId , reply_to: null}, '-__v').lean().exec()
+            const comments = await Comment.find({ recipe: recipeId , reply_to: null}, '-__v').populate('user_id', 'username').lean().exec()
             
             for (let i = 0; i < comments.length; i++) {
-                const replies = await Comment.find({ reply_to: comments[i]._id }, '-_id').lean().exec()
+                const replies = await Comment.find({ reply_to: comments[i]._id })
+                    .populate('user_id', 'username').lean().exec()
                 comments[i].replies = replies
             }
 
             recipe.comments = comments
-            console.log(recipe)
+           
             //Recipes can only be edited by author
             if(recipe.author === req.session.username)
             {

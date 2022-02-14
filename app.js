@@ -44,7 +44,7 @@ app.engine('hbs', exphbs.create({
   extname: 'hbs',
   defaultView: 'main',
   helpers: {
-    isEqual: (arg1, arg2) => arg1 == arg2,
+    isEqual: (arg1, arg2) => arg1.toString() === arg2.toString()
   }
 }).engine);
 
