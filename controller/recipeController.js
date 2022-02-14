@@ -271,12 +271,14 @@ const RecipeController = {
     commentRecipe : async (req, res) =>
     {
         const curid = req.params.id;
-        const comment = req.body.comment;
-        console.log(curid);
+        const {comment, reply_to} = req.body;
+        console.log(reply_to);
+
+        
         await Comment.create({
             text: comment,
             user_id: req.session._id,
-            reply_to: null,
+            reply_to: reply_to,
             recipe: curid,
         })
 
