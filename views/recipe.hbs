@@ -91,9 +91,9 @@
                    <div id="new">
                         <p id="my_new_cmt">{{this.text}}  (by: {{../../session.username}}) </p>
                         
-                        <form action="/reply/{{_id}}" method="POST">
+                        <form action="/comment/{{_id}}" method="POST">
                             <input type="hidden" name:"reply_to" value="{{this._id}}">
-                            <textarea id="comments" name = "reply" placeholder="Reply..." rows="5" cols="80" name="comment" maxlength="500" required></textarea>
+                            <textarea id="comments" name = "comment" placeholder="Reply..." rows="5" cols="80" name="comment" maxlength="500" required></textarea>
                             <input type = "submit" value = "Post Reply"/>
                         </form>
 
