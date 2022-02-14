@@ -90,12 +90,6 @@
                 {{#each comments}}
                    <div id="new">
                         <p id="my_new_cmt">{{this.text}}  (by: {{../../session.username}}) </p>
-                        
-                        <form action="/comment/{{_id}}" method="POST">
-                            <input type="hidden" name:"reply_to" value="{{this._id}}">
-                            <textarea id="comments" name = "comment" placeholder="Reply..." rows="5" cols="80" name="comment" maxlength="500" required></textarea>
-                            <input type = "submit" value = "Post Reply"/>
-                        </form>
 
                         
                         {{#if (isEqual ../../session._id this.user_id)}} 
@@ -110,9 +104,33 @@
                                 <input type = "submit" id="edit" class = 'updateBtn' value = "UPDATE"/>
                             </form>
                         {{/if}}
+
                         <p id = "my_new_cmt">Replies: </p>
-                        {{!-- REPLIES --}}
+                        {{#each replies}}
+                            <p id="my_new_cmt">{{this.text}} </p>
+                        {{/each}}
+
+                        {{#if (isEqual ../../session._id this.user_id)}} 
+                            <form action = "/{{this.recipe}}/delete-comment" method = "POST">
+                                <p id="cmt_user_new"><a id="com_new_link" href ="profile.html"></a></p>
+                                <input type='hidden' name= "comment" id="cmt-id" value='{{this._id}}'>
+                                <input type = "submit" id="delete" class = 'deleteBtn' value = "DELETE"/>
+                            </form> 
+
+                            <form action = "/{{this.recipe}}/edit" method = "POST">
+                                <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
+                                <input type = "submit" id="edit" class = 'updateBtn' value = "UPDATE"/>
+                            </form>
+                        {{/if}}
                         <p id = "my_new_reply">"INSERT REPLIES</p>
+
+                        
+                        <form action="/comment/{{this.recipe}}" method="POST">
+                            <input type="hidden" name="reply_to" id="reply_to" value="{{this._id}}">
+                            <textarea id="comments" name = "comment" placeholder="Reply..." rows="5" cols="80" name="comment" maxlength="500" required></textarea>
+                            <input type = "submit" value = "Post Reply"/>
+                        </form>
+                        
                     </div>
                 
                 {{else}}
