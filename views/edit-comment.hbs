@@ -11,7 +11,7 @@
                 <form action = "/{{_id}}/update-comment"  method = "POST">
                     <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
                     <h5>Comment: </h5>
-                    <textarea name = "text" id = "description" class = "txt" >{{text}}</textarea>
+                    <textarea name = "text" id = "description" class = "txt" required>{{text}}</textarea>
                     <br>
 
                     {{!-- SUBMIT BUTTON --}}
