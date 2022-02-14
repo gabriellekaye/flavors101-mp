@@ -89,7 +89,13 @@
                 <h2 id="rate">Comments:</h2><br><br>
                 {{#each comments}}
                    <div id="new">
-                        <p id="my_new_cmt">{{this.text}}</p>
+                        <p id="my_new_cmt">{{this.text}}  (by: {{../../session.username}}) </p>
+                        <form action="/reply/{{_id}}" method="POST">
+                            <textarea id="comments" name = "reply" placeholder="Reply..." rows="5" cols="80" name="comment" maxlength="500" required></textarea>
+                            <input type = "submit" value = "Post Reply"/>
+                        </form>
+
+                        
                         {{#if (isEqual ../../session._id this.user_id)}} 
                             <form action = "/{{this.recipe}}/delete-comment" method = "POST">
                                 <p id="cmt_user_new"><a id="com_new_link" href ="profile.html"></a></p>
@@ -114,7 +120,7 @@
                 <div>
                     <form action = "/comment/{{_id}}" method = "POST">
                         <br><br>
-                        <textarea id="comments" name = "comment" placeholder="Comment about this recipe..." rows="5" cols="80" name="comment" maxlength="500" required></textarea>
+                        <textarea id="comments" name = "comment" placeholder="Comment about this recipe..." rows="1" cols="80" name="comment" maxlength="500" required></textarea>
                         <br>
                         {{!-- <button id="btn_cmt" onclick="post_cmt(this);">Post Comment</button> --}}
                         <input type = "submit" value = "Post Comment"/>
