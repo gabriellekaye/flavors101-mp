@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt'); //For has password
-const User = require('../models/user'); //Database 
-const Recipe = require('../models/recipe');
+const User = require('../models/user'); // user db 
+const Recipe = require('../models/recipe'); // recipe db
+const Rate = require('../models/rate'); // rate db
 const { validationResult } = require('express-validator'); //for validation
 const path = require('path')
 
@@ -142,6 +143,7 @@ exports.getDeleteProfile = async (req, res) => {
   //        - delete comments on other recipes
 
   await Recipe.deleteMany({author: req.session.username}); // delete recipes
+  await Rate.deleteMany({user_id: req.session._id}) // delete rates
 
   const user = await User.findById({_id : req.session._id});
   const likeCount = user.likes.length;
