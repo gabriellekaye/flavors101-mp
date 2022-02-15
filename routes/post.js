@@ -41,6 +41,9 @@ router.post('/:id/delete-comment', isPrivate, recipeController.deleteComment);
 //to show edit comment page
 router.post('/:id/edit', isPrivate, recipeController.editComment);
 
+//To like a comment
+router.post('/:id/like-comment', isPrivate, recipeController.likeComment);
+
 //To update a comment
 router.post('/:id/update-comment', isPrivate, recipeController.updateComment);
 
