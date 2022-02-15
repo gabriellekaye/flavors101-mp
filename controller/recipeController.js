@@ -3,7 +3,8 @@ require('../models/db');
 const  mongoose = require('mongoose');
 const Recipe = require ('../models/recipe');
 const User = require ('../models/user');
-const Comment = require('../models/comment')
+const Comment = require('../models/comment');
+const Rate = require('../models/rate');
 
 const RecipeController = {
 
@@ -411,43 +412,36 @@ const RecipeController = {
     rateRecipe : async (req, res) =>
     {
         const curid = req.params.id;
-        const recipe = await Recipe.findById(curid);
-
+        
         //Chosen rate based on form
         const chosenRate = req.body.rate;
-        //console.log(chosenRate)
 
-        //Add chosen rate in the array
-        await Recipe.findByIdAndUpdate({_id : curid}, { $push: { rate : chosenRate } });
-        //console.log('pushed rate to db')
+        //create new rate
+        await Rate.create({
+            value: chosenRate,
+            user_id: req.session._id,
+            recipe: curid,
+        });
 
-        const added = req.body.rate
-        var len = recipe.rate.length;
-        //console.log('length after pushing into db ' + len)
-        var sum =0 
-        var avg
+        // compute for average
 
-        // First rate is automatically the new avg
-        if (len == 0){
-            //console.log('new avg is ' + added)
-            await Recipe.findByIdAndUpdate(curid, {average:added});
-            //console.log('first rate added, ' + added)
-        }
+        // Get # of rates
+        var div = await Rate.count({recipe:curid});
+        
+        // Get sum of rates
+        result = await Rate.aggregate([
+            { $match: { recipe: curid } },
+            { $group: { _id: "_id", total: { $sum: "$value"} } }
+        ]);
 
-        // to find average if there is more than 1 length
-        else {
-            sum = added
-            for(let i = 0; i < len; i++){
-                //console.log('sum before add is ' + sum);
-                sum = +recipe.rate[i] + +sum;
-                //console.log('index i is ' + i + ' value is ' + recipe.rate[i] + ' new sum ' + sum);
-            }
-            avg = sum/(len+1);
-            //console.log('avg is ' + sum + '/' + len+1 + ' = ' + avg);
-            await Recipe.findByIdAndUpdate(curid, {average:avg});
-        }
+        // compute for average
+        var avg = result[0].total/div
+        //console.log('average is ' + avg);
 
-        res.redirect('/recipe/' + curid);
+        // Update avg in recipe
+        await Recipe.findByIdAndUpdate(curid, {average:avg});
+
+        res.redirect('/recipe/' + curid); // refresh page
     }
 };
 

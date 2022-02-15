@@ -7,6 +7,4 @@ const commentSchema = new mongoose.Schema({
     reply_to: {type: mongoose.ObjectId, require: true, ref: 'Comment', default: null}
 })
 
-
-
 module.exports = mongoose.model('Comment', commentSchema);
