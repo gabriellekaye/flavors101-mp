@@ -21,4 +21,14 @@ $(document).ready(function () {
            }
         });
     });
+
+    $("#like").click( function () {
+        const id = $("#cmt-id").val();
+    
+        $.post('/:id/like-comment', {id: id}, (isSuccess) => {
+            if (isSuccess) {
+                console.log("Liked Comment!");
+            }
+        });
+    });
 })

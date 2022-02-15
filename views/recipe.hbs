@@ -89,7 +89,7 @@
                 <h2 id="rate">Comments:</h2><br><br>
                 {{#each comments}}
                    <div id="new">
-                        <p id="my_new_cmt">{{this.text}}  (by: {{ this.user_id.username }}) </p>
+                        <p id="my_new_cmt">{{this.text}}  (by: {{ this.user_id.username }}) Liked by: {{this.likes}}</p>
 
                         
                         {{#if (isEqual ../../session._id this.user_id._id)}} 
@@ -97,10 +97,16 @@
                                 <input type='hidden' name= "comment" id="cmt-id" value='{{this._id}}'>
                                 <input type = "submit" id="delete" class = 'deleteBtn' value = "DELETE"/>
                             </form> 
-
+                            <br>
                             <form action = "/{{this.recipe}}/edit" method = "POST">
                                 <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
                                 <input type = "submit" id="edit" class = 'updateBtn' value = "UPDATE"/>
+                            </form>
+                            <br>
+                            {{!-- Like Button --}}
+                            <form action = "/{{this.recipe}}/like-comment" method = "POST">
+                                <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
+                                <input type = "submit" id="like" class = 'likeBtn' value = "LIKE"/>
                             </form>
                         {{/if}}
 
@@ -112,9 +118,16 @@
                                     <input type='hidden' name= "comment" id="cmt-id" value='{{this._id}}'>
                                     <input type = "submit" id="delete" class = 'deleteBtn' value = "DELETE"/>
                                 </form> 
+                                <br>
                                 <form action = "/{{this.recipe}}/edit" method = "POST">
                                     <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
                                     <input type = "submit" id="edit" class = 'updateBtn' value = "UPDATE"/>
+                                </form>
+                                <br>
+                                {{!-- Like Button --}}
+                                <form action = "/{{this.recipe}}/like-comment" method = "POST">
+                                    <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
+                                    <input type = "submit" id="like" class = 'likeBtn' value = "LIKE"/>
                                 </form>
                             {{/if}}
                         {{/each}}

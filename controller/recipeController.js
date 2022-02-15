@@ -282,6 +282,7 @@ const RecipeController = {
             user_id: req.session._id,
             reply_to: reply_to,
             recipe: curid,
+            likes : 0
         })
 
         // const comment = {text: req.body.comment,
@@ -317,6 +318,28 @@ const RecipeController = {
         });
     },
 
+    //To like comment
+    likeComment : async(req, res) =>
+    {
+        const {id} = req.body;
+        const curid = req.params.id;
+
+        const curComment = await Comment.findById(id);
+        const likes = curComment.likes + 1;
+
+        Comment.findByIdAndUpdate({_id : id}, {likes : likes}, function (err, docs) 
+        {
+            if (err){
+                console.log(err)
+            }
+            else{
+                console.log("Comment Liked");
+            }
+        });
+
+        res.redirect('/recipe/' + curid);
+    },
+
     //To render update comment
     editComment : async  (req, res) => 
     {
@@ -350,6 +373,7 @@ const RecipeController = {
             user_id: curComment.user_id,
             recipe: curComment.recipe,
             reply_to : curComment.reply_to,
+            likes : curComment.likes
         }
 
         Comment.findOneAndUpdate({_id: id}, updatedComment, function(err, succ)
@@ -361,7 +385,6 @@ const RecipeController = {
         });
         res.redirect('/recipe/' + curComment.recipe);
     },
-
 
     likeRecipe : async (req, res) =>
     {

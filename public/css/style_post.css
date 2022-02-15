@@ -227,7 +227,7 @@ header{
   cursor: auto;
 }
 
-.updateBtn, .deleteBtn 
+.updateBtn, .deleteBtn, .likeBtn
 {
     width: 200;
     height: 50;
