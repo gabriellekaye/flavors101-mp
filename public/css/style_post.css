@@ -41,6 +41,7 @@
 {
     font-weight: 1000px;
     font-size: 40px;
+    margin-top: 10px;
 }
 
 .ingredients, .prep
@@ -148,6 +149,15 @@ header{
     justify-content: center;
     align-items: center;
     color: white;
+}
+
+strong{
+    /* margin-left : 520px;
+    margin-right : 200px; */
+    font-weight: 900;
+    font-size: 40px;
+    margin-top: 10px;
+    
 }
 
 #input{

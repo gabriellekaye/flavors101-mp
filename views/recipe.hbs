@@ -12,7 +12,7 @@
         {{> nav }}
         {{#with recipe}}
             <div class = "post" style="background-color: white;">
-                <h1 class = "name">{{title}}</h1>                
+                <h1 class = "name">{{{parseMarkdown title}}}</h1>                
                 <h3 class = "author">By: <a href = "/profile/{{author}}">{{author}}</a><br><br></h3>
                 <div class = "button_cont">
 
@@ -39,7 +39,7 @@
                 </div>
                 
                 
-                <p class = "desc">{{description}}</p>
+                <p class = "desc">{{{parseMarkdown description}}}</p>
 
                 <hr>
                 <br>
@@ -48,7 +48,7 @@
                 <ul class = "ingredients">
                     {{#each ingredients}}
                         <li>
-                            {{this}}
+                            {{{parseMarkdown this}}}
                         </li>
                     {{/each}}
                 </ul>
@@ -61,7 +61,7 @@
                 <ol class = "prep">
                     {{#each preparation}}
                         <li>
-                            {{this}}
+                            {{{parseMarkdown this}}}
                         </li>
                     {{/each}}
                 </ol>
@@ -91,8 +91,8 @@
                    <div id="new">
                         <p id="my_new_cmt">{{this.text}}  (by: {{ this.user_id.username }}) Liked by: {{this.likes}}</p>
 
-                        
-                        {{#if (isEqual ../../session._id this.user_id._id)}} 
+                        <div id="buttons">
+                            {{#if (isEqual ../../session._id this.user_id._id)}} 
                             <form action = "/{{this.recipe}}/delete-comment" method = "POST">
                                 <input type='hidden' name= "comment" id="cmt-id" value='{{this._id}}'>
                                 <input type = "submit" id="delete" class = 'deleteBtn' value = "DELETE"/>
@@ -110,6 +110,8 @@
                             </form>
                         {{/if}}
 
+                        </div>
+                        
                         <p id = "my_new_cmt">Replies: </p>
                         {{#each replies}}
                             <p id="my_new_cmt">{{this.text}} (by: {{ this.user_id.username }})</p>

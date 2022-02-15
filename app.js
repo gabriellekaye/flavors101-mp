@@ -7,7 +7,10 @@ const session = require('express-session');
 const mongoStore = require('connect-mongodb-session')(session);
 const flash = require('connect-flash');
 const fileUpload = require('express-fileupload')
-const db = require('./models/db')
+const db = require('./models/db');
+
+const markdown = require('markdown').markdown;
+
 
 // get environment variables
 require('dotenv').config()
@@ -44,7 +47,10 @@ app.engine('hbs', exphbs.create({
   extname: 'hbs',
   defaultView: 'main',
   helpers: {
-    isEqual: (arg1, arg2) => arg1.toString() === arg2.toString()
+    isEqual: (arg1, arg2) => arg1.toString() === arg2.toString(),
+    parseMarkdown: (text) =>{
+      return markdown.toHTML(text);
+    }
   }
 }).engine);
 
