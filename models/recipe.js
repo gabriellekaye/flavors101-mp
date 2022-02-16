@@ -11,6 +11,7 @@ const recipeSchema = new mongoose.Schema({
     //             user_id: {type: String}
     // }],
     likes : {type : Number},
+    likers: {type: Array},
     author : {type : String},
     average : {type : mongoose.Types.Decimal128}
 })
