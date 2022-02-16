@@ -262,10 +262,12 @@ const RecipeController = {
     {
         const curid = req.params.id;
 
+        //remove from all users likes
+        await User.updateMany({ $pull: { likes : curid }});
+
         Recipe.deleteOne({_id: curid}, function(){
             // return to home after deleting
             res.redirect('/');
-            console.log('Recipe Deleted');
         });
     },
 
@@ -476,7 +478,36 @@ const RecipeController = {
             recipe: curid,
         });
 
+        // Get # of rates
+        var div = await Rate.count({recipe:curid});
+        
+        // Get sum of rates
+        result = await Rate.aggregate([
+            { $match: { recipe: curid } },
+            { $group: { _id: "_id", total: { $sum: "$value"} } }
+        ]);
+
         // compute for average
+        var avg = result[0].total/div
+        //console.log('average is ' + avg);
+
+        // Update avg in recipe
+        await Recipe.findByIdAndUpdate(curid, {average:avg});
+
+        res.redirect('/recipe/' + curid); // refresh page
+    },
+
+    // Delete rate
+    deleteRate_Recipe : async (req, res) =>
+    {
+        const curid = req.params.id;
+        const curuser = req.session._id;
+        
+        // Delete rate from db
+        await Rate.deleteOne({recipe:curid, user_id:curuser});
+        console.log('deleted rate from rate db');
+
+        // RECOMPUTE FOR AVERAGE 
 
         // Get # of rates
         var div = await Rate.count({recipe:curid});

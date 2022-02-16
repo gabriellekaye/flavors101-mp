@@ -42,7 +42,7 @@ body {
   border: 1px dotted orange;
 }
 
-#btn_cmt {
+#btn_cmt, #del_rate_btn, #rate_btn {
   /* margin-left: 500px; */
   background-color:#fd9956;
   font-family: 'Montserrat', sans-serif;
@@ -52,7 +52,7 @@ body {
   border: 1px dotted orange;
 }
 
-#btn:hover, #btn_cmt:hover {
+#btn:hover, #btn_cmt:hover, #del_rate_btn:hover, #rate_btn:hover {
   background-color: seashell;
 }
 #comment{
