@@ -422,46 +422,61 @@ const RecipeController = {
     {
         const curid = req.params.id;
         const curRecipe = await Recipe.findById(curid);
-        const likes = curRecipe.likes + 1;
+        const user = req.session.username;
 
-        Recipe.findByIdAndUpdate({_id : curid}, {likes : likes}, function (err, docs) 
-        {
-            if (err){
-                console.log(err)
-            }
-            else{
-                console.log("Liked");
-            }
-        });
-        
-        // Add id of liked recipe to users "likes"
-        await User.updateOne({ _id: req.session._id }, { $push: { likes : curid } });
-        
+        var found = 0;
+
+        var no_likers = curRecipe.likes;
+
+        if(no_likers > 0) {
+            for(var i = 0 ; i < curRecipe.likers.length ; i++) {
+                if(user === curRecipe.likers[i]){
+                    found = 1;
+                }
+            };
+        };
+
+        // unlike
+        if(found == 1) { 
+            const likes = curRecipe.likes - 1;
+            await User.updateOne({ _id: req.session._id }, { $pull: { likes : curid } });
+            await Recipe.updateOne({_id: curid}, { $pull: { likers : user } });
+            await Recipe.findByIdAndUpdate({_id : curid}, {likes : likes});
+        }
+
+        // like
+        else if (found == 0) {
+            const likes = curRecipe.likes + 1;
+            await User.updateOne({ _id: req.session._id }, { $push: { likes : curid } });
+            await Recipe.updateOne({_id: curid}, { $push: { likers : user } });
+            await Recipe.findByIdAndUpdate({_id : curid}, {likes : likes});
+        };
+
         res.redirect('/recipe/' + curid);
     },
 
-    // Unlike a recipe
-    unlikeRecipe : async (req, res) =>
-    {
-        const curid = req.params.id;
-        const curRecipe = await Recipe.findById(curid);
-        const likes = curRecipe.likes - 1;
+    // // Unlike a recipe
+    // unlikeRecipe : async (req, res) =>
+    // {
+    //     const curid = req.params.id;
+    //     const curRecipe = await Recipe.findById(curid);
+    //     const likes = curRecipe.likes - 1;
 
-        Recipe.findByIdAndUpdate({_id : curid}, {likes : likes}, function (err, docs) 
-        {
-            if (err){
-                console.log(err)
-            }
-            else{
-                console.log("Unliked");
-            }
-        });
+    //     Recipe.findByIdAndUpdate({_id : curid}, {likes : likes}, function (err, docs) 
+    //     {
+    //         if (err){
+    //             console.log(err)
+    //         }
+    //         else{
+    //             console.log("Unliked");
+    //         }
+    //     });
         
-        // Add id of liked recipe to users "likes"
-        await User.updateOne({ _id: req.session._id }, { $pull: { likes : curid } });
-        console.log("unlike from userdb")
-        res.redirect('/recipe/' + curid);
-    },
+    //     // Add id of liked recipe to users "likes"
+    //     await User.updateOne({ _id: req.session._id }, { $pull: { likes : curid } });
+    //     console.log("unlike from userdb")
+    //     res.redirect('/recipe/' + curid);
+    // },
 
     //To rate a recipe
     rateRecipe : async (req, res) =>

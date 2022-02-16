@@ -47,11 +47,8 @@ router.post('/:id/like-comment', isPrivate, recipeController.likeComment);
 //To update a comment
 router.post('/:id/update-comment', isPrivate, recipeController.updateComment);
 
-//To like a recipe
+//To like and unlike a recipe
 router.post('/like/:id', isPrivate, recipeController.likeRecipe);
-
-//To unlike a recipe
-router.post('/unlike/:id', isPrivate, recipeController.unlikeRecipe);
 
 //To rate a recipe
 router.post('/rate/:id', isPrivate, recipeController.rateRecipe);
