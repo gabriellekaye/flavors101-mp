@@ -170,7 +170,11 @@
                             <input type="radio" id="star1" name="rate" value="1" />
                             <label for="star1" title="1 star">1 star</label>
                             
-                            <button type = "submit" value = "Rate">Rate</button>
+                            <button id="rate_btn" type = "submit" value = "Rate">Rate</button>
+                        </form>
+                        <br>
+                        <form action = "/unrate/{{_id}}" method="POST">
+                            <button id="del_rate_btn" type="submit">Delete Rate</button>
                         </form>
                         <br><br><br>
                     </div>

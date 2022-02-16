@@ -5,6 +5,7 @@ const Recipe = require ('../models/recipe');
 const User = require ('../models/user');
 const Comment = require('../models/comment');
 const Rate = require('../models/rate');
+const { findOneAndDelete } = require('../models/recipe');
 
 const RecipeController = {
 
@@ -455,44 +456,45 @@ const RecipeController = {
         res.redirect('/recipe/' + curid);
     },
 
-    // // Unlike a recipe
-    // unlikeRecipe : async (req, res) =>
-    // {
-    //     const curid = req.params.id;
-    //     const curRecipe = await Recipe.findById(curid);
-    //     const likes = curRecipe.likes - 1;
-
-    //     Recipe.findByIdAndUpdate({_id : curid}, {likes : likes}, function (err, docs) 
-    //     {
-    //         if (err){
-    //             console.log(err)
-    //         }
-    //         else{
-    //             console.log("Unliked");
-    //         }
-    //     });
-        
-    //     // Add id of liked recipe to users "likes"
-    //     await User.updateOne({ _id: req.session._id }, { $pull: { likes : curid } });
-    //     console.log("unlike from userdb")
-    //     res.redirect('/recipe/' + curid);
-    // },
-
     //To rate a recipe
     rateRecipe : async (req, res) =>
     {
         const curid = req.params.id;
-        
-        //Chosen rate based on form
+        const curRecipe = await Recipe.findById(curid);
         const chosenRate = req.body.rate;
+        const user = req.session.username;
 
-        //create new rate
-        await Rate.create({
-            value: chosenRate,
-            user_id: req.session._id,
-            recipe: curid,
-        });
+        var found = 0;
+        var currate = curRecipe.average;
 
+        if(currate > 0){
+            for(var i = 0 ; i < curRecipe.raters.length ; i++) {
+                if(user === curRecipe.raters[i]){
+                    found = 1;
+                }
+            };  
+        }   
+
+        // user has not rated
+        if(found == 0){
+            await Rate.create({ //create new rate
+                value: chosenRate,
+                user_id: req.session._id,
+                recipe: curid,
+            });
+            // add user id to raters array
+            await Recipe.updateOne({_id:curid}, { $push: { raters : req.session.username } });
+        }
+
+        // user has rated recipe
+        else if (found == 1) {
+            //update rate
+            if (chosenRate > 0){
+                await Rate.updateOne({user_id:req.session._id, recipe:curid}, {value:chosenRate});
+            };
+        };
+
+        // COMPUTE AVERAGE
         // Get # of rates
         var div = await Rate.count({recipe:curid});
         
@@ -507,7 +509,7 @@ const RecipeController = {
         //console.log('average is ' + avg);
 
         // Update avg in recipe
-        await Recipe.findByIdAndUpdate(curid, {average:avg});
+        await Recipe.findByIdAndUpdate(curid, {average:avg,});
 
         res.redirect('/recipe/' + curid); // refresh page
     },
@@ -526,19 +528,28 @@ const RecipeController = {
 
         // Get # of rates
         var div = await Rate.count({recipe:curid});
+        var avg;
+
+        if(div == 0) { //no more rates
+            avg = 0;
+
+        }
         
-        // Get sum of rates
-        result = await Rate.aggregate([
-            { $match: { recipe: curid } },
-            { $group: { _id: "_id", total: { $sum: "$value"} } }
-        ]);
+        else{ //other rates still present
+            // Get sum of rates
+            result = await Rate.aggregate([
+                { $match: { recipe: curid } },
+                { $group: { _id: "_id", total: { $sum: "$value"} } }
+            ]);
 
-        // compute for average
-        var avg = result[0].total/div
-        //console.log('average is ' + avg);
-
+            // compute for average
+            avg = result[0].total/div
+        };
+        
         // Update avg in recipe
         await Recipe.findByIdAndUpdate(curid, {average:avg});
+        // remove username from raters array
+        await Recipe.updateOne({_id:curid}, { $pull: { raters : req.session.username } });
 
         res.redirect('/recipe/' + curid); // refresh page
     }
