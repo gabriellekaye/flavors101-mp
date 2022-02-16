@@ -325,19 +325,49 @@ const RecipeController = {
         const curid = req.params.id;
 
         const curComment = await Comment.findById(id);
-        const likes = curComment.likes + 1;
 
-        Comment.findByIdAndUpdate({_id : id}, {likes : likes}, function (err, docs) 
+        const user = req.session.username;
+
+        var found = 0;
+
+        for(var i = 0 ; i < curComment.likers.length ; i++)
         {
-            if (err){
-                console.log(err)
+            if(user === curComment.likers[i])
+            {
+                found = 1;
             }
-            else{
-                console.log("Comment Liked");
-            }
-        });
+        };
 
-        res.redirect('/recipe/' + curid);
+        if(found)
+        {
+            const likes = curComment.likes - 1;
+            await Comment.findByIdAndUpdate({_id : id}, { $pull:  { likers: user } });
+            await Comment.findByIdAndUpdate({_id : id}, {likes : likes});
+            res.redirect('/recipe/' + curid);
+        }
+
+        else if (!found)
+        {
+            const likes = curComment.likes + 1;
+            await Comment.findByIdAndUpdate({_id : id}, {$push: {likers : user}});
+            await Comment.findByIdAndUpdate({_id : id}, {likes : likes});
+            res.redirect('/recipe/' + curid);
+        }
+
+
+        // const likes = curComment.likes + 1;
+
+        // Comment.findByIdAndUpdate({_id : id}, {likes : likes}, function (err, docs) 
+        // {
+        //     if (err){
+        //         console.log(err)
+        //     }
+        //     else{
+        //         console.log("Comment Liked");
+        //     }
+        // });
+
+        // res.redirect('/recipe/' + curid);
     },
 
     //To render update comment

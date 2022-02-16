@@ -5,7 +5,8 @@ const commentSchema = new mongoose.Schema({
     user_id: {type: String, require, ref: 'user'},
     recipe: {type: mongoose.ObjectId, require: true, ref: 'Recipe'},
     reply_to: {type: mongoose.ObjectId, require: true, ref: 'Comment', default: null},
-    likes : {type : Number}
+    likes : {type : Number},
+    likers : {type : Array}
 })
 
 module.exports = mongoose.model('Comment', commentSchema);
