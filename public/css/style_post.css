@@ -151,12 +151,10 @@ header{
     color: white;
 }
 
-strong{
+strong {
     /* margin-left : 520px;
     margin-right : 200px; */
     font-weight: 900;
-    font-size: 40px;
-    margin-top: 10px;
     
 }
 

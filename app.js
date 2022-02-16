@@ -23,7 +23,7 @@ const options = {
 db.connect();
 
 const secret = process.env.SECRET
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 mongoose.connect(dbUri, options, (err) => {
   console.log(err? err : 'Established connection with MongoDB!');
@@ -49,7 +49,12 @@ app.engine('hbs', exphbs.create({
   helpers: {
     isEqual: (arg1, arg2) => arg1.toString() === arg2.toString(),
     parseMarkdown: (text) =>{
-      return markdown.toHTML(text);
+      text = markdown.toHTML(text);
+
+      if (text.startsWith('<p>')) {
+        text = text.slice(3, text.length - 4); 
+      }
+      return text;
     }
   }
 }).engine);
