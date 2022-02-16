@@ -54,6 +54,9 @@ router.post('/like/:id', isPrivate, recipeController.likeRecipe);
 router.post('/unlike/:id', isPrivate, recipeController.unlikeRecipe);
 
 //To rate a recipe
-router.post('/rate/:id', isPrivate, recipeController.rateRecipe)
+router.post('/rate/:id', isPrivate, recipeController.rateRecipe);
+
+//To delete rate
+router.post('/unrate/:id', isPrivate, recipeController.deleteRate_Recipe);
 
 module.exports = router;

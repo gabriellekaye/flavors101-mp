@@ -4,6 +4,7 @@
         <link rel = "stylesheet" type = "text/css" media="all" href = "../public/css/style_post.css"/>
         <script src="https://kit.fontawesome.com/38d688374b.js" crossorigin="anonymous"></script>
         <link rel = "stylesheet" type = "text/css" media="all" href = "../public/css/comment.css"/>
+        <script type="text/javascript" src="../public/javascript/rate.js"></script>
 
     </head>
     
@@ -157,8 +158,12 @@
                             <label for="star2" title="2 stars">2 stars</label>
                             <input type="radio" id="star1" name="rate" value="1" />
                             <label for="star1" title="1 star">1 star</label>
-                            
-                            <button type = "submit" value = "Rate">Rate</button>
+                            <br>
+                            <button onclick="rate()" id="rate_btn" type = "submit" value = "Rate">Rate</button>
+                        </form>
+                        <br>
+                        <form action = "/unrate/{{_id}}" method="POST">
+                            <button onclick="delete_Rate()" id="del_rate_btn" type="submit">Delete Rate</button>
                         </form>
                         <br><br><br>
                     </div>

@@ -140,26 +140,26 @@ exports.logoutUser = (req, res) => {
 exports.getDeleteProfile = async (req, res) => {
 
   // TO ADD: 
-  //        - delete comments on other recipes
+  //        - delete users recipes from like list of others
 
-  await Recipe.deleteMany({author: req.session.username}); // delete recipes
-  await Rate.deleteMany({user_id: req.session._id}) // delete rates
+  await Recipe.deleteMany({author: req.session.username});  // delete recipes
+  await Rate.deleteMany({user_id: req.session._id});        // delete rates
+  await Comment.deleteMany({user_id: req.session._id});     // delete comments
 
   const user = await User.findById({_id : req.session._id});
   const likeCount = user.likes.length;
 
-  // Delete users likes
-  for(let i = 0; i < likeCount; i++) {
+  for(let i = 0; i < likeCount; i++) {                      // delete likes
     const recipe = await Recipe.findByIdAndUpdate(user.likes[i]);
     const removed = recipe.likes - 1;
     await Recipe.findByIdAndUpdate(user.likes[i], {likes: removed});
   }
   
-  await User.deleteOne({_id: req.session._id}); // delete user
+  await User.deleteOne({_id: req.session._id});             // delete user
   
-  req.session.destroy(() => { //end session
-    res.clearCookie('connect.sid'); //clear cookies
-    res.redirect('/login'); //redirect to log in page
+  req.session.destroy(() => {                               //end session
+    res.clearCookie('connect.sid');                         //clear cookies
+    res.redirect('/login');                                 //redirect to log in page
     res.status(200);
   });
 }
@@ -274,16 +274,12 @@ exports.getPublicProfile = async (req,res) => {
 
     const recipe = await Recipe.find({author : otherUser}).lean().exec();
 
-    // console.log('recipe is ' + recipe.title);
-
     res.render('public-profile', {
       pageTitle: user.username + '`s Profile',
       username: user.username,
       description: user.description,
       avatar: user.avatar, 
       recipe
-      // recipeTitle : recipe.title,
-      // recipeID : recipe._id
     });
   }
   catch (err){
