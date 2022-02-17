@@ -13,7 +13,8 @@ const recipeSchema = new mongoose.Schema({
     likes : {type : Number},
     likers: {type: Array},
     author : {type : String},
-    average : {type : mongoose.Types.Decimal128}
+    average : {type : mongoose.Types.Decimal128},
+    raters: {type: Array}
 })
 
 recipeSchema.index({ name : 'text', description : 'text'});
