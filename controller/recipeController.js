@@ -6,6 +6,7 @@ const User = require ('../models/user');
 const Comment = require('../models/comment');
 const Rate = require('../models/rate');
 const { findOneAndDelete } = require('../models/recipe');
+const user = require('../models/user');
 
 const RecipeController = {
 
@@ -341,13 +342,13 @@ const RecipeController = {
         const {id} = req.body;
         const curid = req.params.id;
         const curComment = await Comment.findById(id);
-        const userid = req.session.id;
+        const userid = req.session._id;
 
         var found = 0;
 
         for(var i = 0 ; i < curComment.likers.length ; i++)
         {
-            if(userid === curComment.likers[i])
+            if(userid.equals(curComment.likers[i]))
             {
                 found = 1;
             }
