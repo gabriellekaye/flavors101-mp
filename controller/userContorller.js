@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt'); //For has password
 const User = require('../models/user'); // user db 
+const Comment = require('../models/comment')
 const Recipe = require('../models/recipe'); // recipe db
 const Rate = require('../models/rate'); // rate db
 const { validationResult } = require('express-validator'); //for validation
@@ -271,15 +272,23 @@ exports.getPublicProfile = async (req,res) => {
   try {
     var otherUser = req.params.id;
     const user = await User.findOne({username : otherUser}).exec();
-
     const recipe = await Recipe.find({author : otherUser}).lean().exec();
+    const data = await Comment.find({ user_id: user._id }).lean().exec()
+
+    const comments = [], replies = []
+
+    for (let i = 0; i < data.length; i++) {
+      (data[i].reply_to ? comments : replies).push(data[i])
+    }
 
     res.render('public-profile', {
       pageTitle: user.username + '`s Profile',
       username: user.username,
       description: user.description,
       avatar: user.avatar, 
-      recipe
+      recipe,
+      comments,
+      replies,
     });
   }
   catch (err){
