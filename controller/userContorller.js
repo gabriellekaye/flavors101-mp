@@ -139,8 +139,8 @@ exports.logoutUser = (req, res) => {
 
 //Delete acct
 exports.getDeleteProfile = async (req, res) => {
-  await Recipe.updateMany({ $pull: { raters : req.session.username }}); // delete user from raters array
-  await Recipe.updateMany({ $pull: { likers : req.session.username }}); // delete user from likers array
+  await Recipe.updateMany({ $pull: { raters : req.session._id }}); // delete user from raters array
+  await Recipe.updateMany({ $pull: { likers : req.session._id }}); // delete user from likers array
   await Recipe.deleteMany({author: req.session.username});  // delete recipes
   
   await Rate.deleteMany({user_id: req.session._id});        // delete rates
