@@ -254,7 +254,8 @@ const RecipeController = {
             likes : curRecipe.likes,
             author : curRecipe.author, 
             average : curRecipe.average,
-            likers : curRecipe.likers
+            likers : curRecipe.likers,
+            raters : curRecipe.raters
         }
 
         Recipe.findOneAndUpdate({_id: curid}, updatedRecipe, function(err, succ)
