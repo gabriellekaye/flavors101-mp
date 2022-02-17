@@ -87,23 +87,17 @@ hr
 
 body{
     background: #f7f7f7;
-    background: url(burger1.png);
-    background-repeat: no-repeat; 
-    background-position: 1500 400;
-    height: 10000;
+    height: auto;
 }
 
-h1
-{
+h1{
     font-size: 100;
     margin-top: 200;
     text-align: center;
     text-shadow: #666;
 }
 
-
-a
-{
+a{
     font-size: 4rem;
     margin-left: 2rem;
     color: #666;

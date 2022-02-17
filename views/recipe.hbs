@@ -79,6 +79,7 @@
 
             {{!-- COMMENTS --}}
             <div id="page">
+                <br><br>
                 <h2 id="rate">Comments:</h2><br><br>
                 {{#each comments}}
                    <div id="new">
@@ -145,17 +146,17 @@
                     <form action = "/comment/{{_id}}" method = "POST">
                         <br><br>
                         <textarea id="comments" name = "comment" placeholder="Comment about this recipe..." rows="5" cols="80" name="comment" maxlength="500" required></textarea>
-                        <br>
+                        <br><br>
                         {{!-- <button id="btn_cmt" onclick="post_cmt(this);">Post Comment</button> --}}
-                        <input type = "submit" value = "Post Comment"/>
+                        <input id="btn_cmt" type = "submit" value = "Post Comment"/>
                     </form>
 
                     <br><br><br>
                     {{!-- RATE --}}
                     <h2 id="rate">Rate this recipe by taste and difficulty:</h2>
                     <br>
-                    <div class="rate">
-                        <form action = "/rate/{{_id}}" method="POST" class = rate>
+                    <div class="stars">
+                        <form action = "/rate/{{_id}}" method="POST" class = stars>
                             <input type="radio" id="star5" name="rate" value="5" />
                             <label for="star5" title="5 stars">5 stars</label>
                             <input type="radio" id="star4" name="rate" value="4" />
@@ -166,17 +167,18 @@
                             <label for="star2" title="2 stars">2 stars</label>
                             <input type="radio" id="star1" name="rate" value="1" />
                             <label for="star1" title="1 star">1 star</label>
-                            
+                            <br><br>
                             <button id="rate_btn" type = "submit" value = "Rate">Rate</button>
                         </form>
                         <br>
                         <form action = "/unrate/{{_id}}" method="POST" class = stars>
                             <button id="del_rate_btn" type="submit">Delete Rate</button>
                         </form>
-                        <br><br><br>
                     </div>
                 </div>
-            </div>
+                <br>
+            </div><br><br>
+            <br>
         {{/with}}
     </body>
 </html>
