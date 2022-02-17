@@ -73,25 +73,28 @@
                    <div id="new">
                         <p id="my_new_cmt">{{this.text}}  (by: {{ this.user_id.username }}) Liked by: {{this.likes}}</p>
 
-                        
-                        {{#if (isEqual ../../session._id this.user_id._id)}} 
+                        <div id="buttons">
+                            {{#if (isEqual ../../session._id this.user_id._id)}} 
                             <form action = "/{{this.recipe}}/delete-comment" method = "POST">
                                 <input type='hidden' name= "comment" id="cmt-id" value='{{this._id}}'>
                                 <input type = "submit" id="delete" class = 'deleteBtn' value = "DELETE"/>
                             </form> 
-
+                            <br>
                             <form action = "/{{this.recipe}}/edit" method = "POST">
                                 <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
                                 <input type = "submit" id="edit" class = 'updateBtn' value = "UPDATE"/>
                             </form>
+                            <br>
+                            {{!-- Like Button --}}
+                            <form action = "/{{this.recipe}}/like-comment" method = "POST">
+                                <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
+                                <input type = "submit" id="like" class = 'likeBtn' value = "LIKE"/>
+                            </form>
                         {{/if}}
 
-                        <form action = "/{{this.recipe}}/like-comment" method = "POST">
-                            <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
-                            <input type = "submit" id="like" class = 'likeBtn' value = "LIKE"/>
-                        </form>
-
-                        <p id = "my_new_cmt" style="font-weight: bolder; color: black;">Replies: </p>
+                        </div>
+                        
+                        <p id = "my_new_cmt">Replies: </p>
                         {{#each replies}}
                             <p id="my_new_cmt">{{this.text}} (by: {{ this.user_id.username }})</p>
                             {{#if (isEqual ../../../session._id this.user_id._id)}} 
@@ -99,18 +102,20 @@
                                     <input type='hidden' name= "comment" id="cmt-id" value='{{this._id}}'>
                                     <input type = "submit" id="delete" class = 'deleteBtn' value = "DELETE"/>
                                 </form> 
+                                <br>
                                 <form action = "/{{this.recipe}}/edit" method = "POST">
                                     <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
                                     <input type = "submit" id="edit" class = 'updateBtn' value = "UPDATE"/>
                                 </form>
+                                <br>
+                                {{!-- Like Button --}}
+                                <form action = "/{{this.recipe}}/like-comment" method = "POST">
+                                    <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
+                                    <input type = "submit" id="like" class = 'likeBtn' value = "LIKE"/>
+                                </form>
                             {{/if}}
-
-                            <form action = "/{{this.recipe}}/like-comment" method = "POST">
-                                <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
-                                <input type = "submit" id="like" class = 'likeBtn' value = "LIKE"/>
-                            </form>
-
                         {{/each}}
+
 
                         
                         <form action="/comment/{{this.recipe}}" method="POST">
