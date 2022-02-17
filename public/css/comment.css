@@ -43,10 +43,10 @@ body {
 }
 
 #btn_cmt, #del_rate_btn, #rate_btn {
-  /* margin-left: 500px; */
+  margin-left: 500px;
   background-color:#fd9956;
   font-family: 'Montserrat', sans-serif;
-  font-size: 30;
+  font-size: 25;
   font-weight: 300;
   border-radius: 4px;
   border: 1px dotted orange;
@@ -55,9 +55,11 @@ body {
 #btn:hover, #btn_cmt:hover, #del_rate_btn:hover, #rate_btn:hover {
   background-color: seashell;
 }
+
 #comment{
   text-align: center;
 }
+
 #rate {
   font-size: 25px;
   /* margin-left: 500px; */
@@ -96,16 +98,16 @@ body {
   text-indent: 50px;
 }
 
-.rate {
-  margin-right: auto;
+.stars {
   text-align: center;
+  margin-right: 250px;
 }
 
-.rate:not(:checked) > input {
+.stars:not(:checked) > input {
   position:absolute;
-  top:-9999px;
 }
-.rate:not(:checked) > label {
+
+.stars:not(:checked) > label {
   float:right;
   width:1em;
   overflow:hidden;
@@ -114,20 +116,24 @@ body {
   font-size:30px;
   color:#ccc;
 }
-.rate:not(:checked) > label:before {
+
+.stars:not(:checked) > label:before {
   content: '★ ';
 }
-.rate > input:checked ~ label {
-  color: #ffc700;    
+
+.stars > input:checked ~ label {
+  color: gold;    
 }
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-  color: #deb217;  
+
+.stars:not(:checked) > label:hover,
+.stars:not(:checked) > label:hover ~ label {
+  color: goldenrod;  
 }
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
+
+.stars > input:checked + label:hover,
+.stars > input:checked + label:hover ~ label,
+.stars > input:checked ~ label:hover,
+.stars > input:checked ~ label:hover ~ label,
+.stars > label:hover ~ input:checked ~ label {
   color: #c59b08;
 }
