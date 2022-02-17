@@ -275,7 +275,8 @@ const RecipeController = {
         const curid = req.params.id;
 
         //remove from all users likes
-        await User.updateMany({ $pull: { likes : curid }});
+        const { likers } = await Recipe.findById(curid, '-username,likers').lean().exec()
+            await User.updateMany({"username": { "$in": likers}}, {$pull: { likes : curid }}).exec();
 
         Recipe.deleteOne({_id: curid}, function(){
             // return to home after deleting
