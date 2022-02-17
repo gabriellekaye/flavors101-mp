@@ -436,7 +436,7 @@ const RecipeController = {
     {
         const curid = req.params.id;
         const curRecipe = await Recipe.findById(curid);
-        const userid = req.session.id;
+        const userid = req.session._id;
 
         var found = 0;
 
@@ -444,7 +444,7 @@ const RecipeController = {
 
         if(no_likers > 0) {
             for(var i = 0 ; i < curRecipe.likers.length ; i++) {
-                if(userid === curRecipe.likers[i]){
+                if(userid.equals(curRecipe.likers[i])){
                     found = 1;
                 }
             };
@@ -475,14 +475,14 @@ const RecipeController = {
         const curid = req.params.id;
         const curRecipe = await Recipe.findById(curid);
         const chosenRate = req.body.rate;
-        const user = req.session.id;
+        const user = req.session._id;
 
         var found = 0;
         var currate = curRecipe.average;
 
         if(currate > 0){
             for(var i = 0 ; i < curRecipe.raters.length ; i++) {
-                if(user === curRecipe.raters[i]){
+                if(user.equals(curRecipe.raters[i])) {
                     found = 1;
                 }
             };  
@@ -532,11 +532,11 @@ const RecipeController = {
     {
         const curid = req.params.id;
         const curRecipe = await Recipe.findById(curid);
-        const user = req.session.id;
+        const user = req.session._id;
         var found = 0;
 
         for(var i = 0 ; i < curRecipe.raters.length ; i++) {
-            if(user === curRecipe.raters[i]){
+            if(user.equals(curRecipe.raters[i])) {
                 found = 1;
             }
         };
