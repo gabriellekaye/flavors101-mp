@@ -139,10 +139,6 @@ exports.logoutUser = (req, res) => {
 
 //Delete acct
 exports.getDeleteProfile = async (req, res) => {
-
-  // TO ADD: 
-  //        - delete users recipes from like list of others
-
   await Recipe.updateMany({ $pull: { raters : req.session.username }}); // delete user from raters array
   await Recipe.updateMany({ $pull: { likers : req.session.username }}); // delete user from likers array
   await Recipe.deleteMany({author: req.session.username});  // delete recipes
