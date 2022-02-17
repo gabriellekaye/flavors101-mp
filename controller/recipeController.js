@@ -519,13 +519,23 @@ const RecipeController = {
     {
         const curid = req.params.id;
         const curuser = req.session._id;
+        const curRecipe = await Recipe.findById(curid);
+        const user = req.session.username;
+        var found = 0;
+
+        for(var i = 0 ; i < curRecipe.raters.length ; i++) {
+            if(user === curRecipe.raters[i]){
+                found = 1;
+            }
+        };
         
-        // Delete rate from db
-        await Rate.deleteOne({recipe:curid, user_id:curuser});
-        console.log('deleted rate from rate db');
+        if(found == 1) {
+            // Delete rate from db
+            await Rate.deleteOne({recipe:curid, user_id:curuser});
+            console.log('deleted rate from rate db');
+        };
 
         // RECOMPUTE FOR AVERAGE 
-
         // Get # of rates
         var div = await Rate.count({recipe:curid});
         var avg;
@@ -535,7 +545,7 @@ const RecipeController = {
 
         }
         
-        else{ //other rates still present
+        else { //other rates still present
             // Get sum of rates
             result = await Rate.aggregate([
                 { $match: { recipe: curid } },
