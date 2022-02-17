@@ -133,7 +133,8 @@
                         <form action="/comment/{{this.recipe}}" method="POST">
                             <input type="hidden" name="reply_to" id="reply_to" value="{{this._id}}">
                             <textarea id="comments" name = "comment" placeholder="Reply..." rows="5" cols="80" name="comment" maxlength="500" required></textarea>
-                            <input type = "submit" value = "Post Reply"/>
+                            <br><br>
+                            <input id="btn_cmt" type = "submit" value = "Post Reply"/>
                         </form>
                         
                     </div>
