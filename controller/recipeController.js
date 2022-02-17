@@ -95,6 +95,31 @@ const RecipeController = {
             //To extract the id from the request
             var recipeId = req.params.id;
 
+            // COMPUTE AVERAGE
+            // Get # of rates
+            var div = await Rate.count({recipe:recipeId});
+            console.log('div is ' + div)
+            var avg;
+
+            if(div == 0){
+                avg = 0;
+            }
+
+            else if (div > 0) {
+                // Get sum of rates
+                result = await Rate.aggregate([
+                    { $match: { recipe: recipeId } },
+                    { $group: { _id: "_id", total: { $sum: "$value"} } }
+                ]);
+
+                // compute for average
+                avg = result[0].total/div
+                console.log('average is ' + avg);
+            }
+
+            // Update avg in recipe
+            await Recipe.findByIdAndUpdate(recipeId, {average:avg,});
+
             const recipe = await Recipe.findById(recipeId).lean().exec();
 
             const comments = await Comment.find({ recipe: recipeId , reply_to: null}, '-__v').populate('user_id', 'username').lean().exec()
@@ -507,23 +532,6 @@ const RecipeController = {
                 await Rate.updateOne({user_id:user, recipe:curid}, {value:chosenRate});
             };
         };
-
-        // COMPUTE AVERAGE
-        // Get # of rates
-        var div = await Rate.count({recipe:curid});
-        
-        // Get sum of rates
-        result = await Rate.aggregate([
-            { $match: { recipe: curid } },
-            { $group: { _id: "_id", total: { $sum: "$value"} } }
-        ]);
-
-        // compute for average
-        var avg = result[0].total/div
-        //console.log('average is ' + avg);
-
-        // Update avg in recipe
-        await Recipe.findByIdAndUpdate(curid, {average:avg,});
 
         res.redirect('/recipe/' + curid); // refresh page
     },
