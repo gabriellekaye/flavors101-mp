@@ -3,7 +3,6 @@ const User = require('../models/user'); // user db
 const Comment = require('../models/comment')
 const Recipe = require('../models/recipe'); // recipe db
 const Rate = require('../models/rate'); // rate db
-const Comment = require('../models/comment');
 const { validationResult } = require('express-validator'); //for validation
 const path = require('path')
 
