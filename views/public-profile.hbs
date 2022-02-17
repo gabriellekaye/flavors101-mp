@@ -31,6 +31,14 @@
                     {{ else }}
                         <h3 id= "activity">No recent activity <i id="frown" class="fa fa-frown-o" aria-hidden="true"></i></h3>
                     {{/each}}
+
+                    {{#each comments}}
+                        <p id="activity">Commented <a id = "small_link" href ="/recipe/{{this.recipe}}">{{this.text}}</a>.</p>
+                    {{/each}}
+
+                    {{#each replies}}
+                        <p id="activity">Replied <a id = "small_link" href ="/recipe/{{this.recipe}}">{{this.text}}</a> .</p>
+                    {{/each}}
                 </ul>
                 <br><br><br>
             </div>

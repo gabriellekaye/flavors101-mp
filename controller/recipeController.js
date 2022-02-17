@@ -135,11 +135,22 @@ const RecipeController = {
     showRandom : async (req, res) => 
     {
         try {
+            
 
             //To find a random post
             var count = await Recipe.find().countDocuments();
             var random = Math.floor(Math.random() * count);
             var recipe = await Recipe.findOne().skip(random).lean().exec();
+            var recipeId = recipe._id;
+            const comments = await Comment.find({ recipe: recipeId , reply_to: null}, '-__v').populate('user_id', 'username').lean().exec();
+            
+            for (let i = 0; i < comments.length; i++) {
+                const replies = await Comment.find({ reply_to: comments[i]._id })
+                    .populate('user_id', 'username').lean().exec()
+                comments[i].replies = replies
+            }
+
+            recipe.comments = comments
 
             //Recipes can only be edited by author
             if(recipe.author === req.session.username)
