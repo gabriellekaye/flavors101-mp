@@ -108,12 +108,14 @@
                                     <input type = "submit" id="edit" class = 'updateBtn' value = "UPDATE"/>
                                 </form>
                                 <br>
-                                {{!-- Like Button --}}
-                                <form action = "/{{this.recipe}}/like-comment" method = "POST">
-                                    <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
-                                    <input type = "submit" id="like" class = 'likeBtn' value = "LIKE"/>
-                                </form>
                             {{/if}}
+
+                            {{!-- Like Button --}}
+                            <form action = "/{{this.recipe}}/like-comment" method = "POST">
+                                <input type='hidden' name= "id" id="cmt-id" value='{{this._id}}'>
+                                <input type = "submit" id="like" class = 'likeBtn' value = "LIKE"/>
+                            </form>
+                            <br>
                         {{/each}}
 
 
