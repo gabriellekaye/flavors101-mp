@@ -277,8 +277,8 @@ const RecipeController = {
         await Comment.deleteMany({recipe:curid});   // delete all comments
 
         //remove from all users likes
-        const { likers } = await Recipe.findById(curid, '-username,likers').lean().exec()
-        await User.updateMany({"username": { "$in": likers}}, {$pull: { likes : curid }}).exec();
+        const { likers } = await Recipe.findById(curid, '-id,likers').lean().exec()
+        await User.updateMany({"id": { "$in": likers}}, {$pull: { likes : curid }}).exec();
 
         Recipe.deleteOne({_id: curid}, function(){
             // return to home after deleting
