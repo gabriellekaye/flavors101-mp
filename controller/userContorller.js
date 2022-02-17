@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt'); //For has password
 const User = require('../models/user'); // user db 
 const Recipe = require('../models/recipe'); // recipe db
 const Rate = require('../models/rate'); // rate db
+const Comment = require('../models/comment');
 const { validationResult } = require('express-validator'); //for validation
 const path = require('path')
 
@@ -142,17 +143,23 @@ exports.getDeleteProfile = async (req, res) => {
   // TO ADD: 
   //        - delete users recipes from like list of others
 
+  await Recipe.updateMany({ $pull: { raters : req.session.username }}); // delete user from raters array
+  await Recipe.updateMany({ $pull: { likers : req.session.username }}); // delete user from likers array
   await Recipe.deleteMany({author: req.session.username});  // delete recipes
+  
   await Rate.deleteMany({user_id: req.session._id});        // delete rates
+  
   await Comment.deleteMany({user_id: req.session._id});     // delete comments
-
+ 
   const user = await User.findById({_id : req.session._id});
   const likeCount = user.likes.length;
 
-  for(let i = 0; i < likeCount; i++) {                      // delete likes
-    const recipe = await Recipe.findByIdAndUpdate(user.likes[i]);
-    const removed = recipe.likes - 1;
-    await Recipe.findByIdAndUpdate(user.likes[i], {likes: removed});
+  if (likeCount > 0){
+    for(let i = 0; i < likeCount; i++) {                      // delete likes
+      const recipe = await Recipe.findByIdAndUpdate(user.likes[i]);
+      const removed = recipe.likes - 1;
+      await Recipe.findByIdAndUpdate(user.likes[i], {likes: removed});
+    }
   }
   
   await User.deleteOne({_id: req.session._id});             // delete user

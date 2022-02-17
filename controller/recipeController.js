@@ -263,8 +263,12 @@ const RecipeController = {
     {
         const curid = req.params.id;
 
-        //remove from all users likes
+        // remove from all users likes
         await User.updateMany({ $pull: { likes : curid }});
+        // delete all rates
+        await Rate.deleteMany({recipe:curid});
+        // delete all comments
+        await Comment.deleteMany({recipe:curid});
 
         Recipe.deleteOne({_id: curid}, function(){
             // return to home after deleting
