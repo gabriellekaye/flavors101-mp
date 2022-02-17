@@ -183,6 +183,11 @@ exports.getUpdateProfile = async (req,res) => {
   const { username, description } = req.body
   const user = {}
 
+  const user_exists = await User.findOne({ username }).exec()
+  if(user_exists){
+    req.flash('error_msg', 'Username exists. Please try a different username.');
+    return res.redirect('/edit-profile');
+  }
   if (username) {
     //change author name for users recipes
     await Recipe.updateMany({author: sess.username}, {author: username});
