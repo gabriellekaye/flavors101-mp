@@ -438,7 +438,7 @@ const RecipeController = {
     {
         const curid = req.params.id;
         const curRecipe = await Recipe.findById(curid);
-        const user = req.session.username;
+        const userid = req.session.id;
 
         var found = 0;
 
@@ -446,7 +446,7 @@ const RecipeController = {
 
         if(no_likers > 0) {
             for(var i = 0 ; i < curRecipe.likers.length ; i++) {
-                if(user === curRecipe.likers[i]){
+                if(userid === curRecipe.likers[i]){
                     found = 1;
                 }
             };
@@ -456,7 +456,7 @@ const RecipeController = {
         if(found == 1) { 
             const likes = curRecipe.likes - 1;
             await User.updateOne({ _id: req.session._id }, { $pull: { likes : curid } });
-            await Recipe.updateOne({_id: curid}, { $pull: { likers : user } });
+            await Recipe.updateOne({_id: curid}, { $pull: { likers : userid } });
             await Recipe.findByIdAndUpdate({_id : curid}, {likes : likes});
         }
 
@@ -464,7 +464,7 @@ const RecipeController = {
         else if (found == 0) {
             const likes = curRecipe.likes + 1;
             await User.updateOne({ _id: req.session._id }, { $push: { likes : curid } });
-            await Recipe.updateOne({_id: curid}, { $push: { likers : user } });
+            await Recipe.updateOne({_id: curid}, { $push: { likers : userid } });
             await Recipe.findByIdAndUpdate({_id : curid}, {likes : likes});
         };
 
@@ -477,7 +477,7 @@ const RecipeController = {
         const curid = req.params.id;
         const curRecipe = await Recipe.findById(curid);
         const chosenRate = req.body.rate;
-        const user = req.session.username;
+        const user = req.session.id;
 
         var found = 0;
         var currate = curRecipe.average;
@@ -494,18 +494,18 @@ const RecipeController = {
         if(found == 0){
             await Rate.create({ //create new rate
                 value: chosenRate,
-                user_id: req.session._id,
+                user_id: user,
                 recipe: curid,
             });
             // add user id to raters array
-            await Recipe.updateOne({_id:curid}, { $push: { raters : req.session.username } });
+            await Recipe.updateOne({_id:curid}, { $push: { raters : user } });
         }
 
         // user has rated recipe
         else if (found == 1) {
             //update rate
             if (chosenRate > 0){
-                await Rate.updateOne({user_id:req.session._id, recipe:curid}, {value:chosenRate});
+                await Rate.updateOne({user_id:user, recipe:curid}, {value:chosenRate});
             };
         };
 
@@ -533,9 +533,8 @@ const RecipeController = {
     deleteRate_Recipe : async (req, res) =>
     {
         const curid = req.params.id;
-        const curuser = req.session._id;
         const curRecipe = await Recipe.findById(curid);
-        const user = req.session.username;
+        const user = req.session.id;
         var found = 0;
 
         for(var i = 0 ; i < curRecipe.raters.length ; i++) {
@@ -546,7 +545,9 @@ const RecipeController = {
         
         if(found == 1) {
             // Delete rate from db
-            await Rate.deleteOne({recipe:curid, user_id:curuser});
+            await Rate.deleteOne({recipe:curid, user_id:user});
+            // remove username from raters array
+            await Recipe.updateOne({_id:curid}, { $pull: { raters : user } });
             console.log('deleted rate from rate db');
         };
 
@@ -573,8 +574,6 @@ const RecipeController = {
         
         // Update avg in recipe
         await Recipe.findByIdAndUpdate(curid, {average:avg});
-        // remove username from raters array
-        await Recipe.updateOne({_id:curid}, { $pull: { raters : req.session.username } });
 
         res.redirect('/recipe/' + curid); // refresh page
     }
