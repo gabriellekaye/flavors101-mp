@@ -52,7 +52,7 @@
                 addIngredientsBtn.addEventListener('click', function()
                 {
                     let newIngredients = ingredientDiv.cloneNode(true);
-                    let input = newIngredients.getElementsByTagName('input')[0];
+                    let input = newIngredients.getElementsByTagName('textarea')[0];
                     input.value = '';
                     ingredientList.appendChild(newIngredients);
                 })
@@ -62,7 +62,7 @@
                 addPrepBtn.addEventListener('click', function()
                 {
                     let newPreparation = preparationDiv.cloneNode(true);
-                    let inputP = newPreparation.getElementsByTagName('input')[0];
+                    let inputP = newPreparation.getElementsByTagName('textarea')[0];
                     inputP.value = '';
                     preparationList.appendChild(newPreparation);
                 })
