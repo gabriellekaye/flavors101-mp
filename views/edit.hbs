@@ -5,76 +5,70 @@
 
     <body>
         {{> nav }}
-        <div class = 'center'>
-            <h4>Edit Recipe</h4><br>
-            {{#with recipe}}
+        {{#with recipe}}
+            <div class = 'center'>
+                <h4> Edit Recipe</h4><br>
                 <form action = "/update/{{_id}}" encType="multipart/form-data" method = "POST">
-                    {{!-- TITLE --}}
-                    {{!-- <label for ="title" class = "form-label">Title:</label> --}}
+                    
                     <h5>Title:</h5>
-                    <input type = "text" name = "title" id = "title" class ="txt" placeholder = "{{title}}" />
+                    <input type="text" name="title" id="title" class="txt" placeholder={{title}}/>
                     <br>
 
-                    {{!-- DESCRIPTION --}}
                     <h5>Description:</h5>
-                    <textarea name = "description" id = "description" class = "txt" placeholder = "{{description}}" ></textarea>
+                    <textarea name="description" id="description" class="txt" placeholder={{description}}></textarea>
                     <br>
 
-                    {{!-- IMAGE --}}
                     <h5>Select an image: </h5>
-                    <input type = "file" name = "image" id = "image" class = "txt" placeholder = "{{image}}" />
+                    <input type="file" name="image" id="image" class="txt" placeholder={{image}}/>
 
-                    {{!-- INGREDIENTS --}}
                     <h5>Ingredients: </h5>
                     <div class = "ingredientList">
                         <div class = "ingredientDiv">
-                            <input type = "text" name = "ingredients" class ="txt" placeholder = "{{ingredients}}" />
+                            <textarea name = "ingredients" class ="txt" placeholder = {{ingredients}}></textarea>
                         </div>
                     </div>
 
-                    <button type = "button" class = "btn" id = "addIngredientsBtn" >+ Ingredient</button>
+                    <button type="button" class="btn" id="addIngredientsBtn">+ Ingredient</button>
                     <br><br><br>
-
 
                     {{!-- PREPARATION --}}
                     <h5>Preparation:</h5>
                     <div class = "preparationList">
                         <div class = "preparationDiv">
-                            <input type = "text" name = "preparation" class ="txt" placeholder = "{{preparation}}" />
+                            <textarea name = "preparation" class ="txt" placeholder = {{preparation}}></textarea>
                         </div>
                     </div>
 
                     <button type = "button" class = "btn" id = "addPrepBtn" >+ Preparation</button>
-                    <br><br><br>
+                    <br><br><br><br><br>
 
                     {{!-- SUBMIT BUTTON --}}
-                    <input type = "submit" id = "post" value = "Submit Post">
+                    <input type = "submit" id = "post" value = "Save">
                 </form>
-            {{/with}}
-
-            <script>
-                let addIngredientsBtn = document.getElementById('addIngredientsBtn');
-                let ingredientList = document.querySelector('.ingredientList');
-                let ingredientDiv = document.querySelectorAll('.ingredientDiv')[0];
-                addIngredientsBtn.addEventListener('click', function()
-                {
-                    let newIngredients = ingredientDiv.cloneNode(true);
-                    let input = newIngredients.getElementsByTagName('input')[0];
-                    input.value = '';
-                    ingredientList.appendChild(newIngredients);
-                })
-                let addPrepBtn = document.getElementById('addPrepBtn');
-                let preparationList = document.querySelector('.preparationList');
-                let preparationDiv = document.querySelectorAll('.preparationDiv')[0];
-                addPrepBtn.addEventListener('click', function()
-                {
-                    let newPreparation = preparationDiv.cloneNode(true);
-                    let inputP = newPreparation.getElementsByTagName('input')[0];
-                    inputP.value = '';
-                    preparationList.appendChild(newPreparation);
-                })
-        </script>
-
-        </div>
+                
+                <script>
+                    let addIngredientsBtn = document.getElementById('addIngredientsBtn');
+                    let ingredientList = document.querySelector('.ingredientList');
+                    let ingredientDiv = document.querySelectorAll('.ingredientDiv')[0];
+                    addIngredientsBtn.addEventListener('click', function()
+                    {
+                        let newIngredients = ingredientDiv.cloneNode(true);
+                        let input = newIngredients.getElementsByTagName('textarea')[0];
+                        input.value = '';
+                        ingredientList.appendChild(newIngredients);
+                    })
+                    let addPrepBtn = document.getElementById('addPrepBtn');
+                    let preparationList = document.querySelector('.preparationList');
+                    let preparationDiv = document.querySelectorAll('.preparationDiv')[0];
+                    addPrepBtn.addEventListener('click', function()
+                    {
+                        let newPreparation = preparationDiv.cloneNode(true);
+                        let inputP = newPreparation.getElementsByTagName('textarea')[0];
+                        inputP.value = '';
+                        preparationList.appendChild(newPreparation);
+                    })
+            </script>
+            </div>
+        {{/with}}
     </body>
 </html>
