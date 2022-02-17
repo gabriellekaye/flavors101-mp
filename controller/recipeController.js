@@ -251,10 +251,9 @@ const RecipeController = {
             ingredients : ingredients || curRecipe.ingredients,
             preparation : preparation || curRecipe.preparation,
             likes : curRecipe.likes,
-            comments : curRecipe.comment,
-            author : curRecipe.author,
-            rate : curRecipe.rate, 
-            average : curRecipe.average
+            author : curRecipe.author, 
+            average : curRecipe.average,
+            likers : curRecipe.likers
         }
 
         Recipe.findOneAndUpdate({_id: curid}, updatedRecipe, function(err, succ)
@@ -341,16 +340,14 @@ const RecipeController = {
     {
         const {id} = req.body;
         const curid = req.params.id;
-
         const curComment = await Comment.findById(id);
-
-        const user = req.session.username;
+        const userid = req.session.id;
 
         var found = 0;
 
         for(var i = 0 ; i < curComment.likers.length ; i++)
         {
-            if(user === curComment.likers[i])
+            if(userid === curComment.likers[i])
             {
                 found = 1;
             }
@@ -359,7 +356,7 @@ const RecipeController = {
         if(found)
         {
             const likes = curComment.likes - 1;
-            await Comment.findByIdAndUpdate({_id : id}, { $pull:  { likers: user } });
+            await Comment.findByIdAndUpdate({_id : id}, { $pull:  { likers: userid } });
             await Comment.findByIdAndUpdate({_id : id}, {likes : likes});
             res.redirect('/recipe/' + curid);
         }
@@ -367,7 +364,7 @@ const RecipeController = {
         else if (!found)
         {
             const likes = curComment.likes + 1;
-            await Comment.findByIdAndUpdate({_id : id}, {$push: {likers : user}});
+            await Comment.findByIdAndUpdate({_id : id}, {$push: {likers : userid}});
             await Comment.findByIdAndUpdate({_id : id}, {likes : likes});
             res.redirect('/recipe/' + curid);
         }
