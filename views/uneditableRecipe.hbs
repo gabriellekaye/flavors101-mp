@@ -35,7 +35,7 @@
                 </div>
                 
                 
-                <p class = "desc">{{description}}</p>
+                <p class = "desc">{{{parseMarkdown description}}}</p>
 
                 <hr>
                 <br>
@@ -44,7 +44,7 @@
                 <ul class = "ingredients">
                     {{#each ingredients}}
                         <li>
-                            {{this}}
+                            {{{parseMarkdown this}}}
                         </li>
                     {{/each}}
                 </ul>
@@ -57,7 +57,7 @@
                 <ol class = "prep">
                     {{#each preparation}}
                         <li>
-                            {{this}}
+                            {{{parseMarkdown this}}}
                         </li>
                     {{/each}}
                 </ol>
