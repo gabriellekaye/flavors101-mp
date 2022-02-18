@@ -11,11 +11,11 @@
                 <form action = "/update/{{_id}}" encType="multipart/form-data" method = "POST">
                     
                     <h5>Title:</h5>
-                    <input type="text" name="title" id="title" class="txt" placeholder={{title}}/>
+                    <input type="text" name="title" id="title" class="txt" value={{title}}/>
                     <br>
 
                     <h5>Description:</h5>
-                    <textarea name="description" id="description" class="txt" placeholder={{description}}></textarea>
+                    <textarea name="description" id="description" class="txt" >{{description}}</textarea>
                     <br>
 
                     <h5>Select an image: </h5>
@@ -24,7 +24,9 @@
                     <h5>Ingredients: </h5>
                     <div class = "ingredientList">
                         <div class = "ingredientDiv">
-                            <textarea name = "ingredients" class ="txt" placeholder = {{ingredients}}></textarea>
+                            {{#each ingredients}}
+                            <textarea name = "ingredients" class ="txt" >{{this}}</textarea><br>
+                            {{/each}}
                         </div>
                     </div>
 
@@ -35,7 +37,9 @@
                     <h5>Preparation:</h5>
                     <div class = "preparationList">
                         <div class = "preparationDiv">
-                            <textarea name = "preparation" class ="txt" placeholder = {{preparation}}></textarea>
+                            {{#each preparation}}
+                            <textarea name = "preparation" class ="txt" >{{this}}</textarea><br>
+                            {{/each}}
                         </div>
                     </div>
 
