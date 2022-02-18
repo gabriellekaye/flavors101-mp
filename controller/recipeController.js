@@ -161,12 +161,21 @@ const RecipeController = {
     showRandom : async (req, res) => 
     {
         try {
-            
-
             //To find a random post
             var count = await Recipe.find().countDocuments();
             var random = Math.floor(Math.random() * count);
             var recipe = await Recipe.findOne().skip(random).lean().exec();
+
+            // TO QUERY FOR HIGHEST RATING
+            // var result = await Recipe.aggregate([
+            //     { $match: { average: { $lte: 5, $gte: 0 } } },
+            //     { $group: {_id: "$_id", highest: {$max:  "$average"} } },
+            //     { $sort: { highest: -1 } },
+            // ]);
+            // console.log(result);
+            // var recipe = await Recipe.findById({_id:result[0]._id}).lean().exec();
+            // console.log('highest rand recipe is ' + recipe.title);
+
             var recipeId = recipe._id;
             const comments = await Comment.find({ recipe: recipeId , reply_to: null}, '-__v').populate('user_id', 'username').lean().exec();
             
@@ -558,29 +567,29 @@ const RecipeController = {
             console.log('deleted rate from rate db');
         };
 
-        // RECOMPUTE FOR AVERAGE 
-        // Get # of rates
-        var div = await Rate.count({recipe:curid});
-        var avg;
+        // // RECOMPUTE FOR AVERAGE 
+        // // Get # of rates
+        // var div = await Rate.count({recipe:curid});
+        // var avg;
 
-        if(div == 0) { //no more rates
-            avg = 0;
+        // if(div == 0) { //no more rates
+        //     avg = 0;
 
-        }
+        // }
         
-        else { //other rates still present
-            // Get sum of rates
-            result = await Rate.aggregate([
-                { $match: { recipe: curid } },
-                { $group: { _id: "_id", total: { $sum: "$value"} } }
-            ]);
+        // else { //other rates still present
+        //     // Get sum of rates
+        //     result = await Rate.aggregate([
+        //         { $match: { recipe: curid } },
+        //         { $group: { _id: "_id", total: { $sum: "$value"} } }
+        //     ]);
 
-            // compute for average
-            avg = result[0].total/div
-        };
+        //     // compute for average
+        //     avg = result[0].total/div
+        // };
         
-        // Update avg in recipe
-        await Recipe.findByIdAndUpdate(curid, {average:avg});
+        // // Update avg in recipe
+        // await Recipe.findByIdAndUpdate(curid, {average:avg});
 
         res.redirect('/recipe/' + curid); // refresh page
     }
