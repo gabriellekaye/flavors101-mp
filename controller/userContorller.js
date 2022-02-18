@@ -180,46 +180,56 @@ exports.getEditProfile = (req, res) => {
 // Update profile
 exports.getUpdateProfile = async (req,res) => {
   let sess = req.session;
-  const { username, description } = req.body
+  const { username, description, curpassword } = req.body
+  const { password } = await User.findById(req.session._id, '-_id password').exec()
   const user = {}
 
   const user_exists = await User.findOne({ username }).exec()
-  if(user_exists){
-    req.flash('error_msg', 'Username exists. Please try a different username.');
-    return res.redirect('/edit-profile');
-  }
-  if (username) {
-    //change author name for users recipes
-    await Recipe.updateMany({author: sess.username}, {author: username});
-
-    sess.username = username;
-    user.username = username;
-  }
- 
-  if (description) {
-    sess.description = description;
-    user.description = description;
-  }
+  console.log(password);
+  const result = await bcrypt.compare(curpassword, password);
   
-  if (req.files) {
-    //upload avatar
-    const { avatar: image } = req.files;
-    // Change file name to username-avatar.jpg
-    const fileName = sess.username + '-avatar.' + image.name.split('.')[1]
-    const uploadPath = path.resolve('./public/avatars', fileName);
-    console.log(fileName)
-    await image.mv(uploadPath);
-
-    sess.avatar = fileName;
-    user.avatar = fileName;
+  if(result){
+    if(user_exists){
+      req.flash('error_msg', 'Username exists. Please try a different username.');
+      return res.redirect('/edit-profile');
+    }
+    if (username) {
+      //change author name for users recipes
+      await Recipe.updateMany({author: sess.username}, {author: username});
+  
+      sess.username = username;
+      user.username = username;
+    }
+    
+    if (description) {
+      sess.description = description;
+      user.description = description;
+    }
+    
+    if (req.files) {
+      //upload avatar
+      const { avatar: image } = req.files;
+      // Change file name to username-avatar.jpg
+      const fileName = sess.username + '-avatar.' + image.name.split('.')[1]
+      const uploadPath = path.resolve('./public/avatars', fileName);
+      console.log(fileName)
+      await image.mv(uploadPath);
+  
+      sess.avatar = fileName;
+      user.avatar = fileName;
+    }
+  
+    try {
+        await User.updateOne({_id: sess._id}, user);
+        console.log('Profile edited');
+        res.redirect ('/profile'); 
+    } catch (err) {
+        console.log(err);
+    }
   }
 
-  try {
-      await User.updateOne({_id: sess._id}, user);
-      console.log('Profile edited');
-      res.redirect ('/profile'); 
-  } catch (err) {
-      console.log(err);
+  else{
+    return res.redirect('/edit-profile');
   }
 };
 
